@@ -11,7 +11,7 @@ Example
 
 	$('.redils').redils({
 		debug: true,
-		zIndex: 2000
+		pagination: 'num'
 	})
 
 ### HTML ###
@@ -149,7 +149,7 @@ Sets debug mode on, should be off for production.
 
 #### Classes ####
 
-Numerous classes can be reassigned. Check the `defaultOpts {}` as to which classes are able to be manipulated.
+Numerous classes can be reassigned. Check the `defaultOpts {} as to which classes are able to be manipulated.
 
 
 ### Methods ###
