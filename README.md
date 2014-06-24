@@ -149,7 +149,7 @@ Sets debug mode on, should be off for production.
 
 #### Classes ####
 
-Numerous classes can be reassigned. Check the defaultOpts {} as to which classes are able to be manipulated.
+Numerous classes can be reassigned. Check the `defaultOpts {}` as to which classes are able to be manipulated.
 
 
 ### Methods ###
@@ -213,7 +213,7 @@ Individual pagination menu items
 Full width slides
 Fix on update
 
-**Version 1.0**
+**Version 1.0**  
 Basic slider finished.
 
 
