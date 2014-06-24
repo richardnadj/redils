@@ -1,0 +1,19 @@
+{
+  "name": "ys-redils",
+  "version": "1.4.0",
+  "main": "dist/redils.js",
+  "authors": [
+    "Richard Herries <richard@youngskilled.com>"
+  ],
+  "description": "Redils a slider for almost all situations",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "1.11",
+    "normalize-scss": "~3.0.1"
+  }
+}

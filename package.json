@@ -1,0 +1,27 @@
+{
+  "name": "ys-redils",
+  "version": "1.4.0",
+  "description": "Redils a slider for almost all situations",
+  "main": "dist/redils.js",
+  "homepage": "http://youngskilled.com",
+  "author": "richard@youngskilled.com Young/Skilled",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "browser-sync": "^0.9.1",
+    "gulp": "^3.8.1",
+    "gulp-autoprefixer": "^0.0.7",
+    "gulp-changed": "^0.4.0",
+    "gulp-clean": "^0.3.0",
+    "gulp-concat": "^2.2.0",
+    "gulp-git": "^0.4.3",
+    "gulp-header": "^1.0.2",
+    "gulp-jscs": "^0.5.0",
+    "gulp-jshint": "^1.6.2",
+    "gulp-minify-css": "^0.3.4",
+    "gulp-notify": "^1.3.1",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^0.7.2",
+    "gulp-uglify": "^0.3.0"
+  }
+}

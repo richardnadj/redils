@@ -1,0 +1,12 @@
+//Requires $pageWidth: 1170px;
+
+.redils-cont { width: $pageWidth; height: 600px; margin: 30px auto; max-width: 100%; position: relative; }
+.redils { overflow: hidden; width: 100%; height: 100%;
+	&.disabled .slides { margin: 0 auto; opacity: 1; float: none; }
+	.slide-cont { height: 100%; }
+	.slides { float: left; height: 100%;
+		img { width: auto; height: 100%; } } }
+.redils-controls { width: 100%; height: 100%; position: absolute; top: 0; left: 0;
+	.arrow-area-left { text-align: left; }
+	td { cursor: pointer; position: relative; padding: 0; text-align: right; display: table-cell; vertical-align: middle; user-select: none; 
+		&.center-cell { width: 10%; z-index: -1; } } }

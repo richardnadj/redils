@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Redils Integration Test</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width = device-width, initial-scale = 1.0, minimum-scale = 1.0, maximum-scale = 1.0, minimal-ui"/>
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,400italic,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+	<body>
+		<div id="grid-container" class="hidden"><div></div></div>
+		<main class="main-cont">
+			<section>
+				<h1>Redils Slider</h1>
+				<p class="ingress">A slider that covers all functionality.</p>
+			</section>
+			<section>
+				<h3>Standard Version</h3>
+				<div class="redils-cont">
+					<div class="redils">
+						<div class="slide-cont" style="width: 7020px">
+							<div class="slides">
+								<img src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="660">
+							</div>
+							<div class="slides">
+								<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
+							</div>
+							<div class="slides">
+								<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
+							</div>
+							<div class="slides">
+								<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
+							</div>
+							<div class="slides">
+								<img src="images/240614085654-placeholder-1170x660-ededed.jpg" alt="ededed" width="1170" height="660">
+							</div>
+						</div>
+					</div>
+					<table class="redils-controls">
+						<tbody>
+							<tr>
+								<td class="arrow-area arrow-area-left">
+									<div class="arrow"></div>
+								</td>
+								<td class="center-cell"></td>
+								<td class="arrow-area arrow-area-right">
+									<div class="arrow"></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="pagination"></div>
+				</div>
+			</section>
+		</main>
+		<footer class="main-cont">
+			<a class="signature" href="http://youngskilled.com">
+				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="81px" height="75px" viewBox="-47.5 655 81 75" enable-background="new -47.5 655 81 75" xml:space="preserve">
+					<g>
+						<path d="M-22.799,656.598c2.21,0,3.738,0.264,3.738,2.211c0,0.689-0.313,1.633-1.104,3.263l-6.955,14.059l-5.581-12.479
+							c-1.848-4.103-2.001-4.526-2.001-5.051c0-1.271,0.844-2.003,2.739-2.003h1.418v-1.583H-47.5v1.583
+							c3.211,0.104,4.424,0.572,5.902,3.785l8.632,18.598v7.691c0,2.943-0.949,4.209-4.372,4.26v1.582h15.381v-1.582
+							c-3.422-0.053-4.367-1.317-4.367-4.26v-7.691l10.637-19.696c0.945-1.743,2.315-2.687,4.58-2.687v-1.583h-11.692V656.598z"/>
+						<path d="M13.96,698.713c0-2.838,2.531-5.581,6.798-5.581c5.58,0,9.053,3.317,9.642,8.692h1.619l0.005-9.324
+							c-2.946-1.055-6.894-1.366-9.74-1.366c-11.745,0-13.269,8.271-13.269,10.954c0,11.689,19.223,11.272,19.223,19.697
+							c0,2.9-2.529,6.217-7.692,6.217c-3.63,0-8.799-2.742-10.063-8.849H8.848l0.004,9.111c3.737,1.048,8.112,1.733,11.482,1.733
+							c8.743,0,13.166-4.948,13.166-11.167C33.5,707.091,13.96,706.399,13.96,698.713"/>
+						<polygon points="10.945,655 7.911,655 -23.157,730 -20.125,730 	"/>
+					</g>
+				</svg>
+			</a>
+		</footer>
+		<script type="text/javascript" src="/js/jquery.js"></script>
+		<script type="text/javascript" src="/js/redils.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('.redils').redils({autoResize: true});
+
+				//Hide/display grid
+				$(window).on('keypress', function(e){
+					if(e.shiftKey && e.ctrlKey && (e.charCode === 1 || e.charCode === 65)) {
+						$('#grid-container').toggleClass('hidden');
+						gridShowing = true;
+					}
+					if(gridShowing && e.charCode === 0) {
+						$('#grid-container').addClass('hidden');
+						gridShowing = false;
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

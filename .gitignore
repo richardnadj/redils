@@ -1,0 +1,15 @@
+### Remove Buildtool files ###
+# 	to get dependencies run the following commands in terminal.
+#	npm install
+#	bower install
+node_modules/
+bower_components/
+
+### Remove System files ###
+
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Thumbs.db
+ehthumbs.db

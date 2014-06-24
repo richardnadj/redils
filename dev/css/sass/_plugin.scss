@@ -1,0 +1,23 @@
+@import "layout";
+
+$font: 'Roboto', sans-serif;
+$fontCol: #333;
+
+html { background-color: #FFFBF3; font-family: $font; font-size: 12px; }
+h1, h2, h3, h4, h5, h6 { margin: ($vMargin/20) 0 ($vMargin/10); font-family: $font; font-weight: 100; }
+h1 { font-size: 48px; }
+h2 { font-size: 48px; }
+h3 { font-size: 36px; }
+h4 { font-size: 18px; }
+h5 { font-size: 16px; }
+h6 { font-size: 14px; }
+a { color: $fontCol; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+iframe { width: 100%; }
+label { cursor: pointer; }
+
+.main-cont { width: $pageWidth; margin: 0 auto; max-width: $maxPageWidth; }
+section { margin-top: 50px; }
+.ingress { width: w(8, 0); }
+.signature { width: w(6, 0); margin: 250px auto 0; text-align: center; display: block; border-top: 1px solid #ccc;
+	svg { padding-top: 30px; } }

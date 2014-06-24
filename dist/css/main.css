@@ -1,0 +1,69 @@
+html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{margin:0}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+audio,canvas,progress,video{display:inline-block;vertical-align:baseline}
+audio:not([controls]){display:none;height:0}
+[hidden],template{display:none}
+a{background:0 0}
+a:active,a:hover{outline:0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:700}
+dfn{font-style:italic}
+mark{background:#ff0;color:#000}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:1em 40px}
+hr{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;height:0}
+pre{overflow:auto}
+code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}
+button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}
+button{overflow:visible}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+input{line-height:normal}
+input[type=checkbox],input[type=radio]{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:0}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}
+input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+textarea{overflow:auto}
+optgroup{font-weight:700}
+table{border-collapse:collapse;border-spacing:0}
+td,th{padding:0}
+#grid-container{width:1170px;max-width:92%;margin:0 auto}
+#grid-container.hidden{display:none}
+#grid-container div{background-image:-webkit-gradient(linear,right top,left top,color-stop(0,rgba(255,0,0,.3)),color-stop(5.98291%,rgba(255,0,0,.3)),color-stop(5.98291%,transparent),color-stop(8.54701%,transparent),color-stop(8.54701%,rgba(255,0,0,.3)),color-stop(14.52991%,rgba(255,0,0,.3)),color-stop(14.52991%,transparent),color-stop(17.09402%,transparent),color-stop(17.09402%,rgba(255,0,0,.3)),color-stop(23.07692%,rgba(255,0,0,.3)),color-stop(23.07692%,transparent),color-stop(25.64103%,transparent),color-stop(25.64103%,rgba(255,0,0,.3)),color-stop(31.62393%,rgba(255,0,0,.3)),color-stop(31.62393%,transparent),color-stop(34.18803%,transparent),color-stop(34.18803%,rgba(255,0,0,.3)),color-stop(40.17094%,rgba(255,0,0,.3)),color-stop(40.17094%,transparent),color-stop(42.73504%,transparent),color-stop(42.73504%,rgba(255,0,0,.3)),color-stop(48.71795%,rgba(255,0,0,.3)),color-stop(48.71795%,transparent),color-stop(51.28205%,transparent),color-stop(51.28205%,rgba(255,0,0,.3)),color-stop(57.26496%,rgba(255,0,0,.3)),color-stop(57.26496%,transparent),color-stop(59.82906%,transparent),color-stop(59.82906%,rgba(255,0,0,.3)),color-stop(65.81197%,rgba(255,0,0,.3)),color-stop(65.81197%,transparent),color-stop(68.37607%,transparent),color-stop(68.37607%,rgba(255,0,0,.3)),color-stop(74.35897%,rgba(255,0,0,.3)),color-stop(74.35897%,transparent),color-stop(76.92308%,transparent),color-stop(76.92308%,rgba(255,0,0,.3)),color-stop(82.90598%,rgba(255,0,0,.3)),color-stop(82.90598%,transparent),color-stop(85.47009%,transparent),color-stop(85.47009%,rgba(255,0,0,.3)),color-stop(91.45299%,rgba(255,0,0,.3)),color-stop(91.45299%,transparent),color-stop(94.01709%,transparent),color-stop(94.01709%,rgba(255,0,0,.3)),color-stop(100%,rgba(255,0,0,.3)),color-stop(100%,transparent),to(transparent));background-image:-webkit-linear-gradient(right,rgba(255,0,0,.3) 0,rgba(255,0,0,.3) 5.98291%,transparent 5.98291%,transparent 8.54701%,rgba(255,0,0,.3) 8.54701%,rgba(255,0,0,.3) 14.52991%,transparent 14.52991%,transparent 17.09402%,rgba(255,0,0,.3) 17.09402%,rgba(255,0,0,.3) 23.07692%,transparent 23.07692%,transparent 25.64103%,rgba(255,0,0,.3) 25.64103%,rgba(255,0,0,.3) 31.62393%,transparent 31.62393%,transparent 34.18803%,rgba(255,0,0,.3) 34.18803%,rgba(255,0,0,.3) 40.17094%,transparent 40.17094%,transparent 42.73504%,rgba(255,0,0,.3) 42.73504%,rgba(255,0,0,.3) 48.71795%,transparent 48.71795%,transparent 51.28205%,rgba(255,0,0,.3) 51.28205%,rgba(255,0,0,.3) 57.26496%,transparent 57.26496%,transparent 59.82906%,rgba(255,0,0,.3) 59.82906%,rgba(255,0,0,.3) 65.81197%,transparent 65.81197%,transparent 68.37607%,rgba(255,0,0,.3) 68.37607%,rgba(255,0,0,.3) 74.35897%,transparent 74.35897%,transparent 76.92308%,rgba(255,0,0,.3) 76.92308%,rgba(255,0,0,.3) 82.90598%,transparent 82.90598%,transparent 85.47009%,rgba(255,0,0,.3) 85.47009%,rgba(255,0,0,.3) 91.45299%,transparent 91.45299%,transparent 94.01709%,rgba(255,0,0,.3) 94.01709%,rgba(255,0,0,.3) 100%,transparent 100%,transparent 100%);background-image:linear-gradient(to left,rgba(255,0,0,.3) 0,rgba(255,0,0,.3) 5.98291%,transparent 5.98291%,transparent 8.54701%,rgba(255,0,0,.3) 8.54701%,rgba(255,0,0,.3) 14.52991%,transparent 14.52991%,transparent 17.09402%,rgba(255,0,0,.3) 17.09402%,rgba(255,0,0,.3) 23.07692%,transparent 23.07692%,transparent 25.64103%,rgba(255,0,0,.3) 25.64103%,rgba(255,0,0,.3) 31.62393%,transparent 31.62393%,transparent 34.18803%,rgba(255,0,0,.3) 34.18803%,rgba(255,0,0,.3) 40.17094%,transparent 40.17094%,transparent 42.73504%,rgba(255,0,0,.3) 42.73504%,rgba(255,0,0,.3) 48.71795%,transparent 48.71795%,transparent 51.28205%,rgba(255,0,0,.3) 51.28205%,rgba(255,0,0,.3) 57.26496%,transparent 57.26496%,transparent 59.82906%,rgba(255,0,0,.3) 59.82906%,rgba(255,0,0,.3) 65.81197%,transparent 65.81197%,transparent 68.37607%,rgba(255,0,0,.3) 68.37607%,rgba(255,0,0,.3) 74.35897%,transparent 74.35897%,transparent 76.92308%,rgba(255,0,0,.3) 76.92308%,rgba(255,0,0,.3) 82.90598%,transparent 82.90598%,transparent 85.47009%,rgba(255,0,0,.3) 85.47009%,rgba(255,0,0,.3) 91.45299%,transparent 91.45299%,transparent 94.01709%,rgba(255,0,0,.3) 94.01709%,rgba(255,0,0,.3) 100%,transparent 100%,transparent 100%);width:1170px;max-width:92%;height:3000px;position:fixed;z-index:9999}
+#grid-container div:before{content:'#01/ 070px   #02/ 170px   #03/ 270px   #04/ 370px   #05/ 470px   #06/ 570px   #07/ 670px   #08/ 770px   #09/ 870px   #10/ 970px   #11/ 1070px   #12/ 1170';position:absolute;top:10px;left:0;white-space:pre}
+html{background-color:#FFFBF3;font-family:Roboto,sans-serif;font-size:12px}
+h1,h2,h3,h4,h5,h6{margin:1px 0 2px;font-family:Roboto,sans-serif;font-weight:100}
+h1,h2{font-size:48px}
+h3{font-size:36px}
+h4{font-size:18px}
+h5{font-size:16px}
+h6{font-size:14px}
+a{color:#333;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+iframe{width:100%}
+label{cursor:pointer}
+.main-cont{width:1170px;margin:0 auto;max-width:92%}
+section{margin-top:50px}
+.ingress{width:65.81197%}
+.signature{width:48.71795%;margin:250px auto 0;text-align:center;display:block;border-top:1px solid #ccc}
+.signature svg{padding-top:30px}
+.redils-cont{width:1170px;height:600px;margin:30px auto;max-width:100%;position:relative}
+.redils{overflow:hidden;width:100%;height:100%}
+.redils.disabled .slides{margin:0 auto;opacity:1;float:none}
+.redils .slide-cont{height:100%}
+.redils .slides{float:left;height:100%}
+.redils .slides img{width:auto;height:100%}
+.redils-controls{width:100%;height:100%;position:absolute;top:0;left:0}
+.redils-controls .arrow-area-left{text-align:left}
+.redils-controls td{cursor:pointer;position:relative;padding:0;text-align:right;display:table-cell;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.redils-controls td.center-cell{width:10%;z-index:-1}

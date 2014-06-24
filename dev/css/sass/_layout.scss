@@ -1,0 +1,51 @@
+@import "normalize";
+
+$totalWidth: 1170;
+$colWidth: 70;
+$gutWidth: 30;
+$gridColumns: 12;
+$pageWidth: $totalWidth + px;
+$vMargin: 20px;
+$maxPageWidth: 92%;
+
+$col: $colWidth / $totalWidth * 100%;
+$gut: $gutWidth / $totalWidth * 100%;
+
+@function w($num, $sub) {
+	@return ($col + $gut) * $num - $gut - $sub;
+}
+
+@function fw($num, $sub) {
+	@return ($colWidth + $gutWidth) * $num - $gutWidth - $sub + px;
+}
+
+@function fwd($num, $sub) {	
+	@return ($colWidth + $gutWidth) * $num - $gutWidth - $sub;
+}
+
+@mixin gridMixin($total, $col, $gut, $colColor, $gutColor) {
+	$grid: ;
+	@for $i from 0 to $total {
+
+		@if $i > 0 { $a: (($col + $gut) * $i); }
+		@else { $a: 0; }
+
+		$g: $a + $col;
+
+		$z: $g + $gut;
+
+		@if (unit($a) == "%") and ($i == ($total - 1)) {
+			$z: 100%;
+		}
+
+		$grid: join($grid, ($colColor $a, $colColor $g, $gutColor $g, $gutColor $z), comma);
+	}
+	background-image: linear-gradient(to left, $grid);
+}
+
+//background-image: linear-gradient(left, transparent 0, rgba(255, 0, 0, 0.3) 0, rgba(255, 0, 0, 0.3) 5.98291%, transparent 5.98291%, transparent 8.54701%, rgba(255, 0, 0, 0.3) 8.54701%, rgba(255, 0, 0, 0.3) 14.52991%, transparent 14.52991%, transparent 17.09402%, rgba(255, 0, 0, 0.3) 17.09402%, rgba(255, 0, 0, 0.3) 23.07692%, transparent 23.07692%, transparent 25.64103%, rgba(255, 0, 0, 0.3) 25.64103%, rgba(255, 0, 0, 0.3) 31.62393%, transparent 31.62393%, transparent 34.18803%, rgba(255, 0, 0, 0.3) 34.18803%, rgba(255, 0, 0, 0.3) 40.17094%, transparent 40.17094%, transparent 42.73504%, rgba(255, 0, 0, 0.3) 42.73504%, rgba(255, 0, 0, 0.3) 48.71795%, transparent 48.71795%, transparent 51.28205%, rgba(255, 0, 0, 0.3) 51.28205%, rgba(255, 0, 0, 0.3) 57.26496%, transparent 57.26496%, transparent 59.82906%, rgba(255, 0, 0, 0.3) 59.82906%, rgba(255, 0, 0, 0.3) 65.81197%, transparent 65.81197%, transparent 68.37607%, rgba(255, 0, 0, 0.3) 68.37607%, rgba(255, 0, 0, 0.3) 74.35897%, transparent 74.35897%, transparent 76.92308%, rgba(255, 0, 0, 0.3) 76.92308%, rgba(255, 0, 0, 0.3) 82.90598%, transparent 82.90598%, transparent 85.47009%, rgba(255, 0, 0, 0.3) 85.47009%, rgba(255, 0, 0, 0.3) 91.45299%, transparent 91.45299%, transparent 94.01709%, rgba(255, 0, 0, 0.3) 94.01709%, rgba(255, 0, 0, 0.3) 100%, transparent 100%, transparent 100%);
+
+#grid-container { width: $pageWidth; max-width: $maxPageWidth; margin: 0 auto; 
+	&.hidden { display: none; }
+	div { @include gridMixin($gridColumns, $col, $gut, rgba(red,0.3), transparent); width: $pageWidth; max-width: $maxPageWidth; height: 3000px; position: fixed; z-index: 9999;
+		&:before { content: '#01/ 0'+round(fwd(1,0)*100)/100+"px   #02/ "+round(fwd(2,0)*100)/100+"px   #03/ "+round(fwd(3,0)*100)/100+"px   #04/ "+round(fwd(4,0)*100)/100+"px   #05/ "+round(fwd(5,0)*100)/100+"px   #06/ "+round(fwd(6,0)*100)/100+"px   #07/ "+round(fwd(7,0)*100)/100+"px   #08/ "+round(fwd(8,0)*100)/100+"px   #09/ "+round(fwd(9,0)*100)/100+"px   #10/ "+round(fwd(10,0)*100)/100+"px   #11/ "+round(fwd(11,0)*100)/100+"px   #12/ "+round(fwd(12,0)) +''; position: absolute; top: 10px; left: 0; white-space: pre; } } }
