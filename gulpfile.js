@@ -61,6 +61,11 @@ gulp.task('update-scss', ['clean-live'], function() {
 		.pipe(gulp.dest(vars.distDir+'css'));
 })
 
+gulp.task('update-js', ['clean-live'], function() {
+	return gulp.src([vars.devDir+'js/'+vars.pluginName+'.js'])
+		.pipe(gulp.dest(vars.distDir+'js'));
+})
+
 gulp.task('publish-css', ['clean-live'], function() {
 	return gulp.src(vars.devDir+'css/main.css')
 		.pipe(minifycss({keepBreaks: true}))
@@ -78,7 +83,7 @@ gulp.task('publish-js', ['clean-live'], function() {
 
 // Publish
 gulp.task('publish', function() {
-	gulp.start('update-index', 'update-scss', 'publish-css', 'publish-js');
+	gulp.start('update-index', 'update-js', 'update-scss', 'publish-css', 'publish-js');
 })
 
 //////////////////////////////////////////

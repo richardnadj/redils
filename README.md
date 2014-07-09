@@ -16,7 +16,7 @@ Example
 
 ### HTML ###
 
-Following structure is required for slider to work. (Using Emmet tab complete for HTML)
+Following structure is required for selector to work. (Using Emmet tab complete for full HTML or check /dev/index.html)
 
 	div
 	div.redils>div.slide-cont[style="width: 7020px"]>div.slides*5>img
@@ -183,6 +183,9 @@ Define outside of the plugin container which slide to skip to.
 
 
 ### Changelog ###
+
+**Version 1.4.1**   
+Added a development version of the code in the final dist folder as well.
 
 **Version 1.4.0**   
 Auto resize now updates the size of the slider based on parent container's width and ratio of slides. Using naturalWidth/naturalHeight
