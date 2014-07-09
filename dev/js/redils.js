@@ -30,6 +30,7 @@
 
 				//update halfway to make it smoother.
 				if(!halfway && numLoaded > totalImages / 5) {
+					$this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();
 					priv.update.apply($this);
 					halfway = true;
 				}
@@ -134,7 +135,6 @@
 				if($this.set.center) {
 					priv.center.apply($this, [$this.set.position]);
 				}
-
 				if($this.set.autoResize) priv.update.apply($this); 
 			});
 
@@ -216,8 +216,13 @@
 			//Work out total width
 			if($this.set.width === 'dyn') {
 				$this.find('.' + $this.set.slideClass).each(function(i) {
-					$this.set.dynWidth[i] = ($(this)[0].naturalWidth !== undefined) ? $(this)[0].naturalWidth : $(this).width();
-					$this.set.contWidth += $this.set.dynWidth[i] + 1;
+					if($this.set.autoResize) {
+						$this.set.dynWidth[i] = $this.parent().width();
+						$(this).width($this.set.dynWidth[i]);
+					} else {
+						$this.set.dynWidth[i] = ($(this)[0].naturalWidth !== undefined) ? $(this)[0].naturalWidth : $(this).width();
+					}
+					$this.set.contWidth += $this.set.dynWidth[i];
 					if($this.set.debug && $(this).find('img')[0]) { console.log('Slide widths: ', $(this).width(), $(this).find('img')[0].naturalWidth); }
 				});
 			} else {

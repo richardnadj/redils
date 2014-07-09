@@ -184,6 +184,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.4.2**   
+Fixes to the resize feature. Slider was not responding on all browsers to resizing.
+
 **Version 1.4.1**   
 Added a development version of the code in the final dist folder as well.
 
