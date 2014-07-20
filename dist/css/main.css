@@ -70,5 +70,5 @@ section{margin-top:50px}
 .redils-responsive .slides img{width:auto;height:100%}
 .redils-responsive .redils.disabled .slides{margin:0 auto;opacity:1;float:none}
 .redils-multislide{height:240px}
-.redils-multislide .superSlide{float:left;text-align:center}
-.redils-multislide .superSlide .slides{display:inline-block;vertical-align:top}
+.redils-multislide .super-slide{float:left;text-align:center}
+.redils-multislide .super-slide .slides{display:inline-block;vertical-align:top}

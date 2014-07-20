@@ -817,10 +817,10 @@ section {
 
 .redils-multislide {
   height: 240px; }
-  .redils-multislide .superSlide {
+  .redils-multislide .super-slide {
     float: left;
     text-align: center; }
-    .redils-multislide .superSlide .slides {
+    .redils-multislide .super-slide .slides {
       display: inline-block;
       vertical-align: top; }
 

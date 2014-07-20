@@ -36,6 +36,7 @@
 				}
 
 				if(imgIsLoaded) {
+					$this.trigger('redils.imagesLoaded');
 					//ensure all images are loaded before determining the length use natural dimensions when possible
 					$this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();
 					priv.update.apply($this);
@@ -57,7 +58,6 @@
 			}
 		},
 		enableEvents: function() {
-
 			var $this = this,
 				start = {},
 				touches = {};
@@ -126,7 +126,23 @@
 				return false;
 			});
 
+			$this.on('redils.imagesLoaded', function() {
+				var $slides = $(this).find('.' + $this.set.slideClass).not('.redils-duplicated');
+
+				if($this.set.slideClass === $this.set.multiSlideClass && $this.set.multiSlide) $slides = $slides.find('.' + $this.set.prevSlideClass);
+
+				$slides.each(function(i) {
+					$this.set.subSlideWidths[i] = $(this).width() + $this.set.multiSlidePadding * 2;
+				});
+				
+				if($this.set.debug) console.log('Individual multislide slide widths: ', $this.set.subSlideWidths);
+				if($this.set.multiSlide) priv.multiSlide.apply($this);
+
+			});
+
 			$(window).on('resize', function() {
+				var pageWidth =  $this.parent().width();
+
 				if($this.set.fullWidth !== false) {
 					priv.fullWidth.apply($this);
 					priv.totalWidth.apply($this);
@@ -137,13 +153,16 @@
 					priv.center.apply($this, [$this.set.position]);
 				}
 
-				if($this.set.autoResize || $this.set.multiSlide) priv.update.apply($this);
+				if($this.set.multiSlide && (pageWidth <= $this.set.multiBreakLess || pageWidth >= $this.set.multiBreakMore)) {
+					priv.update.apply($this);
+				}
+
+				if($this.set.autoResize) priv.update.apply($this);
 			});
 
 		},
 		update: function() {
-			var $this = this,
-				pageWidth =  $this.parent().width();
+			var $this = this;
 
 			if($this.set.autoResize) {
 				$this.parent().height($this.parent().width() / $this.set.ratio);
@@ -151,7 +170,7 @@
 
 			if($this.set.slide) {
 
-				if($this.set.multiSlide && (pageWidth <= $this.set.multiBreakLess || pageWidth >= $this.set.multiBreakMore)) {
+				if($this.set.multiSlide) {
 					priv.multiSlide.apply($this);	
 				}
 
@@ -236,7 +255,7 @@
 			$slides.each(function(i) {
 				var $img = $(this).find('img');
 
-				slideWidth = ($img[0].naturalWidth !== undefined) ? $img[0].naturalWidth + $this.set.multiSlidePadding * 2 : $img.width() + $this.set.multiSlidePadding * 2;
+				slideWidth = ($this.set.subSlideWidths.length === 0) ? $img.width() + $this.set.multiSlidePadding * 2 : $this.set.subSlideWidths[i];
 				totalWidth += slideWidth;
 				currentWidth += slideWidth;
 
@@ -292,7 +311,7 @@
 						$this.set.dynWidth[i] = pageWidth + 1;
 						$(this).width($this.set.dynWidth[i]);
 					} else {
-						$this.set.dynWidth[i] = ($img[0].naturalWidth !== undefined) ? $img[0].naturalWidth : $img.width();
+						$(this).width();
 					}
 
 					$this.set.contWidth += $this.set.dynWidth[i];
@@ -313,13 +332,11 @@
 			//Should repeat the last ones first and the first ones last. i.e. b|c + a|b|c + a|b
 			for (var i = 0; i < $this.set.overflow; i++) {
 				if($this.set.overflow <= $this.set.totalAmount) {
-					$this.find('.' + $this.set.slideContClass)
-						.append($slides.eq(i).clone());
+					$this.find('.' + $this.set.slideContClass).append($slides.eq(i).clone().addClass('redils-duplicated'));
 					$this.set.totalAmount++;
 
 					if($this.set.slide) {
-						$this.find('.' + $this.set.slideContClass)
-							.prepend($slides.eq(-i - 1).clone());
+						$this.find('.' + $this.set.slideContClass).prepend($slides.eq(-i - 1).clone().addClass('redils-duplicated'));
 						$this.set.totalAmount++;
 						$this.set.position++;
 					}
@@ -495,7 +512,7 @@
 				if(!$this.set.slide) { $this.set.overflow = 1; }
 
 				//Are there enough slides to create a slider?
-				if($this.set.totalAmount > 1) {
+				if($this.set.totalAmount > 1 || $this.set.multiSlide) {
 
 					//Create additional elements.
 					if($this.set.pagination !== false) {
@@ -512,6 +529,12 @@
 						priv.fullWidth.apply($this);	
 					}
 
+					//Enable 
+					priv.enableEvents.apply($this);
+					if($this.set.auto && !$this.set.timerBar) {
+						$this.set.timer = setInterval(function() { priv.beforeAnimating.apply($this, [1]); }, $this.set.auto);
+					}
+
 					//Test if images are loaded only if there are images
 					if($this.find('img').length > 0) {
 						priv.testIfLoaded.apply($this);
@@ -521,13 +544,8 @@
 
 					priv.currentSlide.apply($this);
 
-					//Enable 
-					priv.enableEvents.apply($this);
-					if($this.set.auto && !$this.set.timerBar) {
-						$this.set.timer = setInterval(function() { priv.beforeAnimating.apply($this, [1]); }, $this.set.auto);
-					}
-
 				} else {
+					if($this.set.debug) console.info('Slider is disabled due to insufficient slides'); 
 					$this.addClass('disabled');
 					$this.find('.' + $this.set.arrowContClass).hide();
 				}
@@ -609,7 +627,7 @@
 		multiSlidePadding: 0,
 		autoResize: false,
 		slideClass: 'slides',
-		multiSlideClass: 'superSlide',
+		multiSlideClass: 'super-slide',
 		pagClass: 'pagination',
 		slideContClass: 'slide-cont',
 		arrowContClass: 'arrow-area',
@@ -624,6 +642,7 @@
 		contWidth: 0,
 		subSlides: null,
 		dynWidth: [],
+		subSlideWidths: [],
 		totalAmount: 0, //in pixel distance
 		position: 0, //in consecutive integers
 		ends: false,
