@@ -16,8 +16,9 @@
 				<p class="ingress">A slider that covers all functionality.</p>
 			</section>
 			<section>
-				<h3>Standard Version</h3>
-				<div class="redils-cont">
+				<h3>Responsive</h3>
+				<p>Slider Stretches to fit it's container.</p>
+				<div class="redils-cont redils-responsive">
 					<div class="redils">
 						<div class="slide-cont" style="width: 7020px">
 							<div class="slides">
@@ -34,6 +35,60 @@
 							</div>
 							<div class="slides">
 								<img src="images/240614085654-placeholder-1170x660-ededed.jpg" alt="ededed" width="1170" height="660">
+							</div>
+						</div>
+					</div>
+					<table class="redils-controls">
+						<tbody>
+							<tr>
+								<td class="arrow-area arrow-area-left">
+									<div class="arrow"></div>
+								</td>
+								<td class="center-cell"></td>
+								<td class="arrow-area arrow-area-right">
+									<div class="arrow"></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="pagination"></div>
+				</div>
+			</section>
+			<section>
+				<h3>Multislide</h3>
+				<p>Using several fixed size slides within a slider. Slider changes amount of slides shown based on container's width.</p>
+				<div class="redils-cont redils-multislide">
+					<div class="redils">
+						<div class="slide-cont" style="width: 7020px">
+							<div class="slides">
+								<img src="images/170714164301-placeholder-180x240-DDDDDD.jpg" alt="DDDDDD" width="180" height="240">
+							</div>
+							<div class="slides">
+								<img src="images/170714164304-placeholder-180x240-c4c4c4.jpg" alt="c4c4c4" width="180" height="240">
+							</div>
+							<div class="slides">
+								<img src="images/170714164307-placeholder-180x240-e5e5e5.jpg" alt="e5e5e5" width="180" height="240">
+							</div>
+							<div class="slides">
+								<img src="images/170714164309-placeholder-180x240-c6c6c6.jpg" alt="c6c6c6" width="180" height="240">
+							</div>
+							<div class="slides">
+								<img src="images/170714164314-placeholder-180x240-b6b6b6.jpg" alt="b6b6b6" width="180" height="240">
+							</div>
+							<div class="slides">
+								<img src="images/170714164316-placeholder-180x240-757575.jpg" alt="757575" width="180" height="240">
+							</div>
+							<div class="slides">
+								<img src="images/170714164319-placeholder-180x240-383838.jpg" alt="383838" width="180" height="240">
+							</div>
+							<div class="slides">
+								<img src="images/170714164321-placeholder-180x240-262626.jpg" alt="262626" width="180" height="240">
+							</div>
+							<div class="slides">
+								<img src="images/170714164324-placeholder-180x240-f1f1f1.jpg" alt="f1f1f1" width="180" height="240">
+							</div>
+							<div class="slides">
+								<img src="images/170714164326-placeholder-180x240-c3c3c3.jpg" alt="c3c3c3" width="180" height="240">
 							</div>
 						</div>
 					</div>
@@ -75,7 +130,13 @@
 		<script type="text/javascript" src="/js/redils.js"></script>
 		<script>
 			$(document).ready(function() {
-				$('.redils').redils({autoResize: true});
+				//Responsive redils
+				$('.redils-responsive .redils').redils({autoResize: true});
+
+				$('.redils-multislide .redils').redils({
+					multiSlide: true,
+					multiSlidePadding: 10
+				});
 
 				//Hide/display grid
 				$(window).on('keypress', function(e){

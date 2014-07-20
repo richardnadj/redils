@@ -132,21 +132,29 @@
 					priv.totalWidth.apply($this);
 					$this.set.totalPos = priv.totalPos.apply($this, [$this.set.position]);
 				}
+
 				if($this.set.center) {
 					priv.center.apply($this, [$this.set.position]);
 				}
-				if($this.set.autoResize) priv.update.apply($this); 
+
+				if($this.set.autoResize || $this.set.multiSlide) priv.update.apply($this);
 			});
 
 		},
 		update: function() {
-			var $this = this;
+			var $this = this,
+				pageWidth =  $this.parent().width();
 
 			if($this.set.autoResize) {
 				$this.parent().height($this.parent().width() / $this.set.ratio);
 			}
 
 			if($this.set.slide) {
+
+				if($this.set.multiSlide && (pageWidth <= $this.set.multiBreakLess || pageWidth >= $this.set.multiBreakMore)) {
+					priv.multiSlide.apply($this);	
+				}
+
 				//If Dyn get new array of widths.
 				priv.totalWidth.apply($this);
 
@@ -207,8 +215,70 @@
 
 			return pos;
 		},
+		multiSlide: function() {
+			var $this = this,
+				pageWidth = $this.parent().width(),
+				$slides = null,
+				superSlides = [''],
+				slideHTML = '',
+				totalWidth = 0,
+				currentWidth = 0,
+				totalWidthBefore = 0,
+				prevPosition = 0,
+				position = 0;
+			
+
+			//Save original slides.
+			if($this.set.subSlides === null) $this.set.subSlides = $this.find('.' + $this.set.slideClass).clone();
+			$slides = $this.set.subSlides.clone();
+
+			//Make .superSlides
+			$slides.each(function(i) {
+				var $img = $(this).find('img');
+
+				slideWidth = ($img[0].naturalWidth !== undefined) ? $img[0].naturalWidth + $this.set.multiSlidePadding * 2 : $img.width() + $this.set.multiSlidePadding * 2;
+				totalWidth += slideWidth;
+				currentWidth += slideWidth;
+
+				if(position !== Math.floor(currentWidth / pageWidth)) {
+
+					//Save offsets to know when to recompile.
+					$this.set.multiBreakLess = totalWidthBefore;
+					$this.set.multiBreakMore = totalWidth;
+					
+					$this.set.dynWidth[i] = pageWidth;
+					position++;
+					currentWidth = position * pageWidth + slideWidth;
+					superSlides[position] = '';
+					prevPosition = i;
+				}
+				totalWidthBefore = totalWidth;
+				superSlides[position] += $(this).prop('outerHTML');
+			});
+
+			//Manipulate HTML into one html string
+			slideHTML = '<div class="' + $this.set.multiSlideClass + '">' + superSlides.join('</div><div class="' + $this.set.multiSlideClass + '">') + '</div>';
+
+			//Wrap slides in a super slide and put them in the container.
+			$this.find('.' + $this.set.slideContClass).html(slideHTML);
+
+			//Change slideClass to .superSlides
+			if($this.set.slideClass !== $this.set.multiSlideClass) {
+				$this.set.prevSlideClass = $this.set.slideClass;
+				$this.set.slideClass = $this.set.multiSlideClass;
+			} else {
+				//After init.
+				//create overflows
+				$this.set.totalAmount = position + 1;
+				$this.data('position', 0);
+				$this.set.position = 0;
+				priv.overflow.apply($this);
+			}
+
+		},
 		totalWidth: function() {
-			var $this = this;
+			var $this = this,
+				pageWidth = $this.parent().width();
 
 			$this.set.contWidth = 0;
 			$this.set.dynWidth = [];
@@ -216,14 +286,17 @@
 			//Work out total width
 			if($this.set.width === 'dyn') {
 				$this.find('.' + $this.set.slideClass).each(function(i) {
-					if($this.set.autoResize) {
-						$this.set.dynWidth[i] = $this.parent().width();
+					var $img = $(this).find('img');
+
+					if($this.set.autoResize || $this.set.multiSlide) {
+						$this.set.dynWidth[i] = pageWidth + 1;
 						$(this).width($this.set.dynWidth[i]);
 					} else {
-						$this.set.dynWidth[i] = ($(this)[0].naturalWidth !== undefined) ? $(this)[0].naturalWidth : $(this).width();
+						$this.set.dynWidth[i] = ($img[0].naturalWidth !== undefined) ? $img[0].naturalWidth : $img.width();
 					}
+
 					$this.set.contWidth += $this.set.dynWidth[i];
-					if($this.set.debug && $(this).find('img')[0]) { console.log('Slide widths: ', $(this).width(), $(this).find('img')[0].naturalWidth); }
+					if($this.set.debug && $img[0]) { console.log('Slide widths: ', $(this).width(), $img[0].naturalWidth); }
 				});
 			} else {
 				$this.set.contWidth = $this.set.totalAmount * parseInt($this.set.width);
@@ -234,20 +307,21 @@
 
 		},
 		overflow: function() {
-			var $slides = this.find('.' + this.set.slideClass);
+			var $this = this,
+				$slides = $this.find('.' + $this.set.slideClass);
 			//Add in extra slides depending on formation of slider.
 			//Should repeat the last ones first and the first ones last. i.e. b|c + a|b|c + a|b
-			for (var i = 0; i < this.set.overflow; i++) {
-				if(this.set.overflow <= this.set.totalAmount) {
-					this.find('.' + this.set.slideContClass)
+			for (var i = 0; i < $this.set.overflow; i++) {
+				if($this.set.overflow <= $this.set.totalAmount) {
+					$this.find('.' + $this.set.slideContClass)
 						.append($slides.eq(i).clone());
-					this.set.totalAmount++;
+					$this.set.totalAmount++;
 
-					if(this.set.slide) {
-						this.find('.' + this.set.slideContClass)
+					if($this.set.slide) {
+						$this.find('.' + $this.set.slideContClass)
 							.prepend($slides.eq(-i - 1).clone());
-						this.set.totalAmount++;
-						this.set.position++;
+						$this.set.totalAmount++;
+						$this.set.position++;
 					}
 				}
 			}
@@ -410,16 +484,24 @@
 					objectData = $this.data();
 
 				$this.set = $.extend({}, defaultOpts, options, objectData, privateOpts);
+
+				if($this.set.multiSlide) {
+					//Rewrap slides in a superSlide and work with that from here on.
+					priv.multiSlide.apply($this);
+				}
+
 				$this.set.totalAmount = $this.find('.' + $this.set.slideClass).length;
+				
 				if(!$this.set.slide) { $this.set.overflow = 1; }
 
 				//Are there enough slides to create a slider?
 				if($this.set.totalAmount > 1) {
-					
+
 					//Create additional elements.
 					if($this.set.pagination !== false) {
 						priv.pagination.apply($this);
 					}
+
 					if($this.set.overflow > 0) {
 						priv.overflow.apply($this);
 					} else {
@@ -524,8 +606,10 @@
 		timerBar: false,
 		auto: 4000,
 		multiSlide: false,
+		multiSlidePadding: 0,
 		autoResize: false,
 		slideClass: 'slides',
+		multiSlideClass: 'superSlide',
 		pagClass: 'pagination',
 		slideContClass: 'slide-cont',
 		arrowContClass: 'arrow-area',
@@ -538,6 +622,7 @@
 
 	var privateOpts = {
 		contWidth: 0,
+		subSlides: null,
 		dynWidth: [],
 		totalAmount: 0, //in pixel distance
 		position: 0, //in consecutive integers

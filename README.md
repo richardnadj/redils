@@ -120,11 +120,21 @@ Slider resizes based on width of it's container and changes everytime window cha
 #### multiSlide ####
 
 *Default* `false`   
-*Expects* `boolean, 'centered'`
+*Expects* `boolean`
 
-Property under construction. Should not be used.
+Automatically resizes the size of the container and how many slides that are in that container. Container can be styled with CSS. Super slide container can be defined by changing the multiSlideClass.
 
 	$(selector).redils({multiSlide: false});
+
+
+#### multiSlidePadding ####
+
+*Default* `0`   
+*Expects* `integer`
+
+If there is padding or distance between images in the multislider use this variable to adjust for this. The integer will be doubled to account for both sides of the image. Also can be used to make fewer slides per superSlide.
+
+	$(selector).redils({multiSlidePadding: 0});
 
 
 #### slide ####
@@ -183,6 +193,9 @@ Define outside of the plugin container which slide to skip to.
 
 
 ### Changelog ###
+
+**Version 1.5.0**   
+Added the possibility for multiple slides to be placed in one super slide. The slider can then slide multiple slides at the one time. The CSS has changed a bit and is now dependent on redils-responsive and redils-multislide. This will continue for all use cases. 
 
 **Version 1.4.2**   
 Fixes to the resize feature. Slider was not responding on all browsers to resizing.

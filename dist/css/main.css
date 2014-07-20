@@ -57,13 +57,18 @@ section{margin-top:50px}
 .ingress{width:65.81197%}
 .signature{width:48.71795%;margin:250px auto 0;text-align:center;display:block;border-top:1px solid #ccc}
 .signature svg{padding-top:30px}
-.redils-cont{width:1170px;height:600px;margin:30px auto;max-width:100%;position:relative}
+.redils-multislide .slides{padding:10px}
+.redils-cont{width:1170px;max-width:100%;position:relative}
 .redils{overflow:hidden;width:100%;height:100%}
-.redils.disabled .slides{margin:0 auto;opacity:1;float:none}
-.redils .slide-cont{height:100%}
-.redils .slides{float:left;height:100%}
-.redils .slides img{width:auto;height:100%}
+.redils .slide-cont,.redils .slides{height:100%}
 .redils-controls{width:100%;height:100%;position:absolute;top:0;left:0}
 .redils-controls .arrow-area-left{text-align:left}
 .redils-controls td{cursor:pointer;position:relative;padding:0;text-align:right;display:table-cell;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
 .redils-controls td.center-cell{width:10%;z-index:-1}
+.redils-responsive{height:600px}
+.redils-responsive .slides{float:left}
+.redils-responsive .slides img{width:auto;height:100%}
+.redils-responsive .redils.disabled .slides{margin:0 auto;opacity:1;float:none}
+.redils-multislide{height:240px}
+.redils-multislide .superSlide{float:left;text-align:center}
+.redils-multislide .superSlide .slides{display:inline-block;vertical-align:top}

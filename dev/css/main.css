@@ -763,10 +763,11 @@ section {
   .signature svg {
     padding-top: 30px; }
 
+.redils-multislide .slides {
+  padding: 10px; }
+
 .redils-cont {
   width: 1170px;
-  height: 600px;
-  margin: 30px auto;
   max-width: 100%;
   position: relative; }
 
@@ -774,18 +775,10 @@ section {
   overflow: hidden;
   width: 100%;
   height: 100%; }
-  .redils.disabled .slides {
-    margin: 0 auto;
-    opacity: 1;
-    float: none; }
   .redils .slide-cont {
     height: 100%; }
   .redils .slides {
-    float: left;
     height: 100%; }
-    .redils .slides img {
-      width: auto;
-      height: 100%; }
 
 .redils-controls {
   width: 100%;
@@ -809,5 +802,26 @@ section {
     .redils-controls td.center-cell {
       width: 10%;
       z-index: -1; }
+
+.redils-responsive {
+  height: 600px; }
+  .redils-responsive .slides {
+    float: left; }
+    .redils-responsive .slides img {
+      width: auto;
+      height: 100%; }
+  .redils-responsive .redils.disabled .slides {
+    margin: 0 auto;
+    opacity: 1;
+    float: none; }
+
+.redils-multislide {
+  height: 240px; }
+  .redils-multislide .superSlide {
+    float: left;
+    text-align: center; }
+    .redils-multislide .superSlide .slides {
+      display: inline-block;
+      vertical-align: top; }
 
 /*# sourceMappingURL=main.css.map */

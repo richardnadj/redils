@@ -128,7 +128,8 @@ gulp.task('plugin-js', function() {
 	return gulp.src([vars.devDir+'js/'+vars.pluginName+'.js', vars.devDir+'js/styling-example.js'])
 		.pipe(jscs().on("error", notify.onError("JSCS: <%= error %>")))
 		.pipe(jshint())
-		.pipe(jshint.reporter('default'));
+		.pipe(jshint.reporter('default'))
+		.pipe(browserSync.reload({stream:true}));
 });
 
 gulp.task('init-js', function() {
