@@ -194,6 +194,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.5.2**   
+Removed some faulty logic that made multislide not update on resize.
+
 **Version 1.5.1**   
 Better image width handling. Image width was based on `naturalWidth` which meant if the image was naturally large i.e. for retina screens the size of the image was read wrong. Now back to using jQuery `.width()` command. Code needs to be refactored to take into account image loading. Too many functions doing similar things.
 

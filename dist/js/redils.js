@@ -141,8 +141,6 @@
 			});
 
 			$(window).on('resize', function() {
-				var pageWidth =  $this.parent().width();
-
 				if($this.set.fullWidth !== false) {
 					priv.fullWidth.apply($this);
 					priv.totalWidth.apply($this);
@@ -153,16 +151,13 @@
 					priv.center.apply($this, [$this.set.position]);
 				}
 
-				if($this.set.multiSlide && (pageWidth <= $this.set.multiBreakLess || pageWidth >= $this.set.multiBreakMore)) {
-					priv.update.apply($this);
-				}
-
-				if($this.set.autoResize) priv.update.apply($this);
+				if($this.set.autoResize || $this.set.multiSlide) priv.update.apply($this);
 			});
 
 		},
 		update: function() {
-			var $this = this;
+			var $this = this,
+				pageWidth =  $this.parent().width();
 
 			if($this.set.autoResize) {
 				$this.parent().height($this.parent().width() / $this.set.ratio);
@@ -170,8 +165,8 @@
 
 			if($this.set.slide) {
 
-				if($this.set.multiSlide) {
-					priv.multiSlide.apply($this);	
+				if($this.set.multiSlide && (pageWidth <= $this.set.multiBreakLess || pageWidth >= $this.set.multiBreakMore)) {
+					priv.multiSlide.apply($this);
 				}
 
 				//If Dyn get new array of widths.
@@ -302,10 +297,11 @@
 			$this.set.contWidth = 0;
 			$this.set.dynWidth = [];
 
+
 			//Work out total width
 			if($this.set.width === 'dyn') {
+
 				$this.find('.' + $this.set.slideClass).each(function(i) {
-					var $img = $(this).find('img');
 
 					if($this.set.autoResize || $this.set.multiSlide) {
 						$this.set.dynWidth[i] = pageWidth + 1;
@@ -315,7 +311,7 @@
 					}
 
 					$this.set.contWidth += $this.set.dynWidth[i];
-					if($this.set.debug && $img[0]) { console.log('Slide widths: ', $(this).width(), $img[0].naturalWidth); }
+					if($this.set.debug) console.log('Slide widths: ', $this.set.dynWidth[i]); 
 				});
 			} else {
 				$this.set.contWidth = $this.set.totalAmount * parseInt($this.set.width);
