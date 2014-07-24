@@ -1,6 +1,6 @@
 {
   "name": "ys-redils",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Redils a slider for almost all situations",
   "main": "dist/redils.js",
   "homepage": "http://youngskilled.com",

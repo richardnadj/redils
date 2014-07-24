@@ -30,7 +30,7 @@
 
 				//update halfway to make it smoother.
 				if(!halfway && numLoaded > totalImages / 5) {
-					$this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();
+					if($this.set.ratio === false) $this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();
 					priv.update.apply($this);
 					halfway = true;
 				}
@@ -38,7 +38,7 @@
 				if(imgIsLoaded) {
 					$this.trigger('redils.imagesLoaded');
 					//ensure all images are loaded before determining the length use natural dimensions when possible
-					$this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();
+					if($this.set.ratio === false) $this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();
 					priv.update.apply($this);
 				} else {
 					requestAnimFrame(imgLoaded);
@@ -622,6 +622,7 @@
 		multiSlide: false,
 		multiSlidePadding: 0,
 		autoResize: false,
+		ratio: false,
 		slideClass: 'slides',
 		multiSlideClass: 'super-slide',
 		pagClass: 'pagination',
@@ -645,7 +646,6 @@
 		offset: 0,
 		totalPos: 0,
 		timer: null,
-		ratio: null,
 		animationStopped: false
 	};
 

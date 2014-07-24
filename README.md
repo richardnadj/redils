@@ -117,6 +117,16 @@ Slider resizes based on width of it's container and changes everytime window cha
 	$(selector).redils({autoResize: false});
 
 
+#### ratio ####
+
+*Default* `false`   
+*Expects* `integer, float, false`
+
+If there is more than one image per slide that has different image ratios then this setting will need to be set. Recommended to be set as a data attribute i.e. data-ratio="". Ratio works out as width / height.
+
+	$(selector).redils({ratio: false});
+
+
 #### multiSlide ####
 
 *Default* `false`   
@@ -193,6 +203,9 @@ Define outside of the plugin container which slide to skip to.
 
 
 ### Changelog ###
+
+**Version 1.5.3**   
+Added a fixed ratio property for sliders that have multiple images in it.
 
 **Version 1.5.2**   
 Removed some faulty logic that made multislide not update on resize.
