@@ -287,6 +287,8 @@
 				$this.data('position', 0);
 				$this.set.position = 0;
 				priv.overflow.apply($this);
+				$this.trigger('redils.rendered');
+
 			}
 
 		},
