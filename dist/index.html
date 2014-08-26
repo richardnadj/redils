@@ -137,7 +137,9 @@
 					multiSlide: true,
 					multiSlidePadding: 10,
 					auto: false
-				});
+				}).on('redils.rendered', function(){
+					console.log('var 1', 1);
+				});;
 
 				//Hide/display grid
 				$(window).on('keypress', function(e){

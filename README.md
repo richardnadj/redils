@@ -204,6 +204,12 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.5.5**   
+Many fixes to the way multislider works. When the slides within the multislider is only one the slider changes back to single slides.
+
+**Version 1.5.4**   
+Event on the redils element for when the slider is finished rendering.
+
 **Version 1.5.3**   
 Added a fixed ratio property for sliders that have multiple images in it.
 

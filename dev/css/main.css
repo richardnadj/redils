@@ -763,7 +763,7 @@ section {
   .signature svg {
     padding-top: 30px; }
 
-.redils-multislide .slides {
+.redils-multislide .super-slide .slides {
   padding: 10px; }
 
 .redils-cont {
@@ -817,11 +817,11 @@ section {
 
 .redils-multislide {
   height: 240px; }
+  .redils-multislide .slides {
+    display: inline-block;
+    vertical-align: top; }
   .redils-multislide .super-slide {
     float: left;
     text-align: center; }
-    .redils-multislide .super-slide .slides {
-      display: inline-block;
-      vertical-align: top; }
 
 /*# sourceMappingURL=main.css.map */

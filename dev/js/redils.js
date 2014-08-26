@@ -111,7 +111,7 @@
 			$this.siblings('.redils-controls').on('click', '.' + $this.set.arrowContClass, function() {
 				var dir = ($(this).hasClass($this.set.rightArrowClass)) ? 1 : -1;
 				if($this.set.debug) { console.log('Arrows clicked direction: ', dir); }
-				
+
 				priv.interaction.apply($this);
 				priv.beforeAnimating.apply($this, [dir]);
 			});
@@ -129,10 +129,16 @@
 			$this.on('redils.imagesLoaded', function() {
 				var $slides = $(this).find('.' + $this.set.slideClass).not('.redils-duplicated');
 
-				if($this.set.slideClass === $this.set.multiSlideClass && $this.set.multiSlide) $slides = $slides.find('.' + $this.set.prevSlideClass);
+				if($this.set.slideClass === $this.set.multiSlideClass && $this.set.multiSlide) {
+					$slides = $slides.find('.' + $this.set.prevSlideClass);
+				}
 
 				$slides.each(function(i) {
-					$this.set.subSlideWidths[i] = $(this).width() + $this.set.multiSlidePadding * 2;
+					if($this.set.multiSlide) {
+						$this.set.subSlideWidths[i] = $(this).find('img').width() + $this.set.multiSlidePadding * 2;
+					} else {
+						$this.set.subSlideWidths[i] = $(this).width() + $this.set.multiSlidePadding * 2;
+					}
 				});
 				
 				if($this.set.debug) console.log('Individual multislide slide widths: ', $this.set.subSlideWidths);
@@ -239,7 +245,9 @@
 				currentWidth = 0,
 				totalWidthBefore = 0,
 				prevPosition = 0,
-				position = 0;
+				position = 0,
+				slidesPerSuper = 0,
+				slidesPerSuperMax = 0;
 			
 
 			//Save original slides.
@@ -250,46 +258,72 @@
 			$slides.each(function(i) {
 				var $img = $(this).find('img');
 
+				//If I have a variable sized image???
+				//Two should always make two slides.
 				slideWidth = ($this.set.subSlideWidths.length === 0) ? $img.width() + $this.set.multiSlidePadding * 2 : $this.set.subSlideWidths[i];
 				totalWidth += slideWidth;
 				currentWidth += slideWidth;
 
+				//This triggers when the current slide can't fit in previous container.
 				if(position !== Math.floor(currentWidth / pageWidth)) {
 
 					//Save offsets to know when to recompile.
 					$this.set.multiBreakLess = totalWidthBefore;
 					$this.set.multiBreakMore = totalWidth;
-					
+
 					$this.set.dynWidth[i] = pageWidth;
 					position++;
 					currentWidth = position * pageWidth + slideWidth;
 					superSlides[position] = '';
 					prevPosition = i;
+					slidesPerSuper = 0;
 				}
+
+				slidesPerSuper++;
+				if(slidesPerSuper > slidesPerSuperMax) slidesPerSuperMax = slidesPerSuper;
+
 				totalWidthBefore = totalWidth;
 				superSlides[position] += $(this).prop('outerHTML');
 			});
 
+			if($this.set.multiBreakLess === undefined || $this.set.multiBreakMore === undefined) {
+				$this.set.multiBreakLess = totalWidthBefore;
+				$this.set.multiBreakMore = totalWidth;	
+			}
+			
 			//Manipulate HTML into one html string
-			slideHTML = '<div class="' + $this.set.multiSlideClass + '">' + superSlides.join('</div><div class="' + $this.set.multiSlideClass + '">') + '</div>';
+			if(slidesPerSuperMax === 1) {
+				//each slide has only one slide in it...
+				slideHTML = superSlides.join('');
+				if($this.set.slideClass === $this.set.multiSlideClass) {
+					$this.set.slideClass = $this.set.prevSlideClass;
+				}
+			} else {
+				//Wrap slides in a super slide.
+				slideHTML = '<div class="' + $this.set.multiSlideClass + '">' + superSlides.join('</div><div class="' + $this.set.multiSlideClass + '">') + '</div>';
+				
+				if($this.set.slideClass !== $this.set.multiSlideClass) {
+					$this.set.prevSlideClass = $this.set.slideClass;
+					$this.set.slideClass = $this.set.multiSlideClass;
+				}
+			}
 
-			//Wrap slides in a super slide and put them in the container.
+			//Put back slides into the container.
 			$this.find('.' + $this.set.slideContClass).html(slideHTML);
 
-			//Change slideClass to .superSlides
-			if($this.set.slideClass !== $this.set.multiSlideClass) {
-				$this.set.prevSlideClass = $this.set.slideClass;
-				$this.set.slideClass = $this.set.multiSlideClass;
-			} else {
-				//After init.
-				//create overflows
-				$this.set.totalAmount = position + 1;
-				$this.data('position', 0);
-				$this.set.position = 0;
-				priv.overflow.apply($this);
-				$this.trigger('redils.rendered');
+			//Change slider amount.
+			$this.set.totalAmount = position + 1;
+			
+			//Start slider at the start
+			$this.data('position', 0);
+			$this.set.position = 0;
 
-			}
+			//Add in new slides to enable carousel.
+			priv.overflow.apply($this);
+
+			//Everytime this function is run it generates new slides. 
+			//Therefore new links need to be made everytime.
+			$this.trigger('redils.rendered');
 
 		},
 		totalWidth: function() {
@@ -341,6 +375,7 @@
 				}
 			}
 
+			$this.data('position', $this.set.position);
 		},
 		pagination: function() {
 			var html = '<div class="center-pagination">',

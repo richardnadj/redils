@@ -15,5 +15,5 @@
 	.redils.disabled .slides { margin: 0 auto; opacity: 1; float: none; } }
 
 .redils-multislide { height: 240px;
-	.super-slide { float: left; text-align: center;
-		.slides { display: inline-block; vertical-align: top; } } }
+	.slides { display: inline-block; vertical-align: top; }
+	.super-slide { float: left; text-align: center; } }
