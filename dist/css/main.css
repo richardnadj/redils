@@ -61,10 +61,14 @@ section{margin-top:50px}
 .redils-cont{width:1170px;max-width:100%;position:relative}
 .redils{overflow:hidden;width:100%;height:100%}
 .redils .slide-cont,.redils .slides{height:100%}
-.redils-controls{width:100%;height:100%;position:absolute;top:0;left:0}
-.redils-controls .arrow-area-left{text-align:left}
-.redils-controls td{cursor:pointer;position:relative;padding:0;text-align:right;display:table-cell;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
-.redils-controls td.center-cell{width:10%;z-index:-1}
+.redils-controls .arrow-area{position:absolute;height:100%;width:20%;top:0;z-index:10}
+.redils-controls .arrow-area-right{right:0}
+table.redils-controls{width:100%;height:100%;position:absolute;top:0;left:0}
+table.redils-controls .arrow-area-left{text-align:left}
+table.redils-controls td{cursor:pointer;position:relative;padding:0;text-align:right;display:table-cell;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+table.redils-controls td.center-cell{width:10%;z-index:-1}
+.redils-default{height:600px}
+.redils-default .slides{display:inline-block;vertical-align:top}
 .redils-responsive{height:600px}
 .redils-responsive .slides{float:left}
 .redils-responsive .slides img{width:auto;height:100%}

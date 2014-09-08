@@ -343,7 +343,7 @@
 						$this.set.dynWidth[i] = pageWidth + 1;
 						$(this).width($this.set.dynWidth[i]);
 					} else {
-						$(this).width();
+						$this.set.dynWidth[i] = $(this).width();
 					}
 
 					$this.set.contWidth += $this.set.dynWidth[i];

@@ -780,15 +780,24 @@ section {
   .redils .slides {
     height: 100%; }
 
-.redils-controls {
+.redils-controls .arrow-area {
+  position: absolute;
+  height: 100%;
+  width: 20%;
+  top: 0;
+  z-index: 10; }
+.redils-controls .arrow-area-right {
+  right: 0; }
+
+table.redils-controls {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0; }
-  .redils-controls .arrow-area-left {
+  table.redils-controls .arrow-area-left {
     text-align: left; }
-  .redils-controls td {
+  table.redils-controls td {
     cursor: pointer;
     position: relative;
     padding: 0;
@@ -799,9 +808,15 @@ section {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .redils-controls td.center-cell {
+    table.redils-controls td.center-cell {
       width: 10%;
       z-index: -1; }
+
+.redils-default {
+  height: 600px; }
+  .redils-default .slides {
+    display: inline-block;
+    vertical-align: top; }
 
 .redils-responsive {
   height: 600px; }

@@ -204,6 +204,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.6.0**   
+Initialized deprecation of using tables as arrow controls now using divs. Added a bug fix to the slider that is not multislide or autoresize.
+
 **Version 1.5.5**   
 Many fixes to the way multislider works. When the slides within the multislider is only one the slider changes back to single slides.
 
