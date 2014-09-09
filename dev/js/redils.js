@@ -195,13 +195,15 @@
 
 		},
 		compress: function() {
-			var zIndex = 10000;
+			var $this = this;
 
-			this.css({'position': 'relative','z-index':500}).find('.' + this.set.slideClass).each(function() {
-				$(this).css({'position':'absolute','left':0,'top':0,'z-index':zIndex});
-				zIndex--;
+			$this.css({'position': 'relative'}).find('.' + $this.set.slideClass).css({
+				'position':'absolute',
+				'left': 0,
+				'top': 0
 			});
 
+			$this.find('.' + $this.set.slideContClass).css('width', '');
 		},
 		center: function(position) {
 
@@ -366,12 +368,11 @@
 				if($this.set.overflow <= $this.set.totalAmount) {
 					$this.find('.' + $this.set.slideContClass).append($slides.eq(i).clone().addClass('redils-duplicated'));
 					$this.set.totalAmount++;
-
-					if($this.set.slide) {
-						$this.find('.' + $this.set.slideContClass).prepend($slides.eq(-i - 1).clone().addClass('redils-duplicated'));
-						$this.set.totalAmount++;
-						$this.set.position++;
-					}
+					
+					$this.find('.' + $this.set.slideContClass).prepend($slides.eq(-i - 1).clone().addClass('redils-duplicated'));
+					$this.set.totalAmount++;
+					$this.set.position++;
+				
 				}
 			}
 
@@ -414,12 +415,15 @@
 			var $this = this;
 
 			$this.set.position = $this.data('position');
+			$this.set.oldPosition = $this.set.position;
+			//This should be the previous slide.
+			if(!$this.set.slide) $this.find('.' + $this.set.slideClass).css({'z-index': '', 'display': 'block'}).eq($this.set.position).css('z-index', 3);
 
 			//Adding the overflow offset will enable us to use absolute positions.
 			if($this.set.position + dir > $this.set.totalAmount - 1 - $this.set.overflow) {
 				if($this.set.debug) { console.log('Before Sliding -> reached end | pos: ', $this.set.position,' dir: ', dir,' total: ', $this.set.totalAmount,' overflow: ', $this.set.overflow, ' case left: ', $this.set.position + dir, ' case right: ', $this.set.totalAmount - 1 - $this.set.overflow); }
 				$this.set.ends = $this.set.position + dir;
-				$this.set.position = $this.set.slide ? (0 + $this.set.overflow) : 0;
+				$this.set.position = 0 + $this.set.overflow;
 				
 			} else if($this.set.position + dir < 0 + $this.set.overflow) {
 				if($this.set.debug) { console.log('Before Sliding -> reached start | pos: ', $this.set.position,' dir: ', dir,' overflow: ', $this.set.overflow, ' case left: ', $this.set.position + dir, ' case right: ', 0 + $this.set.overflow); }
@@ -433,7 +437,6 @@
 			if($this.set.debug) { console.log('Current settings object before animation ', $this.set); }
 
 			$this.set.totalPos = priv.totalPos.apply($this, [$this.set.position]);
-			$this.find('.' + $this.set.slideClass).removeClass('focused');
 			priv.animating.apply($this);
 			priv.currentSlide.apply($this);
 
@@ -443,6 +446,8 @@
 				barTimer = null;
 
 			$this.find('.' + $this.set.slideClass).removeClass('focused').eq($this.set.position).addClass('focused');
+			//This should be the future slide.
+			if(!$this.set.slide) $this.find('.' + $this.set.slideClass).eq($this.set.position).css('z-index', 2);
 			$this.siblings('.' + $this.set.pagClass).find('a').removeClass('selected').eq($this.set.position - $this.set.overflow).addClass('selected');
 
 			if($this.set.timerBar && $this.set.auto !== false) {
@@ -500,7 +505,7 @@
 					complete: callback
 				});
 			} else {
-				$this.find('.' + $this.set.slideClass).eq(moveTo - 1).fadeOut({
+				$this.find('.' + $this.set.slideClass).eq($this.set.oldPosition).fadeOut({
 					'duration': $this.set.speed,
 					'queue': false,
 					'complete': callback
@@ -542,7 +547,7 @@
 
 				$this.set.totalAmount = $this.find('.' + $this.set.slideClass).length;
 				
-				if(!$this.set.slide) { $this.set.overflow = 1; }
+				if(!$this.set.slide) { $this.set.overflow = 0; }
 
 				//Are there enough slides to create a slider?
 				if($this.set.totalAmount > 1 || $this.set.multiSlide) {
@@ -593,7 +598,7 @@
 				var $this = $(this);
 
 				$this.set = $.extend({}, $this.data(), options);
-				if(!$this.set.slide) { $this.set.overflow = 1; }
+				if(!$this.set.slide) { $this.set.overflow = 0; }
 				priv.update.apply($this);
 
 				$this.data($this.set);
@@ -679,6 +684,7 @@
 		subSlideWidths: [],
 		totalAmount: 0, //in pixel distance
 		position: 0, //in consecutive integers
+		oldPosition: 0,
 		ends: false,
 		offset: 0,
 		totalPos: 0,

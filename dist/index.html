@@ -79,8 +79,56 @@
 				</div>
 			</section>
 			<section>
+				<h3>Fader</h3>
+				<p>Slider off use fade transitions instead.</p>
+				<pre>
+$('.redils-fader .redils').redils({
+	autoResize: true,
+	slide: false,
+	speed: 800
+});
+				</pre>
+				<div class="redils-cont redils-fader">
+					<div class="redils">
+						<div class="slide-cont" style="width: 7020px">
+							<div class="slides">
+								<img src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="660">
+							</div>
+							<div class="slides">
+								<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
+							</div>
+							<div class="slides">
+								<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
+							</div>
+							<div class="slides">
+								<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
+							</div>
+							<div class="slides">
+								<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
+							</div>
+						</div>
+					</div>
+					<div class="redils-controls">
+						<div class="arrow-area arrow-area-left">
+							<div class="arrow"></div>
+						</div>
+						<div class="arrow-area arrow-area-right">
+							<div class="arrow"></div>
+						</div>
+					</div>
+					<div class="pagination"></div>
+				</div>
+			</section>
+			<section>
 				<h3>Multislide</h3>
 				<p>Using several fixed size slides within a slider. Slider changes amount of slides shown based on container's width.</p>
+				<pre>
+$('.redils-multislide .redils').redils({
+	multiSlide: true,
+	multiSlidePadding: 10,
+	auto: false
+})
+				</pre>
 				<div class="redils-cont redils-multislide">
 					<div class="redils">
 						<div class="slide-cont" style="width: 7020px">
@@ -152,7 +200,15 @@
 				//Responsive redils
 				$('.redils-default .redils').redils();
 
-				$('.redils-responsive .redils').redils({autoResize: true});
+				$('.redils-responsive .redils').redils({
+					autoResize: true
+				});
+
+				$('.redils-fader .redils').redils({
+					autoResize: true,
+					slide: false,
+					speed: 800
+				});
 
 				$('.redils-multislide .redils').redils({
 					multiSlide: true,

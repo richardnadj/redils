@@ -204,6 +204,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.6.1**   
+Refactored how the slider fades between slides. Now using relative z-indexes. Fader now is by-directional.
+
 **Version 1.6.0**   
 Initialized deprecation of using tables as arrow controls now using divs. Added a bug fix to the slider that is not multislide or autoresize.
 
