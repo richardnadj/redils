@@ -204,6 +204,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.6.2**   
+Added a class for redils activated.
+
 **Version 1.6.1**   
 Refactored how the slider fades between slides. Now using relative z-indexes. Fader now is by-directional.
 
