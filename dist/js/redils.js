@@ -582,6 +582,8 @@
 
 					priv.currentSlide.apply($this);
 
+					$this.addClass('redils-activated');
+
 				} else {
 					if($this.set.debug) console.info('Slider is disabled due to insufficient slides'); 
 					$this.addClass('disabled');
