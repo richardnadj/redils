@@ -18,6 +18,7 @@
 			<section>
 				<h3>Default</h3>
 				<p>Standard slider.</p>
+				<pre>$('.redils-default .redils').redils();</pre>
 				<div class="redils-cont redils-default">
 					<div class="redils">
 						<div class="slide-cont" style="width: 5850px">
@@ -30,7 +31,7 @@
 							</div><div class="slides">
 								<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
 							</div><div class="slides">
-								<img src="images/240614085654-placeholder-1170x660-ededed.jpg" alt="ededed" width="1170" height="660">
+								<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
 							</div>
 						</div>
 					</div>
@@ -47,6 +48,11 @@
 			</section><section>
 				<h3>Responsive</h3>
 				<p>Slider Stretches to fit it's container.</p>
+				<pre>
+$('.redils-responsive .redils').redils({
+	autoResize: true
+});
+				</pre>
 				<div class="redils-cont redils-responsive">
 					<div class="redils">
 						<div class="slide-cont" style="width: 7020px">
@@ -63,7 +69,7 @@
 								<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
 							</div>
 							<div class="slides">
-								<img src="images/240614085654-placeholder-1170x660-ededed.jpg" alt="ededed" width="1170" height="660">
+								<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
 							</div>
 						</div>
 					</div>
@@ -85,6 +91,7 @@
 $('.redils-fader .redils').redils({
 	autoResize: true,
 	slide: false,
+	auto: false,
 	speed: 800
 });
 				</pre>
@@ -127,7 +134,7 @@ $('.redils-multislide .redils').redils({
 	multiSlide: true,
 	multiSlidePadding: 10,
 	auto: false
-})
+});
 				</pre>
 				<div class="redils-cont redils-multislide">
 					<div class="redils">
@@ -207,6 +214,7 @@ $('.redils-multislide .redils').redils({
 				$('.redils-fader .redils').redils({
 					autoResize: true,
 					slide: false,
+					auto: false,
 					speed: 800
 				});
 
@@ -215,7 +223,7 @@ $('.redils-multislide .redils').redils({
 					multiSlidePadding: 10,
 					auto: false
 				}).on('redils.rendered', function(){
-					console.log('var 1', 1);
+					console.log('This is an event for when multiSlide has finished rendering.');
 				});;
 
 				//Hide/display grid

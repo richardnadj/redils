@@ -766,6 +766,21 @@ section {
 .redils-multislide .super-slide .slides {
   padding: 10px; }
 
+.pagination {
+  text-align: center;
+  position: relative;
+  top: -25px;
+  z-index: 5; }
+  .pagination a {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: inline-block;
+    margin: 0 5px; }
+    .pagination a.selected {
+      background-color: #333; }
+
 .redils-cont {
   width: 1170px;
   max-width: 100%;
@@ -822,10 +837,9 @@ table.redils-controls {
     height: 100%; }
 
 .redils-default {
-  height: 600px; }
+  height: 660px; }
   .redils-default .slides {
-    display: inline-block;
-    vertical-align: top; }
+    float: left; }
 
 .redils-responsive {
   height: 600px; }

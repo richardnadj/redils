@@ -59,52 +59,34 @@
 		},
 		enableEvents: function() {
 			var $this = this,
-				start = {},
 				touches = {};
 
 			$this.on({
 				touchstart: function(e) {
 					//Get initial values
-					if($this.set.auto)clearInterval($this.set.timer);
-					start.x = e.originalEvent.targetTouches[0].pageX;
-					start.y = e.originalEvent.targetTouches[0].pageY;
-					start.time = e.originalEvent.timeStamp;
-					touches.dir = '';
-					touches.move = '';
+					touches.slide = false;
+					touches.startX = e.originalEvent.targetTouches[0].pageX;
 				},
 				touchmove: function(e) {
 					//Determine if scrolling handle accordingly
-					touches.x = e.originalEvent.targetTouches[0].pageX;
-					touches.y = e.originalEvent.targetTouches[0].pageY;
-					scrolling = (Math.abs(Math.abs(touches.y) - Math.abs(start.y)) > Math.abs(Math.abs(touches.x) - Math.abs(start.x)));
+					touches.endX = e.originalEvent.targetTouches[0].pageX;
 
-					//Test if touch is a vertical movement.
-					if (!scrolling && e.originalEvent.touches.length == 1) {
-						e.preventDefault();
-					}
-				},
-				touchend: function(e) {
-					//If short then click return false;
-					if((e.originalEvent.timeStamp - start.time) < 200) {
-						return false;
-					}
-
-					if (touches.x > start.x + 40) {
-						touches.move = 'right';
-						if(touches.move !== touches.dir) {
-							touches.dir = touches.move;
+					//Check if we've registered that we've made the slider slide.
+					//Check if we've moved our finger more than 50 px sideways.
+					if(!touches.slide && Math.abs(Math.abs(touches.startX) - Math.abs(touches.endX)) > 50) {
+						touches.slide = true;
+						
+						//We started at a lower amount than where we have finished. 
+						//We slid our finger from left to right and therefore gone backwards
+						if (touches.endX > touches.startX) {
 							priv.interaction.apply($this);
-							priv.beforeAnimating.apply($this, [-1]); //-1
-						}
-					} else if(touches.x < start.x - 40) {
-						touches.move = 'left';
-						if(touches.move !== touches.dir) {
-							touches.dir = touches.move;
+							priv.beforeAnimating.apply($this, [-1]);
+						} else {
 							priv.interaction.apply($this);
 							priv.beforeAnimating.apply($this, [1]);
 						}
 					}
-
+					
 				}
 			});
 			
@@ -121,8 +103,7 @@
 				if($this.set.debug) { console.log('Pagination links clicked index: ', index); }
 				
 				priv.interaction.apply($this);
-				$this.data({'position': (index + $this.set.overflow)});
-				priv.beforeAnimating.apply($this, [0]);
+				priv.beforeAnimating.apply($this, [0, (index + $this.set.overflow)]);
 				return false;
 			});
 
@@ -150,11 +131,11 @@
 				if($this.set.fullWidth !== false) {
 					priv.fullWidth.apply($this);
 					priv.totalWidth.apply($this);
-					$this.set.totalPos = priv.totalPos.apply($this, [$this.set.position]);
+					$this.set.totalPos = priv.totalPos.apply($this);
 				}
 
 				if($this.set.center) {
-					priv.center.apply($this, [$this.set.position]);
+					priv.center.apply($this);
 				}
 
 				if($this.set.autoResize || $this.set.multiSlide) priv.update.apply($this);
@@ -180,11 +161,11 @@
 
 				if($this.set.center) {
 					//Reset center
-					priv.center.apply($this, [$this.set.position]);
+					priv.center.apply($this);
 				}
 				
 				//Reset scrollLeft
-				$this.set.totalPos = priv.totalPos.apply($this, [$this.set.position]);
+				$this.set.totalPos = priv.totalPos.apply($this);
 
 
 				$this.scrollLeft($this.set.totalPos - $this.set.offset);
@@ -205,12 +186,14 @@
 
 			$this.find('.' + $this.set.slideContClass).css('width', '');
 		},
-		center: function(position) {
+		center: function(pos) {
+			var $this = this,
+				position = pos || $this.data('position');
 
-			if(this.set.width === 'dyn') {
-				this.set.offset = (this.width() - parseInt(this.set.dynWidth[position])) / 2;
+			if($this.set.width === 'dyn') {
+				$this.set.offset = ($this.width() - parseInt($this.set.dynWidth[position])) / 2;
 			} else {
-				this.set.offset = (this.width() - parseInt(this.set.width)) / 2;
+				$this.set.offset = ($this.width() - parseInt($this.set.width)) / 2;
 			}
 
 		},
@@ -223,19 +206,21 @@
 			}
 
 		},
-		totalPos: function(amount) {
-			var pos = 0,
+		totalPos: function(pos) {
+			var $this = this,
+				position = (pos !== undefined) ? pos : $this.data('position'),
+				pxPosition = 0,
 				obj = $.isEmptyObject(this.data()) ? this.set : this.data();
 
 			if(this.set.width === 'dyn') {
-				for (var i = 0; i < amount; i++) {
-					pos += obj.dynWidth[i];
+				for (var i = 0; i < position; i++) {
+					pxPosition += obj.dynWidth[i];
 				}
 			} else {
-				pos = amount * parseInt(this.set.width);
+				pxPosition = position * parseInt(this.set.width);
 			}
 
-			return pos;
+			return pxPosition;
 		},
 		multiSlide: function() {
 			var $this = this,
@@ -247,7 +232,7 @@
 				currentWidth = 0,
 				totalWidthBefore = 0,
 				prevPosition = 0,
-				position = 0,
+				j = 0,
 				slidesPerSuper = 0,
 				slidesPerSuperMax = 0;
 			
@@ -267,16 +252,16 @@
 				currentWidth += slideWidth;
 
 				//This triggers when the current slide can't fit in previous container.
-				if(position !== Math.floor(currentWidth / pageWidth)) {
+				if(j !== Math.floor(currentWidth / pageWidth)) {
 
 					//Save offsets to know when to recompile.
 					$this.set.multiBreakLess = totalWidthBefore;
 					$this.set.multiBreakMore = totalWidth;
 
 					$this.set.dynWidth[i] = pageWidth;
-					position++;
-					currentWidth = position * pageWidth + slideWidth;
-					superSlides[position] = '';
+					j++;
+					currentWidth = j * pageWidth + slideWidth;
+					superSlides[j] = '';
 					prevPosition = i;
 					slidesPerSuper = 0;
 				}
@@ -285,7 +270,7 @@
 				if(slidesPerSuper > slidesPerSuperMax) slidesPerSuperMax = slidesPerSuper;
 
 				totalWidthBefore = totalWidth;
-				superSlides[position] += $(this).prop('outerHTML');
+				superSlides[j] += $(this).prop('outerHTML');
 			});
 
 			if($this.set.multiBreakLess === undefined || $this.set.multiBreakMore === undefined) {
@@ -314,12 +299,15 @@
 			$this.find('.' + $this.set.slideContClass).html(slideHTML);
 
 			//Change slider amount.
-			$this.set.totalAmount = position + 1;
+			$this.set.totalAmount = j + 1;
 			
 			//Start slider at the start
 			$this.data('position', 0);
-			$this.set.position = 0;
 
+			//Create pagination
+			if($this.set.pagination !== false) {
+				priv.pagination.apply($this);
+			}
 			//Add in new slides to enable carousel.
 			priv.overflow.apply($this);
 
@@ -371,12 +359,11 @@
 					
 					$this.find('.' + $this.set.slideContClass).prepend($slides.eq(-i - 1).clone().addClass('redils-duplicated'));
 					$this.set.totalAmount++;
-					$this.set.position++;
 				
 				}
 			}
 
-			$this.data('position', $this.set.position);
+			$this.data('position', $this.set.overflow);
 		},
 		pagination: function() {
 			var html = '<div class="center-pagination">',
@@ -411,44 +398,50 @@
 			
 			this.siblings('.' + this.set.pagClass).html(html);
 		},
-		beforeAnimating: function(dir) {
-			var $this = this;
+		beforeAnimating: function(dir, newPosition) {
+			var $this = this,
+				position = $this.data('position'),
+				prevPosition = position;
 
-			$this.set.position = $this.data('position');
-			$this.set.oldPosition = $this.set.position;
-			//This should be the previous slide.
-			if(!$this.set.slide) $this.find('.' + $this.set.slideClass).css({'z-index': '', 'display': 'block'}).eq($this.set.position).css('z-index', 3);
+			//$this.set.oldPosition = $this.set.position;
+			//$this.set.position = $this.data('position');
+			//console.log('var $this.set.position, $this.set.oldPosition', $this.set.position, $this.set.oldPosition);
 
 			//Adding the overflow offset will enable us to use absolute positions.
-			if($this.set.position + dir > $this.set.totalAmount - 1 - $this.set.overflow) {
-				if($this.set.debug) { console.log('Before Sliding -> reached end | pos: ', $this.set.position,' dir: ', dir,' total: ', $this.set.totalAmount,' overflow: ', $this.set.overflow, ' case left: ', $this.set.position + dir, ' case right: ', $this.set.totalAmount - 1 - $this.set.overflow); }
-				$this.set.ends = $this.set.position + dir;
-				$this.set.position = 0 + $this.set.overflow;
+			if(position + dir > $this.set.totalAmount - 1 - $this.set.overflow) {
+				if($this.set.debug) { console.log('Before Sliding -> reached end | pos: ', position,' dir: ', dir,' total: ', $this.set.totalAmount,' overflow: ', $this.set.overflow, ' case left: ', position + dir, ' case right: ', $this.set.totalAmount - 1 - $this.set.overflow); }
+				$this.set.ends = position + dir;
+				position = 0 + $this.set.overflow;
 				
-			} else if($this.set.position + dir < 0 + $this.set.overflow) {
-				if($this.set.debug) { console.log('Before Sliding -> reached start | pos: ', $this.set.position,' dir: ', dir,' overflow: ', $this.set.overflow, ' case left: ', $this.set.position + dir, ' case right: ', 0 + $this.set.overflow); }
-				$this.set.ends = $this.set.position + dir;
-				$this.set.position = $this.set.totalAmount - 1 - $this.set.overflow;
+			} else if(position + dir < 0 + $this.set.overflow) {
+				if($this.set.debug) { console.log('Before Sliding -> reached start | pos: ', position,' dir: ', dir,' overflow: ', $this.set.overflow, ' case left: ', position + dir, ' case right: ', 0 + $this.set.overflow); }
+				$this.set.ends = position + dir;
+				position = $this.set.totalAmount - 1 - $this.set.overflow;
 			} else {
-				if($this.set.debug) { console.log('Before Sliding -> middle | pos: ', $this.set.position,' dir: ', dir,' overflow: ', $this.set.overflow); }
-				$this.set.position += dir;
+				if($this.set.debug) { console.log('Before Sliding -> middle | pos: ', position,' dir: ', dir,' overflow: ', $this.set.overflow); }
+				position = (newPosition !== undefined) ? newPosition : position + dir;
 			}
+
+			$this.data('prevPosition', prevPosition);
+			$this.data('position', position);
+			//This should be the previous slide.
+			if(!$this.set.slide) $this.find('.' + $this.set.slideClass).css({'z-index': '', 'display': 'block'}).eq(prevPosition).css('z-index', 3);
 
 			if($this.set.debug) { console.log('Current settings object before animation ', $this.set); }
 
-			$this.set.totalPos = priv.totalPos.apply($this, [$this.set.position]);
 			priv.animating.apply($this);
 			priv.currentSlide.apply($this);
 
 		},
 		currentSlide: function() {
 			var $this = this,
+				position = $this.data('position'),
 				barTimer = null;
 
-			$this.find('.' + $this.set.slideClass).removeClass('focused').eq($this.set.position).addClass('focused');
+			$this.find('.' + $this.set.slideClass).removeClass('focused').eq(position).addClass('focused');
 			//This should be the future slide.
-			if(!$this.set.slide) $this.find('.' + $this.set.slideClass).eq($this.set.position).css('z-index', 2);
-			$this.siblings('.' + $this.set.pagClass).find('a').removeClass('selected').eq($this.set.position - $this.set.overflow).addClass('selected');
+			if(!$this.set.slide) $this.find('.' + $this.set.slideClass).eq(position).css('z-index', 2);
+			$this.siblings('.' + $this.set.pagClass).find('a').removeClass('selected').eq(position - $this.set.overflow).addClass('selected');
 
 			if($this.set.timerBar && $this.set.auto !== false) {
 
@@ -476,8 +469,8 @@
 		animating: function() {
 			//Handle scroll animation.
 			var $this = this,
-				moveTo = $this.set.position,
-				totalPos = $this.set.totalPos,
+				moveTo = $this.data('position'),
+				totalPos = priv.totalPos.apply($this),
 				callback = function() { priv.afterAnimating.apply($this); };
 
 			if($this.set.ends !== false) {
@@ -505,7 +498,7 @@
 					complete: callback
 				});
 			} else {
-				$this.find('.' + $this.set.slideClass).eq($this.set.oldPosition).fadeOut({
+				$this.find('.' + $this.set.slideClass).eq($this.data('prevPosition')).fadeOut({
 					'duration': $this.set.speed,
 					'queue': false,
 					'complete': callback
@@ -517,13 +510,11 @@
 			var $this = this;
 
 			//Trigger an event on after slide to connect to.
-			if(this.set.overflow && this.set.ends !== false) {
-				this.scrollLeft(this.set.totalPos - this.set.offset);
-				this.find('.' + this.set.slideClass).show();
-				this.set.ends = false;
+			if($this.set.overflow && $this.set.ends !== false) {
+				$this.scrollLeft(priv.totalPos.apply($this) - $this.set.offset);
+				$this.find('.' + $this.set.slideClass).show();
+				$this.set.ends = false;
 			}
-
-			$this.data({'position':$this.set.position});
 
 		}
 	};
@@ -545,6 +536,7 @@
 					priv.multiSlide.apply($this);
 				}
 
+				if($this.data('position') === undefined) $this.data('position', 0);
 				$this.set.totalAmount = $this.find('.' + $this.set.slideClass).length;
 				
 				if(!$this.set.slide) { $this.set.overflow = 0; }
@@ -634,7 +626,7 @@
 
 				$this.set = $this.data();
 				var skipToSlide = options.skipToSlide || 0;
-				$this.set.position = skipToSlide + $this.set.overflow;
+				$this.data('position', skipToSlide + $this.set.overflow);
 
 				priv.interaction.apply($this);
 				priv.beforeAnimating.apply($this, [0]);
@@ -685,8 +677,6 @@
 		dynWidth: [],
 		subSlideWidths: [],
 		totalAmount: 0, //in pixel distance
-		position: 0, //in consecutive integers
-		oldPosition: 0,
 		ends: false,
 		offset: 0,
 		totalPos: 0,

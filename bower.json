@@ -1,6 +1,6 @@
 {
   "name": "ys-redils",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "main": "dist/redils.js",
   "authors": [
     "Richard Herries <richard@youngskilled.com>"

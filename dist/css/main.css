@@ -58,6 +58,9 @@ section{margin-top:50px}
 .signature{width:48.71795%;margin:250px auto 0;text-align:center;display:block;border-top:1px solid #ccc}
 .signature svg{padding-top:30px}
 .redils-multislide .super-slide .slides{padding:10px}
+.pagination{text-align:center;position:relative;top:-25px;z-index:5}
+.pagination a{width:15px;height:15px;border-radius:50%;background-color:#fff;display:inline-block;margin:0 5px}
+.pagination a.selected{background-color:#333}
 .redils-cont{width:1170px;max-width:100%;position:relative}
 .redils{overflow:hidden;width:100%;height:100%}
 .redils .slide-cont,.redils .slides{height:100%}
@@ -70,8 +73,8 @@ table.redils-controls td.center-cell{width:10%;z-index:-1}
 .redils-fader{height:600px}
 .redils-fader .redils{z-index:5}
 .redils-fader .slides{width:100%;height:100%}
-.redils-default{height:600px}
-.redils-default .slides{display:inline-block;vertical-align:top}
+.redils-default{height:660px}
+.redils-default .slides{float:left}
 .redils-responsive{height:600px}
 .redils-responsive .slides{float:left}
 .redils-responsive .slides img{width:auto;height:100%}

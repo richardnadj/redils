@@ -19,8 +19,8 @@ table.redils-controls { width: 100%; height: 100%; position: absolute; top: 0; l
 	.redils { z-index: 5; }
 	.slides { width: 100%; height: 100%; } }
 
-.redils-default { height: 600px;
-	.slides { display: inline-block; vertical-align: top; } }
+.redils-default { height: 660px;
+	.slides { float: left; } }
 
 .redils-responsive { height: 600px;
 	.slides { float: left;

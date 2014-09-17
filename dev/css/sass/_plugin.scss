@@ -23,3 +23,7 @@ section { margin-top: 50px; }
 	svg { padding-top: 30px; } }
 
 .redils-multislide .super-slide .slides { padding: 10px; }
+
+.pagination { text-align: center; position: relative; top: -25px; z-index: 5; 
+	a { width: 15px; height: 15px; border-radius: 50%; background-color: #fff; display: inline-block; margin: 0 5px; 
+		&.selected { background-color: #333; } } }
