@@ -66,14 +66,29 @@
 					//Get initial values
 					touches.slide = false;
 					touches.startX = e.originalEvent.targetTouches[0].pageX;
+					touches.startY = e.originalEvent.targetTouches[0].pageY;
 				},
 				touchmove: function(e) {
+					var totalX,
+						totalY;
+
 					//Determine if scrolling handle accordingly
 					touches.endX = e.originalEvent.targetTouches[0].pageX;
+					touches.endY = e.originalEvent.targetTouches[0].pageY;
 
-					//Check if we've registered that we've made the slider slide.
-					//Check if we've moved our finger more than 50 px sideways.
-					if(!touches.slide && Math.abs(Math.abs(touches.startX) - Math.abs(touches.endX)) > 50) {
+					//See how far we've moved in either positive or negative direction...
+					totalX = Math.abs(Math.abs(touches.startX) - Math.abs(touches.endX));
+					totalY = Math.abs(Math.abs(touches.startY) - Math.abs(touches.endY));
+					
+					//Check that we are not scrolling more than sliding.
+					if(totalX > totalY) {
+						//We're moving sideways disable scroll.
+						e.preventDefault();
+					}
+
+					//Check that we haven't already made the slider slide.
+					//Check if we've moved our finger more than 50 px sideways left or right.
+					if(!touches.slide && totalX > 50) {
 						touches.slide = true;
 						
 						//We started at a lower amount than where we have finished. 
@@ -85,6 +100,7 @@
 							priv.interaction.apply($this);
 							priv.beforeAnimating.apply($this, [1]);
 						}
+
 					}
 					
 				}

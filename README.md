@@ -204,6 +204,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.6.4**   
+Tweaked the feel of touch sliding. If sliding to the right or the left more than vertically scrolling is disabled.
+
 **Version 1.6.3**   
 Touch events have been rewritten and optimized so that it's not on touchend but on touchmove the slider slides among other optimizations for touch events. Rewrote how position works for the slides, now completely dependent on the data object. Pagination now works for multislide and fader.
 
