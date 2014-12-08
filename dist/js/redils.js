@@ -335,6 +335,7 @@
 		totalWidth: function() {
 			var $this = this,
 				pageWidth = $this.parent().width();
+			
 
 			$this.set.contWidth = 0;
 			$this.set.dynWidth = [];

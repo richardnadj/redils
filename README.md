@@ -204,6 +204,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.6.5**   
+Small touch ups. Added arrows to demo and did a test with padding for the slider. Updated to latest gulp plugin locally.
+
 **Version 1.6.4**   
 Tweaked the feel of touch sliding. If sliding to the right or the left more than vertically scrolling is disabled.
 

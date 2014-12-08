@@ -57,10 +57,19 @@ section{margin-top:50px}
 .ingress{width:65.81197%}
 .signature{width:48.71795%;margin:250px auto 0;text-align:center;display:block;border-top:1px solid #ccc}
 .signature svg{padding-top:30px}
-.redils-multislide .super-slide .slides{padding:10px}
+.redils-multislide{padding:0 50px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.redils-multislide .redils-controls{position:absolute;width:100%;left:0;top:0;height:240px}
+.redils-multislide .super-slide .slides{padding:0 10px}
 .pagination{text-align:center;position:relative;top:-25px;z-index:5}
 .pagination a{width:15px;height:15px;border-radius:50%;background-color:#fff;display:inline-block;margin:0 5px}
 .pagination a.selected{background-color:#333}
+.arrow{position:absolute;display:inline-block;vertical-align:center;top:50%;margin-top:-10px}
+.arrow:before{content:"";border:10px solid transparent;position:absolute}
+.arrow-area-left:hover .arrow:before{border-right-color:#555}
+.arrow-area-left .arrow:before{border-right-color:#333}
+.arrow-area-right:hover .arrow:before{border-left-color:#555}
+.arrow-area-right .arrow{right:20px}
+.arrow-area-right .arrow:before{border-left-color:#333}
 .redils-cont{width:1170px;max-width:100%;position:relative}
 .redils{overflow:hidden;width:100%;height:100%}
 .redils .slide-cont,.redils .slides{height:100%}
