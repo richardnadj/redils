@@ -815,6 +815,14 @@ section {
   .arrow-area-right .arrow:before {
     border-left-color: #333; }
 
+.external-controls {
+  text-align: center; }
+  .external-controls div {
+    padding: 20px;
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer; }
+
 .redils-cont {
   width: 1170px;
   max-width: 100%;

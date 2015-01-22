@@ -70,6 +70,8 @@ section{margin-top:50px}
 .arrow-area-right:hover .arrow:before{border-left-color:#555}
 .arrow-area-right .arrow{right:20px}
 .arrow-area-right .arrow:before{border-left-color:#333}
+.external-controls{text-align:center}
+.external-controls div{padding:20px;display:inline-block;vertical-align:top;cursor:pointer}
 .redils-cont{width:1170px;max-width:100%;position:relative}
 .redils{overflow:hidden;width:100%;height:100%}
 .redils .slide-cont,.redils .slides{height:100%}

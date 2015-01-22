@@ -157,6 +157,25 @@
 				if($this.set.autoResize || $this.set.multiSlide) priv.update.apply($this);
 			});
 
+			if($this.set.allowKeyboard) {
+
+				$(window).on('keydown', function(e) {
+					if($this.set.debug) console.log('Allow keyboard on key pressed is: ', e.keyCode);
+					switch (e.keyCode) {
+						case 39:
+							//key right
+							priv.interaction.apply($this);
+							priv.beforeAnimating.apply($this, [1]);
+							break;
+						case 37:
+							priv.interaction.apply($this);
+							priv.beforeAnimating.apply($this, [-1]);
+							break;
+					}
+				});
+
+			}
+
 		},
 		update: function() {
 			var $this = this,
@@ -451,14 +470,21 @@
 
 		},
 		currentSlide: function() {
-			var $this = this,
-				position = $this.data('position'),
-				barTimer = null;
+			var $this = this;
+			var position = $this.data('position');
+			var barTimer = null;
+			var hash = '';
 
 			$this.find('.' + $this.set.slideClass).removeClass('focused').eq(position).addClass('focused');
 			//This should be the future slide.
 			if(!$this.set.slide) $this.find('.' + $this.set.slideClass).eq(position).css('z-index', 2);
 			$this.siblings('.' + $this.set.pagClass).find('a').removeClass('selected').eq(position - $this.set.overflow).addClass('selected');
+
+			if($this.set.updateHash) {
+				hash = $this.find('.focused').data('hash');
+				if(hash === undefined) hash = 'slide-' + ($this.find('.focused').index() + 1);
+				window.location.hash = hash;
+			}
 
 			if($this.set.timerBar && $this.set.auto !== false) {
 
@@ -543,8 +569,9 @@
 
 			return this.each(function() {
 				
-				var $this = $(this),
-					objectData = $this.data();
+				var $this = $(this);
+				var objectData = $this.data();
+				var pos = 0;
 
 				$this.set = $.extend({}, defaultOpts, options, objectData, privateOpts);
 
@@ -553,7 +580,14 @@
 					priv.multiSlide.apply($this);
 				}
 
-				if($this.data('position') === undefined) $this.data('position', 0);
+				if($this.set.updateHash) {
+					pos = $this.find('[data-hash="' + window.location.hash.replace('#','') + '"]').index();
+					if(pos === -1) pos = parseInt(window.location.hash.replace('#slide-',''), 10) - 1;
+					$this.data('position', pos);
+				} else if($this.data('position') === undefined) {
+					$this.data('position', 0);
+				}
+
 				$this.set.totalAmount = $this.find('.' + $this.set.slideClass).length;
 				
 				if(!$this.set.slide) { $this.set.overflow = 0; }
@@ -636,6 +670,20 @@
 			});
 
 		},
+		moveTo: function(options) {
+
+			return this.each(function() {
+				var $this = $(this);
+				var dir = 0;
+
+				$this.set = $this.data();
+				dir = options.moveTo > 0 ? 1 : -1;
+				priv.interaction.apply($this);
+				priv.beforeAnimating.apply($this, [dir]);
+				
+			});
+
+		},
 		skipTo: function(options) {
 
 			return this.each(function() {
@@ -676,6 +724,8 @@
 		multiSlidePadding: 0,
 		autoResize: false,
 		ratio: false,
+		allowKeyboard: false,
+		updateHash: false,
 		slideClass: 'slides',
 		multiSlideClass: 'super-slide',
 		pagClass: 'pagination',

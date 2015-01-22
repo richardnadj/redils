@@ -39,3 +39,6 @@ section { margin-top: 50px; }
 	&:hover .arrow:before { border-left-color: #555; }
 	.arrow { right: 20px;
 		&:before { border-left-color: #333; } } }
+
+.external-controls { text-align: center;
+	div { padding: 20px; display: inline-block; vertical-align: top; cursor: pointer; } }

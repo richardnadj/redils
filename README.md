@@ -157,6 +157,26 @@ Should only be used if the plugin is already being used or if you want to switch
 	$(selector).redils({slide: false});
 
 
+#### allowKeyboard ####
+
+*Default* `false`   
+*Expects* `boolean`
+
+Manipulate the position of the slider with the left and right keys. The animation is on keydown and does not prevent any other listeners on the window event. If you want to preventDefaults then create a listener for that.
+
+	$(selector).redils({allowKeyboard: false});
+
+
+#### updateHash ####
+
+*Default* `false`   
+*Expects* `boolean`
+
+Updates the location hash `window.location.hash`. Each slide should have a data attribute with the desired hash. If none is set it defaults back to slide-# where # is the slide number with index starting at 1.
+
+	$(selector).redils({updateHash: false});
+
+
 #### debug ####
 
 *Default* `false`   
@@ -192,17 +212,27 @@ Used to pause animation i.e. onmousenter of container pause animation.
 
 Used to resume animation i.e. onmouseleave of container resume animation.
 
-	$(selector).redils('pauseAnimation');
+	$(selector).redils('resumeAnimation');
+
+
+#### moveTo ####
+
+Define outside of the plugin container which slide to move to. Option moveTo takes either a positive integer or negative integer. Positive moves the slider one to the right, negative, one to the left.
+
+	$(selector).redils('moveTo', {moveTo: 1});
 
 
 #### skipTo ####
 
 Define outside of the plugin container which slide to skip to. 
 
-	$(selector).redils('skipTo');
+	$(selector).redils('skipTo', {skipToSlide: 3});
 
 
 ### Changelog ###
+
+**Version 1.7.0**   
+Added many more external controls. Now possible to control the slider with keyboard and via external buttons to move to the next/prev slide. Hash is updateable via adding a data-hash attribute to the elements. On reload the slider automatically comes back to that position. Removed variables from scss.
 
 **Version 1.6.5**   
 Small touch ups. Added arrows to demo and did a test with padding for the slider. Updated to latest gulp plugin locally.

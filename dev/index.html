@@ -77,10 +77,24 @@
 				</div>
 			</section><section>
 				<h3>Responsive</h3>
-				<p>Slider Stretches to fit it's container.</p>
+				<p>Slider Stretches to fit it's container. With external controls</p>
 				<pre>
 $('.redils-responsive .redils').redils({
 	autoResize: true
+});
+
+//External controls for responsive redils
+$('#arrow-left').on('click', function(){
+	$('.redils-responsive .redils').redils('moveTo', {moveTo: -1});
+});
+
+$('#arrow-right').on('click', function(){
+	$('.redils-responsive .redils').redils('moveTo', {moveTo: 1});
+});
+
+$('#return-to-start').on('click', function(){
+	var pos = $(this).data('pos');
+	$('.redils-responsive .redils').redils('skipTo', {skipToSlide: pos});
 });
 				</pre>
 				<div class="redils-cont redils-responsive">
@@ -115,25 +129,36 @@ $('.redils-responsive .redils').redils({
 					</div>
 					<div class="pagination"></div>
 				</div>
+				<!-- Seperated by content out of bounding box -->
+				<div class="external-controls">
+					<div id="arrow-left">
+						Arrow Left
+					</div><div id="return-to-start" data-pos="0">
+						Return Home
+					</div><div id="arrow-right">
+						Arrow Right
+					</div>
+				</div>
 			</section>
 			<section>
 				<h3>Fader</h3>
-				<p>Slider off use fade transitions instead.</p>
+				<p>Slider off use fade transitions instead. Updates the page's hash automatically based on data-hash or default 'slide-#' where # is the index + 1.</p>
 				<pre>
 $('.redils-fader .redils').redils({
 	autoResize: true,
 	slide: false,
 	auto: false,
-	speed: 800
+	speed: 800,
+	updateHash: true
 });
 				</pre>
 				<div class="redils-cont redils-fader">
 					<div class="redils">
 						<div class="slide-cont" style="width: 7020px">
-							<div class="slides">
+							<div class="slides" data-hash="slides-1">
 								<img src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="660">
 							</div>
-							<div class="slides">
+							<div class="slides" data-hash="slides-2">
 								<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
 							</div>
 							<div class="slides">
@@ -142,7 +167,7 @@ $('.redils-fader .redils').redils({
 							<div class="slides">
 								<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
 							</div>
-							<div class="slides">
+							<div class="slides" data-hash="slides-5">
 								<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
 							</div>
 						</div>
@@ -236,20 +261,39 @@ $('.redils-multislide .redils').redils({
 		<script type="text/javascript" src="js/redils.js"></script>
 		<script>
 			$(document).ready(function() {
-				//Responsive redils
+				//Default redils
 				$('.redils-default .redils').redils();
 
+				//Responsive redils
 				$('.redils-responsive .redils').redils({
-					autoResize: true
+					autoResize: true,
+					allowKeyboard: true
 				});
 
+				//External controls for responsive redils
+				$('#arrow-left').on('click', function(){
+					$('.redils-responsive .redils').redils('moveTo', {moveTo: -1});
+				});
+
+				$('#arrow-right').on('click', function(){
+					$('.redils-responsive .redils').redils('moveTo', {moveTo: 1});
+				});
+
+				$('#return-to-start').on('click', function(){
+					var pos = $(this).data('pos');
+					$('.redils-responsive .redils').redils('skipTo', {skipToSlide: pos});
+				});
+
+				//Fading redils
 				$('.redils-fader .redils').redils({
 					autoResize: true,
 					slide: false,
 					auto: false,
-					speed: 800
+					speed: 800,
+					updateHash: true
 				});
 
+				//Multislide redils
 				$('.redils-multislide .redils').redils({
 					multiSlide: true,
 					multiSlidePadding: 10,
