@@ -482,7 +482,7 @@
 
 			if($this.set.updateHash) {
 				hash = $this.find('.focused').data('hash');
-				if(hash === undefined) hash = 'slide-' + ($this.find('.focused').index() + 1);
+				if(hash === undefined) hash = 'slide-' + ($this.find('.focused').index() + 1 - $this.set.overflow);
 				window.location.hash = hash;
 			}
 
@@ -583,6 +583,7 @@
 				if($this.set.updateHash) {
 					pos = $this.find('[data-hash="' + window.location.hash.replace('#','') + '"]').index();
 					if(pos === -1) pos = parseInt(window.location.hash.replace('#slide-',''), 10) - 1;
+					if(isNaN(pos)) pos = 0;
 					$this.data('position', pos);
 				} else if($this.data('position') === undefined) {
 					$this.data('position', 0);

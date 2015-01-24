@@ -231,6 +231,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.7.1**   
+Edited default values for hash. Removed overflow slides from being counted. Fixed on load with no hash.
+
 **Version 1.7.0**   
 Added many more external controls. Now possible to control the slider with keyboard and via external buttons to move to the next/prev slide. Hash is updateable via adding a data-hash attribute to the elements. On reload the slider automatically comes back to that position. Removed variables from scss.
 
