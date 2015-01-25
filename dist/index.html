@@ -239,6 +239,53 @@ $('.redils-multislide .redils').redils({
 					<div class="pagination"></div>
 				</div>
 			</section>
+			<section>
+				<h3>Multislide Contact Sheet</h3>
+				<p>Responsive, stretching images reconfigure on user defined breakpoints. Levrages multislide with defined breakpoints.</p>
+				<pre>
+$('.redils-contact-sheet .redils').redils({
+	multiSlide: true,
+	breakPoints: [{breakAfter: 1100, numSlides: 9}, {breakAfter: 600, numSlides: 4}, {breakAfter: 0, numSlides: 1}],
+	auto: false
+});
+				</pre>
+				<div class="redils-cont redils-contact-sheet">
+					<div class="redils">
+						<div class="slide-cont" style="width: 7020px">
+							<div class="slides">
+								<img src="images/250115213833-placeholder-570x250-DDDDDD.jpg" alt="DDDDDD" width="570" height="250">
+							</div><div class="slides">
+								<img src="images/250115213839-placeholder-570x250-757575.jpg" alt="c4c4c4" width="570" height="250">
+							</div><div class="slides">
+								<img src="images/250115213844-placeholder-570x250-6f6f6f.jpg" alt="e5e5e5" width="570" height="250">
+							</div><div class="slides">
+								<img src="images/250115213850-placeholder-570x250-d1d1d1.jpg" alt="c6c6c6" width="570" height="250">
+							</div><div class="slides">
+								<img src="images/250115213856-placeholder-570x250-cbcbcb.jpg" alt="b6b6b6" width="570" height="250">
+							</div><div class="slides">
+								<img src="images/250115213901-placeholder-570x250-131313.jpg" alt="757575" width="570" height="250">
+							</div><div class="slides">
+								<img src="images/250115213906-placeholder-570x250-575757.jpg" alt="383838" width="570" height="250">
+							</div><div class="slides">
+								<img src="images/250115213911-placeholder-570x250-232323.jpg" alt="262626" width="570" height="250">
+							</div><div class="slides">
+								<img src="images/250115213915-placeholder-570x250-6f6f6f.jpg" alt="f1f1f1" width="570" height="250">
+							</div> <div class="slides">
+								<img src="images/250115213920-placeholder-570x250-c2c2c2.jpg" alt="c3c3c3" width="570" height="250">
+							</div>
+						</div>
+					</div>
+					<div class="redils-controls">
+						<div class="arrow-area arrow-area-left">
+							<div class="arrow"></div>
+						</div>
+						<div class="arrow-area arrow-area-right">
+							<div class="arrow"></div>
+						</div>
+					</div>
+					<div class="pagination"></div>
+				</div>
+			</section>
 		</main>
 		<footer class="main-cont">
 			<a class="signature" href="http://youngskilled.com">
@@ -261,6 +308,8 @@ $('.redils-multislide .redils').redils({
 		<script type="text/javascript" src="js/redils.js"></script>
 		<script>
 			$(document).ready(function() {
+				var gridShowing = false;
+
 				//Default redils
 				$('.redils-default .redils').redils();
 
@@ -301,6 +350,13 @@ $('.redils-multislide .redils').redils({
 				}).on('redils.rendered', function(){
 					console.log('This is an event for when multiSlide has finished rendering.');
 				});;
+
+				//Contact Sheet redils
+				$('.redils-contact-sheet .redils').redils({
+					multiSlide: true,
+					breakPoints: [{breakAfter: 1100, numSlides: 9}, {breakAfter: 600, numSlides: 4}, {breakAfter: 0, numSlides: 1}],
+					auto: false
+				});
 
 				//Hide/display grid
 				$(window).on('keypress', function(e){

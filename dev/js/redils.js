@@ -125,19 +125,21 @@
 
 			$this.on('redils.imagesLoaded', function() {
 				var $slides = $(this).find('.' + $this.set.slideClass).not('.redils-duplicated');
+				var subSlideWidths = [];
 
 				if($this.set.slideClass === $this.set.multiSlideClass && $this.set.multiSlide) {
 					$slides = $slides.find('.' + $this.set.prevSlideClass);
 				}
 
 				$slides.each(function(i) {
-					if($this.set.multiSlide) {
-						$this.set.subSlideWidths[i] = $(this).find('img').width() + $this.set.multiSlidePadding * 2;
+					if($this.set.multiSlide && $this.set.breakPoints === false) {
+						subSlideWidths[i] = $(this).find('img').width() + $this.set.multiSlidePadding * 2;
 					} else {
-						$this.set.subSlideWidths[i] = $(this).width() + $this.set.multiSlidePadding * 2;
+						subSlideWidths[i] = $(this).width() + $this.set.multiSlidePadding * 2;
 					}
 				});
-				
+
+				$this.set.subSlideWidths = subSlideWidths;
 				if($this.set.debug) console.log('Individual multislide slide widths: ', $this.set.subSlideWidths);
 				if($this.set.multiSlide) priv.multiSlide.apply($this);
 
@@ -264,6 +266,7 @@
 				superSlides = [''],
 				slideHTML = '',
 				totalWidth = 0,
+				slideWidth = 0,
 				currentWidth = 0,
 				totalWidthBefore = 0,
 				j = 0,
@@ -271,7 +274,7 @@
 				slidesPerSuperMax = 0,
 				breakPoint = null,
 				currentBreakPoint = 0;
-			
+
 
 			//Save original slides.
 			if($this.set.subSlides === null) $this.set.subSlides = $this.find('.' + $this.set.slideClass).clone();
@@ -295,7 +298,7 @@
 						$this.set.multiBreakLess = totalWidthBefore;
 						$this.set.multiBreakMore = totalWidth;
 
-						$this.set.dynWidth[i] = pageWidth;
+						$this.set.dynWidth[j] = pageWidth;
 						j++;
 						currentWidth = j * pageWidth + slideWidth;
 						superSlides[j] = '';

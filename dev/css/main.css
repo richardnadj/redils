@@ -833,6 +833,14 @@ section {
     width: 100%;
     height: auto; }
 
+@media only screen and (min-width: 1196px) {
+  .redils-contact-sheet .super-slide .slides {
+    width: 31.62393%; }
+    .redils-contact-sheet .super-slide .slides:nth-child(2n-1) {
+      margin-left: 2.5641%; }
+    .redils-contact-sheet .super-slide .slides:nth-child(3n-2) {
+      margin-left: 0; } }
+
 .redils-cont {
   width: 1170px;
   max-width: 100%;
@@ -914,13 +922,11 @@ table.redils-controls {
     float: left;
     text-align: center; }
 
-.redils-contact-sheet {
-  height: 600px; }
-  .redils-contact-sheet .slides {
-    display: inline-block;
-    vertical-align: top; }
-  .redils-contact-sheet .super-slide {
-    float: left;
-    text-align: center; }
+.redils-contact-sheet .slides {
+  display: inline-block;
+  vertical-align: top; }
+.redils-contact-sheet .super-slide {
+  float: left;
+  text-align: center; }
 
 /*# sourceMappingURL=main.css.map */

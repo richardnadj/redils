@@ -147,6 +147,19 @@ If there is padding or distance between images in the multislider use this varia
 	$(selector).redils({multiSlidePadding: 0});
 
 
+#### breakPoints ####
+
+*Default* `false`   
+*Expects* `array, false`
+
+Stipulate break points for multislider to change number of sub slides in super slide container. Allows for multiple slides in a super slide container. This requires multislide for it to work.
+
+	$(selector).redils({
+		multiSlide: true,
+		breakPoints: [{breakAfter: 1200, numSlides: 9}, {breakAfter: 600, numSlides: 4}, {breakAfter: 0, numSlides: 1}],
+	});
+
+
 #### slide ####
 
 *Default* `false`   
@@ -230,6 +243,9 @@ Define outside of the plugin container which slide to skip to.
 
 
 ### Changelog ###
+
+**Version 1.8.0**   
+Added a new slider layout. Contact sheet. Several slides with a predetermined breakpoint. *Important* breakpoint is not window based but based on container that slides sit in. This allows responsive images that stretch and at a certain point break into more slides. This is an addition to the multislide function. Also in this release a minor bug was discovered and fixed related to having several multisiders of different proportions on the same page.
 
 **Version 1.7.1**   
 Edited default values for hash. Removed overflow slides from being counted. Fixed on load with no hash.
