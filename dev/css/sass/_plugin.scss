@@ -42,3 +42,11 @@ section { margin-top: 50px; }
 
 .external-controls { text-align: center;
 	div { padding: 20px; display: inline-block; vertical-align: top; cursor: pointer; } }
+
+//Setting up the contact sheet images
+
+.redils-contact-sheet {
+	.super-slide {
+		.slides { margin-left: $gut; margin-bottom: $gut; width: w(6);
+			&:nth-child(2n-1) { margin-left: 0; }
+			img { width: 100%; height: auto; } } } }

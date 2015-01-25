@@ -266,10 +266,11 @@
 				totalWidth = 0,
 				currentWidth = 0,
 				totalWidthBefore = 0,
-				prevPosition = 0,
 				j = 0,
 				slidesPerSuper = 0,
-				slidesPerSuperMax = 0;
+				slidesPerSuperMax = 0,
+				breakPoint = null,
+				currentBreakPoint = 0;
 			
 
 			//Save original slides.
@@ -280,32 +281,66 @@
 			$slides.each(function(i) {
 				var $img = $(this).find('img');
 
-				//If I have a variable sized image???
-				//Two should always make two slides.
-				slideWidth = ($this.set.subSlideWidths.length === 0) ? $img.width() + $this.set.multiSlidePadding * 2 : $this.set.subSlideWidths[i];
-				totalWidth += slideWidth;
-				currentWidth += slideWidth;
+				//For automatically calculated fixed images.
+				if($this.set.breakPoints === false) {
+					slideWidth = ($this.set.subSlideWidths.length === 0) ? $img.width() + $this.set.multiSlidePadding * 2 : $this.set.subSlideWidths[i];
+					totalWidth += slideWidth;
+					currentWidth += slideWidth;
 
-				//This triggers when the current slide can't fit in previous container.
-				if(j !== Math.floor(currentWidth / pageWidth)) {
+					//This triggers when the current slide can't fit in previous container.
+					//Creates then a new .superSlides.
+					if(j !== Math.floor(currentWidth / pageWidth)) {
 
-					//Save offsets to know when to recompile.
-					$this.set.multiBreakLess = totalWidthBefore;
-					$this.set.multiBreakMore = totalWidth;
+						//Save offsets to know when to recompile.
+						$this.set.multiBreakLess = totalWidthBefore;
+						$this.set.multiBreakMore = totalWidth;
 
-					$this.set.dynWidth[i] = pageWidth;
-					j++;
-					currentWidth = j * pageWidth + slideWidth;
-					superSlides[j] = '';
-					prevPosition = i;
-					slidesPerSuper = 0;
+						$this.set.dynWidth[i] = pageWidth;
+						j++;
+						currentWidth = j * pageWidth + slideWidth;
+						superSlides[j] = '';
+						slidesPerSuper = 0;
+					}
+
+					totalWidthBefore = totalWidth;
+					
+				} else {
+					//Responsive images based on breakpoints
+
+					//Sort breakpoints lowest to highest
+					$this.set.breakPoints.sort(function(a, b) {
+						return parseInt(a.breakAfter) - parseInt(b.breakAfter);
+					});
+					
+					for (var k = 0; k < $this.set.breakPoints.length; k++) {
+						breakPoint = parseInt($this.set.breakPoints[k].breakAfter);
+
+						if(pageWidth > breakPoint) {
+							currentBreakPoint = $this.set.breakPoints[k].numSlides;
+							$this.set.multiBreakLess = breakPoint;
+							if(k + 1 < $this.set.breakPoints.length) {
+								$this.set.multiBreakMore = parseInt($this.set.breakPoints[(k + 1)].breakAfter);
+							} else {
+								//Use a high number for last breakpoint.
+								$this.set.multiBreakMore = 999999;
+							}
+						}
+					}
+
+					if(i !== 0 && i % currentBreakPoint === 0) {
+						$this.set.dynWidth[j] = pageWidth;
+						j++;
+						superSlides[j] = '';
+						slidesPerSuper = 0;
+					}
+
 				}
 
 				slidesPerSuper++;
 				if(slidesPerSuper > slidesPerSuperMax) slidesPerSuperMax = slidesPerSuper;
 
-				totalWidthBefore = totalWidth;
 				superSlides[j] += $(this).prop('outerHTML');
+
 			});
 
 			if($this.set.multiBreakLess === undefined || $this.set.multiBreakMore === undefined) {
@@ -727,6 +762,7 @@
 		ratio: false,
 		allowKeyboard: false,
 		updateHash: false,
+		breakPoints: false,
 		slideClass: 'slides',
 		multiSlideClass: 'super-slide',
 		pagClass: 'pagination',

@@ -11,15 +11,15 @@ $maxPageWidth: 92%;
 $col: $colWidth / $totalWidth * 100%;
 $gut: $gutWidth / $totalWidth * 100%;
 
-@function w($num, $sub) {
+@function w($num, $sub:0) {
 	@return ($col + $gut) * $num - $gut - $sub;
 }
 
-@function fw($num, $sub) {
+@function fw($num, $sub:0) {
 	@return ($colWidth + $gutWidth) * $num - $gutWidth - $sub + px;
 }
 
-@function fwd($num, $sub) {	
+@function fwd($num, $sub:0) {	
 	@return ($colWidth + $gutWidth) * $num - $gutWidth - $sub;
 }
 

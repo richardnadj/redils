@@ -823,6 +823,16 @@ section {
     vertical-align: top;
     cursor: pointer; }
 
+.redils-contact-sheet .super-slide .slides {
+  margin-left: 2.5641%;
+  margin-bottom: 2.5641%;
+  width: 48.71795%; }
+  .redils-contact-sheet .super-slide .slides:nth-child(2n-1) {
+    margin-left: 0; }
+  .redils-contact-sheet .super-slide .slides img {
+    width: 100%;
+    height: auto; }
+
 .redils-cont {
   width: 1170px;
   max-width: 100%;
@@ -901,6 +911,15 @@ table.redils-controls {
     display: inline-block;
     vertical-align: top; }
   .redils-multislide .super-slide {
+    float: left;
+    text-align: center; }
+
+.redils-contact-sheet {
+  height: 600px; }
+  .redils-contact-sheet .slides {
+    display: inline-block;
+    vertical-align: top; }
+  .redils-contact-sheet .super-slide {
     float: left;
     text-align: center; }
 
