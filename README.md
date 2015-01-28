@@ -244,6 +244,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.8.1**   
+Updated the method update to force a reload and re-calculation of multisliders. Also ran update through test for images as it is likely that images may not be fully loaded on update.
+
 **Version 1.8.0**   
 Added a new slider layout. Contact sheet. Several slides with a predetermined breakpoint. *Important* breakpoint is not window based but based on container that slides sit in. This allows responsive images that stretch and at a certain point break into more slides. This is an addition to the multislide function. Also in this release a minor bug was discovered and fixed related to having several multisiders of different proportions on the same page.
 

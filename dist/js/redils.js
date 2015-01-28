@@ -7,13 +7,14 @@
 			if (typeof img.naturalWidth != 'undefined' && img.naturalWidth === 0) return false;
 			return true;
 		},
-		testIfLoaded: function() { //id, $imgs
+		testIfLoaded: function(force) { //id, $imgs
 			var $this = this,
 				imgIsLoaded = null,
 				numLoaded = 0,
 				$imgs = this.find('img'),
 				totalImages = $imgs.length,
-				halfway = false;
+				halfway = false,
+				forced = force || false;
 
 			(function imgLoaded() {
 				numLoaded = 0;
@@ -31,7 +32,7 @@
 				//update halfway to make it smoother.
 				if(!halfway && numLoaded > totalImages / 5) {
 					if($this.set.ratio === false) $this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();
-					priv.update.apply($this);
+					priv.update.apply($this, [forced]);
 					halfway = true;
 				}
 
@@ -39,7 +40,7 @@
 					$this.trigger('redils.imagesLoaded');
 					//ensure all images are loaded before determining the length use natural dimensions when possible
 					if($this.set.ratio === false) $this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();
-					priv.update.apply($this);
+					priv.update.apply($this, [forced]);
 				} else {
 					requestAnimFrame(imgLoaded);
 				}
@@ -179,9 +180,10 @@
 			}
 
 		},
-		update: function() {
+		update: function(force) {
 			var $this = this,
-				pageWidth =  $this.parent().width();
+				pageWidth =  $this.parent().width(),
+				forced = force || false;
 
 			if($this.set.autoResize) {
 				$this.parent().height($this.parent().width() / $this.set.ratio);
@@ -189,7 +191,7 @@
 
 			if($this.set.slide) {
 
-				if($this.set.multiSlide && (pageWidth <= $this.set.multiBreakLess || pageWidth >= $this.set.multiBreakMore)) {
+				if($this.set.multiSlide && (pageWidth <= $this.set.multiBreakLess || pageWidth >= $this.set.multiBreakMore) || forced) {
 					priv.multiSlide.apply($this);
 				}
 
@@ -683,7 +685,7 @@
 
 				$this.set = $.extend({}, $this.data(), options);
 				if(!$this.set.slide) { $this.set.overflow = 0; }
-				priv.update.apply($this);
+				priv.testIfLoaded.apply($this, [true]);
 
 				$this.data($this.set);
 			});
