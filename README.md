@@ -244,6 +244,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.8.2**   
+Removed id's on duplicated slides to avoid conflicts with original slides.
+
 **Version 1.8.1**   
 Updated the method update to force a reload and re-calculation of multisliders. Also ran update through test for images as it is likely that images may not be fully loaded on update.
 

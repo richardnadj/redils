@@ -424,16 +424,22 @@
 
 		},
 		overflow: function() {
-			var $this = this,
-				$slides = $this.find('.' + $this.set.slideClass);
+			var $this = this;
+			var $slides = $this.find('.' + $this.set.slideClass);
+			var $cloneNext;
+			var $clonePrev;
 			//Add in extra slides depending on formation of slider.
 			//Should repeat the last ones first and the first ones last. i.e. b|c + a|b|c + a|b
 			for (var i = 0; i < $this.set.overflow; i++) {
 				if($this.set.overflow <= $this.set.totalAmount) {
-					$this.find('.' + $this.set.slideContClass).append($slides.eq(i).clone().addClass('redils-duplicated'));
+					$cloneNext = $slides.eq(i).clone(false).addClass('redils-duplicated');
+					$this.find('.' + $this.set.slideContClass).append($cloneNext);
 					$this.set.totalAmount++;
 					
-					$this.find('.' + $this.set.slideContClass).prepend($slides.eq(-i - 1).clone().addClass('redils-duplicated'));
+					$clonePrev = $slides.eq(-i - 1).clone(false).addClass('redils-duplicated');
+					$this.find('.' + $this.set.slideContClass).prepend($clonePrev);
+
+					$this.find('.redils-duplicated').removeAttr('id').find('[id]').removeAttr('id');
 					$this.set.totalAmount++;
 				
 				}
