@@ -117,6 +117,16 @@ Slider resizes based on width of it's container and changes everytime window cha
 	$(selector).redils({autoResize: false});
 
 
+#### setHeight ####
+
+*Default* `true`   
+*Expects* `boolean`
+
+If slider is responsive it's default behaviour is to set the height based on images (due to legacy implications). Having height automatically set is not always necessary or desired as CSS can do this normally fine if the slider is based on image sizes.
+
+	$(selector).redils({setHeight: true});
+
+
 #### ratio ####
 
 *Default* `false`   
@@ -243,6 +253,9 @@ Define outside of the plugin container which slide to skip to.
 
 
 ### Changelog ###
+
+**Version 1.9.0**   
+Added in an optional height for responsive sliders. This is so that there can be headers on some slides.
 
 **Version 1.8.2**   
 Removed id's on duplicated slides to avoid conflicts with original slides.

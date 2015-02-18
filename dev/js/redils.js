@@ -185,7 +185,7 @@
 				pageWidth =  $this.parent().width(),
 				forced = force || false;
 
-			if($this.set.autoResize) {
+			if($this.set.autoResize && $this.set.setHeight) {
 				$this.parent().height($this.parent().width() / $this.set.ratio);
 			}
 
@@ -770,6 +770,7 @@
 		multiSlide: false,
 		multiSlidePadding: 0,
 		autoResize: false,
+		setHeight: true,
 		ratio: false,
 		allowKeyboard: false,
 		updateHash: false,

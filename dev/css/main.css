@@ -913,6 +913,16 @@ table.redils-controls {
     opacity: 1;
     float: none; }
 
+.redils-responsive-height {
+  height: auto; }
+  .redils-responsive-height .redils {
+    height: auto; }
+  .redils-responsive-height .slide-cont {
+    height: auto; }
+  .redils-responsive-height .slides {
+    height: auto;
+    float: left; }
+
 .redils-multislide {
   height: 240px; }
   .redils-multislide .slides {

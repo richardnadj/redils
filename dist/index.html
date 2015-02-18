@@ -285,6 +285,48 @@ $('.redils-contact-sheet .redils').redils({
 					</div>
 					<div class="pagination"></div>
 				</div>
+			</section><section>
+				<h3>Responsive</h3>
+				<p>Using only CSS to manipulate height</p>
+				<pre>
+$('.redils-responsive-height .redils').redils({
+	autoResize: true,
+	setHeight: false
+});
+				</pre>
+				<div class="redils-cont redils-responsive-height">
+					<div class="redils">
+						<div class="slide-cont" style="width: 7020px">
+							<div class="slides">
+								<a href="http://google.com" target="_blank">
+									<img src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="660">
+								</a>
+							</div>
+							<div class="slides">
+								<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
+								<h3>Caption associated with slide</h3>
+							</div>
+							<div class="slides">
+								<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
+							</div>
+							<div class="slides">
+								<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
+							</div>
+							<div class="slides">
+								<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
+							</div>
+						</div>
+					</div>
+					<div class="redils-controls">
+						<div class="arrow-area arrow-area-left">
+							<div class="arrow"></div>
+						</div>
+						<div class="arrow-area arrow-area-right">
+							<div class="arrow"></div>
+						</div>
+					</div>
+					<div class="pagination"></div>
+				</div>
 			</section>
 		</main>
 		<footer class="main-cont">
@@ -317,6 +359,12 @@ $('.redils-contact-sheet .redils').redils({
 				$('.redils-responsive .redils').redils({
 					autoResize: true,
 					allowKeyboard: true
+				});
+
+				//Responsive with no height
+				$('.redils-responsive-height .redils').redils({
+					autoResize: true,
+					setHeight: false
 				});
 
 				//External controls for responsive redils

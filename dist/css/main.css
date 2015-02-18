@@ -96,6 +96,8 @@ table.redils-controls td.center-cell{width:10%;z-index:-1}
 .redils-responsive .slides{float:left}
 .redils-responsive .slides img{width:auto;height:100%}
 .redils-responsive .redils.disabled .slides{margin:0 auto;opacity:1;float:none}
+.redils-responsive-height,.redils-responsive-height .redils,.redils-responsive-height .slide-cont{height:auto}
+.redils-responsive-height .slides{height:auto;float:left}
 .redils-multislide{height:240px}
 .redils-multislide .slides{display:inline-block;vertical-align:top}
 .redils-multislide .super-slide{float:left;text-align:center}
