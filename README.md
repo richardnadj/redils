@@ -254,6 +254,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.9.1**   
+Multislide now has a class added to it for the disabling of arrows and pagination when there is only one slide left. This does not disable sliding in any way and is responsive.
+
 **Version 1.9.0**   
 Added in an optional height for responsive sliders. This is so that there can be headers on some slides.
 

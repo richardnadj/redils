@@ -370,6 +370,12 @@
 				}
 			}
 
+			if(superSlides.length === 1) {
+				$this.parent().addClass($this.set.singleMultiSlideClass);
+			} else {
+				$this.parent().removeClass($this.set.singleMultiSlideClass);
+			}
+
 			//Put back slides into the container.
 			$this.find('.' + $this.set.slideContClass).html(slideHTML);
 
@@ -783,6 +789,7 @@
 		rightArrowClass: 'arrow-area-right',
 		timerBarContClass: 'redils-timer',
 		timerBarFillClass: 'redils-fill',
+		singleMultiSlideClass: 'single-multislide-disable',
 		slide: true,
 		debug: false
 	};

@@ -932,6 +932,11 @@ table.redils-controls {
     float: left;
     text-align: center; }
 
+.single-multislide-disable .arrow-area {
+  display: none; }
+.single-multislide-disable .pagination {
+  display: none; }
+
 .redils-contact-sheet .slides {
   display: inline-block;
   vertical-align: top; }

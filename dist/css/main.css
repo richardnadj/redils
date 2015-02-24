@@ -101,5 +101,6 @@ table.redils-controls td.center-cell{width:10%;z-index:-1}
 .redils-multislide{height:240px}
 .redils-multislide .slides{display:inline-block;vertical-align:top}
 .redils-multislide .super-slide{float:left;text-align:center}
+.single-multislide-disable .arrow-area,.single-multislide-disable .pagination{display:none}
 .redils-contact-sheet .slides{display:inline-block;vertical-align:top}
 .redils-contact-sheet .super-slide{float:left;text-align:center}
