@@ -394,6 +394,8 @@ $('.redils-responsive-height .redils').redils({
 				$('.redils-responsive .redils').redils({
 					autoResize: true,
 					allowKeyboard: true
+				}).on('redils.beforeAnimating', function(){
+					console.log('Before animating triggered');
 				});
 
 				//Responsive with no height
@@ -432,7 +434,7 @@ $('.redils-responsive-height .redils').redils({
 					auto: false
 				}).on('redils.rendered', function(){
 					console.log('This is an event for when multiSlide has finished rendering.');
-				});;
+				});
 
 				//Contact Sheet redils
 				$('.redils-contact-sheet .redils').redils({

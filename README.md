@@ -7,6 +7,7 @@ A jQuery plugin that changes any HTML content into a slider or fader. Content sh
 
 Initiate with `$(selector).redils({'some':'property'});`   
 Invoke methods with `$(selector).redils('method', {'some':'property'});`   
+Listen for various events on the slider with `$(selector).on('redils.interaction', function(){})`
 Example
 
 	$('.redils').redils({
@@ -22,6 +23,44 @@ Following structure is required for selector to work. (Using Emmet tab complete 
 	div.redils>div.slide-cont[style="width: 7020px"]>div.slides*5>img
 	table.redils-controls>tbody>tr>td.arrow-area.arrow-area-left>div.arrow^td.center-cell+td.arrow-area.arrow-area-right>div.arrow
 	div.pagination
+
+
+### Events ###
+
+#### redils.interaction ####
+
+Triggers when interacting with the slider. Swipe, click, arrow etc. Is not triggered in automatic slide mode.
+
+	$(selector).on('redils.interaction', function(){ });
+
+
+#### redils.imagesLoaded ####
+
+Triggers when images in the slider are completely loaded. This triggers before rendered. Not many use cases for this.
+
+	$(selector).on('redils.imagesLoaded', function(){ });
+
+
+#### redils.rendered ####
+
+When a multi slider is fully rendered for the first time and after every recalculation.
+
+	$(selector).on('redils.rendered', function(){ });
+
+
+#### redils.beforeAnimating ####
+
+This is triggered before the slider starts animating.
+
+	$(selector).on('redils.beforeAnimating', function(){ });
+
+
+#### redils.afterAnimating ####
+
+This is triggered after the slider starts animating.
+
+	$(selector).on('redils.afterAnimating', function(){ });
+
 
 ### Properties ###
 
@@ -253,6 +292,9 @@ Define outside of the plugin container which slide to skip to.
 
 
 ### Changelog ###
+
+**Version 1.9.2**   
+Added two triggers for listening to before the slider slides and after the slider finishes its animation.
 
 **Version 1.9.1**   
 Multislide now has a class added to it for the disabling of arrows and pagination when there is only one slide left. This does not disable sliding in any way and is responsive.

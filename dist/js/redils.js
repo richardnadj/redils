@@ -50,7 +50,7 @@
 		interaction: function() {
 			var $this = this;
 
-			$(window).trigger('redils.interaction', [$this]);
+			$this.trigger('redils.interaction', [$this]);
 			if($this.set.auto) {
 				$this.set.animationStopped = true;
 				$this.data({'animationStopped':true});
@@ -495,6 +495,8 @@
 			//$this.set.position = $this.data('position');
 			//console.log('var $this.set.position, $this.set.oldPosition', $this.set.position, $this.set.oldPosition);
 
+			$this.trigger('redils.beforeAnimating', [$this]);
+
 			//Adding the overflow offset will enable us to use absolute positions.
 			if(position + dir > $this.set.totalAmount - 1 - $this.set.overflow) {
 				if($this.set.debug) { console.log('Before Sliding -> reached end | pos: ', position,' dir: ', dir,' total: ', $this.set.totalAmount,' overflow: ', $this.set.overflow, ' case left: ', position + dir, ' case right: ', $this.set.totalAmount - 1 - $this.set.overflow); }
@@ -603,6 +605,8 @@
 		},
 		afterAnimating: function() {
 			var $this = this;
+
+			$this.trigger('redils.afterAnimating', [$this]);
 
 			//Trigger an event on after slide to connect to.
 			if($this.set.overflow && $this.set.ends !== false) {
