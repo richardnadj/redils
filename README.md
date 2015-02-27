@@ -293,6 +293,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.9.4**   
+Moved position of the before animating event. So that the position is correctly defined as the next position.
+
 **Version 1.9.3**   
 Edited bower dependencies for jQuery to >=1.8
 

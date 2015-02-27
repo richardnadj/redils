@@ -495,7 +495,6 @@
 			//$this.set.position = $this.data('position');
 			//console.log('var $this.set.position, $this.set.oldPosition', $this.set.position, $this.set.oldPosition);
 
-			$this.trigger('redils.beforeAnimating', [$this]);
 
 			//Adding the overflow offset will enable us to use absolute positions.
 			if(position + dir > $this.set.totalAmount - 1 - $this.set.overflow) {
@@ -514,6 +513,7 @@
 
 			$this.data('prevPosition', prevPosition);
 			$this.data('position', position);
+			$this.trigger('redils.beforeAnimating', [$this]);
 			//This should be the previous slide.
 			if(!$this.set.slide) $this.find('.' + $this.set.slideClass).css({'z-index': '', 'display': 'block'}).eq(prevPosition).css('z-index', 3);
 
