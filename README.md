@@ -293,6 +293,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.9.3**   
+Edited bower dependencies for jQuery to >=1.8
+
 **Version 1.9.2**   
 Added two triggers for listening to before the slider slides and after the slider finishes its animation.
 
