@@ -191,7 +191,7 @@
 
 			if($this.set.slide) {
 
-				if($this.set.multiSlide && (pageWidth <= $this.set.multiBreakLess || pageWidth >= $this.set.multiBreakMore) || forced) {
+				if($this.set.multiSlide && (pageWidth <= $this.set.multiBreakLess || pageWidth >= $this.set.multiBreakMore || forced)) {
 					priv.multiSlide.apply($this);
 				}
 
