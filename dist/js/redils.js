@@ -37,7 +37,7 @@
 				}
 
 				if(imgIsLoaded) {
-					$this.trigger('redils.imagesLoaded');
+					$this.trigger('redils.imagesLoaded').addClass('redils--imagesLoaded');
 					//ensure all images are loaded before determining the length use natural dimensions when possible
 					if($this.set.ratio === false) $this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();
 					priv.update.apply($this, [forced]);

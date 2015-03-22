@@ -294,6 +294,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.9.6**   
+Added a class for when the slider's images had completed loading.
+
 **Version 1.9.5**   
 Running update was converting non-multisliders into multisliders.
 
