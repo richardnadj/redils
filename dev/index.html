@@ -398,6 +398,10 @@ $('.redils-responsive-height .redils').redils({
 					console.log('Before animating triggered');
 				});
 
+				$('.redils-responsive-height .redils').on('redils.updated', function(e, settings) {
+					console.log('This is an event for update of the slider, settings are available as well.', settings);
+				});
+
 				//Responsive with no height
 				$('.redils-responsive-height .redils').redils({
 					autoResize: true,

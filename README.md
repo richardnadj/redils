@@ -44,9 +44,16 @@ Triggers when images in the slider are completely loaded. This triggers before r
 
 #### redils.rendered ####
 
-When a multi slider is fully rendered for the first time and after every recalculation.
+When a **multi slider** is fully rendered for the first time and after every recalculation.
 
 	$(selector).on('redils.rendered', function(){ });
+
+
+#### redils.updated ####
+
+When a the slider is rendered and at every update.
+
+	$(selector).on('redils.updated', function(){ });
 
 
 #### redils.beforeAnimating ####
@@ -293,6 +300,9 @@ Define outside of the plugin container which slide to skip to.
 
 
 ### Changelog ###
+
+**Version 1.9.7**   
+Added a new event for when slider is updated and on initial load.
 
 **Version 1.9.6**   
 Added a class for when the slider's images had completed loading.

@@ -19,7 +19,7 @@
 			(function imgLoaded() {
 				numLoaded = 0;
 				//Check if all images are loaded.
-				$imgs.each(function() {					
+				$imgs.each(function() {	
 					if(!priv.isImageLoaded($(this)[0])) {
 						imgIsLoaded = false;
 						return false;
@@ -213,6 +213,8 @@
 				priv.compress.apply($this);
 			}
 
+			$this.trigger('redils.updated', [$this.set]);
+
 		},
 		compress: function() {
 			var $this = this;
@@ -230,9 +232,9 @@
 				position = pos || $this.data('position');
 
 			if($this.set.width === 'dyn') {
-				$this.set.offset = ($this.width() - parseInt($this.set.dynWidth[position])) / 2;
+				$this.set.offset = ($this.width() - parseInt($this.set.dynWidth[position], 10)) / 2;
 			} else {
-				$this.set.offset = ($this.width() - parseInt($this.set.width)) / 2;
+				$this.set.offset = ($this.width() - parseInt($this.set.width, 10)) / 2;
 			}
 
 		},
@@ -256,7 +258,7 @@
 					pxPosition += obj.dynWidth[i];
 				}
 			} else {
-				pxPosition = position * parseInt(this.set.width);
+				pxPosition = position * parseInt(this.set.width, 10);
 			}
 
 			return pxPosition;
@@ -314,17 +316,17 @@
 
 					//Sort breakpoints lowest to highest
 					$this.set.breakPoints.sort(function(a, b) {
-						return parseInt(a.breakAfter) - parseInt(b.breakAfter);
+						return parseInt(a.breakAfter) - parseInt(b.breakAfter, 10);
 					});
 					
 					for (var k = 0; k < $this.set.breakPoints.length; k++) {
-						breakPoint = parseInt($this.set.breakPoints[k].breakAfter);
+						breakPoint = parseInt($this.set.breakPoints[k].breakAfter, 10);
 
 						if(pageWidth > breakPoint) {
 							currentBreakPoint = $this.set.breakPoints[k].numSlides;
 							$this.set.multiBreakLess = breakPoint;
 							if(k + 1 < $this.set.breakPoints.length) {
-								$this.set.multiBreakMore = parseInt($this.set.breakPoints[(k + 1)].breakAfter);
+								$this.set.multiBreakMore = parseInt($this.set.breakPoints[(k + 1)].breakAfter, 10);
 							} else {
 								//Use a high number for last breakpoint.
 								$this.set.multiBreakMore = 999999;
@@ -350,7 +352,7 @@
 
 			if($this.set.multiBreakLess === undefined || $this.set.multiBreakMore === undefined) {
 				$this.set.multiBreakLess = totalWidthBefore;
-				$this.set.multiBreakMore = totalWidth;	
+				$this.set.multiBreakMore = totalWidth;
 			}
 			
 			//Manipulate HTML into one html string
@@ -419,10 +421,10 @@
 					}
 
 					$this.set.contWidth += $this.set.dynWidth[i];
-					if($this.set.debug) console.log('Slide widths: ', $this.set.dynWidth[i]); 
+					if($this.set.debug) console.log('Slide widths: ', $this.set.dynWidth[i]);
 				});
 			} else {
-				$this.set.contWidth = $this.set.totalAmount * parseInt($this.set.width);
+				$this.set.contWidth = $this.set.totalAmount * parseInt($this.set.width, 10);
 			}
 
 			$this.find('.' + $this.set.slideContClass).width($this.set.contWidth);
@@ -664,7 +666,7 @@
 					}
 
 					if($this.set.fullWidth !== false) {
-						priv.fullWidth.apply($this);	
+						priv.fullWidth.apply($this);
 					}
 
 					//Enable 
@@ -685,7 +687,7 @@
 					$this.addClass('redils-activated');
 
 				} else {
-					if($this.set.debug) console.info('Slider is disabled due to insufficient slides'); 
+					if($this.set.debug) console.info('Slider is disabled due to insufficient slides');
 					$this.addClass('disabled');
 					$this.find('.' + $this.set.arrowContClass).hide();
 				}
