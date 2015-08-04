@@ -8,13 +8,14 @@
 			return true;
 		},
 		testIfLoaded: function(force) { //id, $imgs
-			var $this = this,
-				imgIsLoaded = null,
-				numLoaded = 0,
-				$imgs = this.find('img'),
-				totalImages = $imgs.length,
-				halfway = false,
-				forced = force || false;
+			var $this = this;
+			var imgIsLoaded = null;
+			var numLoaded = 0;
+			var $imgs = this.find('img');
+			var totalImages = $imgs.length;
+			var halfway = false;
+			var forced = force || false;
+			var startTimer = new Date().getTime() + 2500;
 
 			(function imgLoaded() {
 				numLoaded = 0;
@@ -36,7 +37,7 @@
 					halfway = true;
 				}
 
-				if(imgIsLoaded) {
+				if(imgIsLoaded || startTimer < new Date().getTime()) {
 					$this.trigger('redils.imagesLoaded').addClass('redils--imagesLoaded');
 					//ensure all images are loaded before determining the length use natural dimensions when possible
 					if($this.set.ratio === false) $this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();

@@ -301,6 +301,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.9.8**   
+If all images are not loaded after 2.5 seconds carry on with execution of slider anyway. This will probably need further refinement.
+
 **Version 1.9.7**   
 Added a new event for when slider is updated and on initial load.
 
