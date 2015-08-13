@@ -301,6 +301,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.9.9**   
+Total width now runs preliminarily for responsive slides before checking if images are loaded as this is based on size of container. Also updated fader to have updated total widths.
+
 **Version 1.9.8**   
 If all images are not loaded after 2.5 seconds carry on with execution of slider anyway. This will probably need further refinement.
 

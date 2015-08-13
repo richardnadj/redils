@@ -211,7 +211,11 @@
 				$this.scrollLeft($this.set.totalPos - $this.set.offset);
 
 			} else {
+				//Fader update
 				priv.compress.apply($this);
+
+				//If Dyn get new array of widths.
+				priv.totalWidth.apply($this);
 			}
 
 			$this.trigger('redils.updated', [$this.set]);
@@ -674,6 +678,11 @@
 					priv.enableEvents.apply($this);
 					if($this.set.auto && !$this.set.timerBar) {
 						$this.set.timer = setInterval(function() { priv.beforeAnimating.apply($this, [1]); }, $this.set.auto);
+					}
+
+					//Quickly apply sizes if not using image sizes.
+					if($this.set.autoResize || $this.set.multiSlide) {
+						priv.totalWidth.apply($this);
 					}
 
 					//Test if images are loaded only if there are images
