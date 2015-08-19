@@ -1,6 +1,6 @@
 {
   "name": "ys-redils",
-  "version": "1.9.9",
+  "version": "1.9.10",
   "main": "dist/redils.js",
   "authors": [
     "Richard Herries <richard@youngskilled.com>"
@@ -13,7 +13,9 @@
     "bower_components"
   ],
   "dependencies": {
-    "jquery": ">=1.8",
+    "jquery": ">=1.8"
+  },
+  "devDependencies": {
     "normalize-scss": "~3.0.1"
   }
 }

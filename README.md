@@ -301,6 +301,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.9.10**   
+Changed bower dependencies.
+
 **Version 1.9.9**   
 Total width now runs preliminarily for responsive slides before checking if images are loaded as this is based on size of container. Also updated fader to have updated total widths.
 
