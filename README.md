@@ -301,6 +301,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.10.0**   
+Even if slider only has one slide will now get all dimensions of a non-disabled slider. Making it easier when implementing.
+
 **Version 1.9.10**   
 Changed bower dependencies.
 

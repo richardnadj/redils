@@ -494,9 +494,12 @@
 			this.siblings('.' + this.set.pagClass).html(html);
 		},
 		beforeAnimating: function(dir, newPosition) {
-			var $this = this,
-				position = $this.data('position'),
-				prevPosition = position;
+			var $this = this;
+			
+			if($this.set.totalAmount <= 1) return;
+
+			var position = $this.data('position');
+			var prevPosition = position;
 
 			//$this.set.oldPosition = $this.set.position;
 			//$this.set.position = $this.data('position');
@@ -656,50 +659,52 @@
 				
 				if(!$this.set.slide) { $this.set.overflow = 0; }
 
-				//Are there enough slides to create a slider?
+
+				//Create additional elements.
+				if($this.set.pagination !== false && ($this.set.totalAmount > 1 || $this.set.multiSlide)) {
+					priv.pagination.apply($this);
+				}
+
+				if($this.set.overflow > 0 && ($this.set.totalAmount > 1 || $this.set.multiSlide)) {
+					priv.overflow.apply($this);
+				} else {
+					$this.scrollLeft(0);
+				}
+
+				if($this.set.fullWidth !== false) {
+					priv.fullWidth.apply($this);
+				}
+
+				priv.enableEvents.apply($this);
 				if($this.set.totalAmount > 1 || $this.set.multiSlide) {
-
-					//Create additional elements.
-					if($this.set.pagination !== false) {
-						priv.pagination.apply($this);
-					}
-
-					if($this.set.overflow > 0) {
-						priv.overflow.apply($this);
-					} else {
-						$this.scrollLeft(0);
-					}
-
-					if($this.set.fullWidth !== false) {
-						priv.fullWidth.apply($this);
-					}
-
-					//Enable 
-					priv.enableEvents.apply($this);
 					if($this.set.auto && !$this.set.timerBar) {
 						$this.set.timer = setInterval(function() { priv.beforeAnimating.apply($this, [1]); }, $this.set.auto);
 					}
+				}
 
-					//Quickly apply sizes if not using image sizes.
-					if($this.set.autoResize || $this.set.multiSlide) {
-						priv.totalWidth.apply($this);
-					}
+				//Quickly apply sizes if not using image sizes.
+				if($this.set.autoResize || $this.set.multiSlide) {
+					priv.totalWidth.apply($this);
+				}
 
-					//Test if images are loaded only if there are images
-					if($this.find('img').length > 0) {
-						priv.testIfLoaded.apply($this);
-					} else {
-						priv.update.apply($this);
-					}
+				//Test if images are loaded only if there are images
+				if($this.find('img').length > 0) {
+					priv.testIfLoaded.apply($this);
+				} else {
+					priv.update.apply($this);
+				}
 
+				if($this.set.totalAmount > 1 || $this.set.multiSlide) {
+					
 					priv.currentSlide.apply($this);
-
 					$this.addClass('redils-activated');
 
 				} else {
+
 					if($this.set.debug) console.info('Slider is disabled due to insufficient slides');
 					$this.addClass('disabled');
-					$this.find('.' + $this.set.arrowContClass).hide();
+					$this.siblings('.redils-controls').find('.' + $this.set.arrowContClass).hide();
+
 				}
 
 				$this.data($this.set);
