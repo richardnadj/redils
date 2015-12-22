@@ -79,7 +79,11 @@
 			var paddingRight;
 
 			var moveSlider = function(e) {
-				mousePosition = e.pageX;
+				if(e.type === 'mousemove') {
+					mousePosition = e.pageX;
+				} else {
+					mousePosition = e.originalEvent.targetTouches[0].pageX;
+				}
 				handlePosition = handleStart - containerStart + mousePosition - mouseStart;
 				handlePositionPercentage = handlePosition / containerLength;
 
@@ -201,7 +205,6 @@
 					} else {
 						mouseStart = e.originalEvent.targetTouches[0].pageX;
 						mousePosition = e.originalEvent.targetTouches[0].pageX;
-						console.log('var event', event);
 					}
 
 					$container = $(this);
@@ -216,14 +219,20 @@
 
 					$this.set.handleMoving = true;
 
-					$(this).on('mousemove touchmove', function(e) {
-						window.requestAnimFrame(function() {
-							moveSlider(e);
+					if(event.type === 'mousedown') {
+						$(this).on('mousemove', function(e) {
+							window.requestAnimFrame(function() {
+								moveSlider(e);
+							});
 						});
-					});
+					}
 
 				}
 
+			}).on('touchmove', function(e) {
+				window.requestAnimFrame(function() {
+					moveSlider(e);
+				});
 			});
 
 			$(window).on('mouseup touchend', function() {

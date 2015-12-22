@@ -61,8 +61,10 @@ section{margin-top:50px}
 .redils-multislide .redils-controls{position:absolute;width:100%;left:0;top:0;height:240px}
 .redils-multislide .super-slide .slides{padding:0 10px}
 .pagination{text-align:center;position:relative;top:-25px;z-index:5}
-.pagination a{width:15px;height:15px;border-radius:50%;background-color:#fff;display:inline-block;margin:0 5px}
-.pagination a.selected{background-color:#333}
+.pagination .center-pagination a{width:15px;height:15px;border-radius:50%;background-color:#fff;display:inline-block;margin:0 5px}
+.pagination .center-pagination a.selected{background-color:#333}
+.pagination--line{height:50px;width:60%;position:relative;margin:25px auto;background-color:#fff;text-align:left}
+.pagination--line .pagination-inner a{width:10%;position:absolute;background-color:#000;height:10px;top:20px;display:inline-block}
 .arrow{position:absolute;display:inline-block;vertical-align:center;top:50%;margin-top:-10px}
 .arrow:before{content:"";border:10px solid transparent;position:absolute}
 .arrow-area-left:hover .arrow:before{border-right-color:#555}
@@ -92,6 +94,10 @@ table.redils-controls td.center-cell{width:10%;z-index:-1}
 .redils-fader .slides{width:100%;height:100%}
 .redils-default{height:660px}
 .redils-default .slides{float:left}
+.redils-centered{width:100%}
+.redils-centered .slide-cont{line-height:0;font-size:0}
+.redils-centered .slides{display:inline-block;vertical-align:top}
+.redils-centered .slides img{width:585px;height:auto}
 .redils-responsive{height:600px}
 .redils-responsive .slides{float:left}
 .redils-responsive .slides img{width:auto;height:100%}

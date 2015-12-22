@@ -107,7 +107,7 @@ How fast the animation between slides is.
 *Default* `false`   
 *Expects* `boolean`
 
-If the container is bigger than the slide it will center the slide.
+If the container is bigger than the slide it will center the slide. If not using overflow then padding will be added to the start and the end of the slideshow to center the first and last slides.
 
 	$(selector).redils({center: false});
 
@@ -115,11 +115,12 @@ If the container is bigger than the slide it will center the slide.
 #### pagination ####
 
 *Default* `true`   
-*Expects* `boolean, 'num', 'str'`
+*Expects* `boolean, 'num', 'str', 'line'`
 
 Adds dynamically created elements to pagination container. Pagination *will only be true* if a sibling to the called container has a container with `.pagination`.   
 `'num'` `'str'` prints out consecutive numbers, letters respectively. `data-pagination="String"` can be set on each slide to define indivdual unique pagination names on each slide.
-Pagination will create following html structure `div.center-pagination>a*5>span.default-pagination` (default-pagination and 5 are subject to options).
+Pagination will create following html structure `div.center-pagination>a*5>span.default-pagination` (default-pagination and 5 are subject to options).   
+If using `'line'` then a slider will be created as a timeline of the slideshow.
 
 	$(selector).redils({pagination: true});
 
@@ -300,6 +301,9 @@ Define outside of the plugin container which slide to skip to.
 
 
 ### Changelog ###
+
+**Version 1.11.0**   
+Added a new type of pagination for continuous sliding of the slideshow. Added padding to the slideshow for center to center the first and last slides.
 
 **Version 1.10.0**   
 Even if slider only has one slide will now get all dimensions of a non-disabled slider. Making it easier when implementing.

@@ -60,8 +60,46 @@
 			}
 		},
 		enableEvents: function() {
-			var $this = this,
-				touches = {};
+			var $this = this;
+			var touches = {};
+
+			//Pagination Line variables.
+			var mouseStart;
+			var mousePosition;
+			var $container = $this.siblings('.' + $this.set.pagClass);
+			var $handle = $container.find('.pagination-inner a');
+			var handleLength = $handle.width();
+			var containerLength = $container.width() - handleLength;
+			var handleStart;
+			var containerStart;
+			var contWidth;
+			var handlePosition;
+			var handlePositionPercentage;
+			var paddingLeft;
+			var paddingRight;
+
+			var moveSlider = function(e) {
+				if(e.type === 'mousemove') {
+					mousePosition = e.pageX;
+				} else {
+					mousePosition = e.originalEvent.targetTouches[0].pageX;
+				}
+				handlePosition = handleStart - containerStart + mousePosition - mouseStart;
+				handlePositionPercentage = handlePosition / containerLength;
+
+				if(handlePosition > containerLength) {
+					$handle.css('left', containerLength);
+					$this.scrollLeft(contWidth);
+					handlePositionPercentage = 1;
+				} else if(handlePosition < 0) {
+					$handle.css('left', 0);
+					$this.scrollLeft(0);
+					handlePositionPercentage = 0;
+				} else {
+					$handle.css('left', handlePosition);
+					$this.scrollLeft(contWidth * handlePositionPercentage);
+				}
+			};
 
 			$this.on({
 				touchstart: function(e) {
@@ -71,8 +109,8 @@
 					touches.startY = e.originalEvent.targetTouches[0].pageY;
 				},
 				touchmove: function(e) {
-					var totalX,
-						totalY;
+					var totalX;
+					var totalY;
 
 					//Determine if scrolling handle accordingly
 					touches.endX = e.originalEvent.targetTouches[0].pageX;
@@ -116,13 +154,108 @@
 				priv.beforeAnimating.apply($this, [dir]);
 			});
 
-			$this.siblings('.' + $this.set.pagClass).on('click', 'a', function() {
+			$this.siblings('.' + $this.set.pagClass).on('click', '.center-pagination a', function(e) {
+				e.preventDefault();
+
 				var index = $(this).index();
 				if($this.set.debug) { console.log('Pagination links clicked index: ', index); }
 				
 				priv.interaction.apply($this);
 				priv.beforeAnimating.apply($this, [0, (index + $this.set.overflow)]);
-				return false;
+			});
+
+			//Pagination slider control.
+			$this.siblings('.' + $this.set.pagClass).on('click', function(e) {
+				if($this.set.pagination === 'line') {
+					e.preventDefault();
+					e.stopPropagation();
+
+					if(Math.abs(mouseStart - mousePosition) < 5) {
+						//Performed a static click
+						handlePosition = e.pageX - containerStart;
+						handlePositionPercentage = handlePosition / containerLength;
+
+						if(handlePosition > containerLength) {
+							handlePositionPercentage = 1;
+						} else if(handlePosition < 0) {
+							handlePositionPercentage = 0;
+						}
+
+						position = Math.round(($this.set.totalAmount - 1) * handlePositionPercentage);
+
+						$handle.animate({
+							left: position / ($this.set.totalAmount - 1) * containerLength
+						}, $this.set.speed);
+
+						$this.set.paginationLinePosition = position;
+
+						priv.interaction.apply($this);
+						priv.beforeAnimating.apply($this, [0, (position + $this.set.overflow)]);
+
+					}
+				}
+			}).on('mousedown touchstart', function(event) {
+				if($this.set.pagination === 'line') {
+
+					//If mouseevents
+					if(event.type === 'mousedown') {
+						event.preventDefault();
+						mouseStart = event.pageX;
+						mousePosition = event.pageX;
+					} else {
+						mouseStart = e.originalEvent.targetTouches[0].pageX;
+						mousePosition = e.originalEvent.targetTouches[0].pageX;
+					}
+
+					$container = $(this);
+					$handle = $(this).find('.pagination-inner a');
+					handleLength = $handle.width();
+					containerLength = $container.width() - handleLength;
+					handleStart = $handle.offset().left;
+					containerStart = $container.offset().left;
+					paddingLeft = parseInt($this.find('.' + $this.set.slideContClass).css('paddingLeft'));
+					paddingRight = parseInt($this.find('.' + $this.set.slideContClass).css('paddingRight'));
+					contWidth = $this.set.contWidth + paddingLeft - $this.parent().width() + paddingRight;
+
+					$this.set.handleMoving = true;
+
+					if(event.type === 'mousedown') {
+						$(this).on('mousemove', function(e) {
+							window.requestAnimFrame(function() {
+								moveSlider(e);
+							});
+						});
+					}
+
+				}
+
+			}).on('touchmove', function(e) {
+				window.requestAnimFrame(function() {
+					moveSlider(e);
+				});
+			});
+
+			$(window).on('mouseup touchend', function() {
+				if($this.set.handleMoving) {
+					$this.siblings('.' + $this.set.pagClass).off('mousemove touchmove');
+					$this.set.handleMoving = false;
+
+					if(Math.abs(mouseStart - mousePosition) > 5) {
+						var position = 0;
+
+						//Calculate where handle is dropped. Slide to closest segment.
+						position = Math.round(($this.set.totalAmount - 1) * handlePositionPercentage);
+
+						$handle.animate({
+							left: position / ($this.set.totalAmount - 1) * containerLength
+						}, $this.set.speed);
+
+						$this.set.paginationLinePosition = position;
+
+						priv.interaction.apply($this);
+						priv.beforeAnimating.apply($this, [0, (position + $this.set.overflow)]);
+					}
+				}
 			});
 
 			$this.on('redils.imagesLoaded', function() {
@@ -156,6 +289,17 @@
 
 				if($this.set.center) {
 					priv.center.apply($this);
+					if($this.set.overflow === 0) {
+						priv.totalWidth.apply($this);
+						$this.set.totalPos = priv.totalPos.apply($this);
+					}
+					priv.update.apply($this);
+				}
+
+				if($this.set.pagination === 'line') {
+					handleLength = $handle.width();
+					containerLength = $container.width() - handleLength;
+					$handle.css('left', $this.data('position') / ($this.set.totalAmount - 1) * containerLength);
 				}
 
 				if($this.set.autoResize || $this.set.multiSlide) priv.update.apply($this);
@@ -233,13 +377,14 @@
 			$this.find('.' + $this.set.slideContClass).css('width', '');
 		},
 		center: function(pos) {
-			var $this = this,
-				position = pos || $this.data('position');
+			var $this = this;
+			var position = pos || $this.data('position');
+			var startPadding = parseInt($this.find('.' + $this.set.slideContClass).css('paddingLeft'));
 
 			if($this.set.width === 'dyn') {
-				$this.set.offset = ($this.width() - parseInt($this.set.dynWidth[position], 10)) / 2;
+				$this.set.offset = startPadding - ($this.width() - parseInt($this.set.dynWidth[position], 10)) / 2;
 			} else {
-				$this.set.offset = ($this.width() - parseInt($this.set.width, 10)) / 2;
+				$this.set.offset = startPadding - ($this.width() - parseInt($this.set.width, 10)) / 2;
 			}
 
 		},
@@ -253,10 +398,10 @@
 
 		},
 		totalPos: function(pos) {
-			var $this = this,
-				position = (pos !== undefined) ? pos : $this.data('position'),
-				pxPosition = 0,
-				obj = $.isEmptyObject(this.data()) ? this.set : this.data();
+			var $this = this;
+			var position = (pos !== undefined) ? pos : $this.data('position');
+			var pxPosition = 0;
+			var obj = $.isEmptyObject(this.data()) ? this.set : this.data();
 
 			if(this.set.width === 'dyn') {
 				for (var i = 0; i < position; i++) {
@@ -394,7 +539,11 @@
 
 			//Create pagination
 			if($this.set.pagination !== false) {
-				priv.pagination.apply($this);
+				if($this.set.pagination === 'line') {
+					priv.paginationLine.apply($this);
+				} else {
+					priv.pagination.apply($this);
+				}
 			}
 			//Add in new slides to enable carousel.
 			priv.overflow.apply($this);
@@ -405,8 +554,9 @@
 
 		},
 		totalWidth: function() {
-			var $this = this,
-				pageWidth = $this.parent().width();
+			var $this = this;
+			var pageWidth = $this.parent().width();
+			var applyStyles = {};
 			
 
 			$this.set.contWidth = 0;
@@ -432,7 +582,15 @@
 				$this.set.contWidth = $this.set.totalAmount * parseInt($this.set.width, 10);
 			}
 
-			$this.find('.' + $this.set.slideContClass).width($this.set.contWidth);
+			if($this.set.overflow === 0 && $this.set.center) {
+				//Give slide container padding to center first and last slides.
+				applyStyles.paddingLeft = Math.ceil((pageWidth - $this.set.dynWidth[0]) / 2);
+				applyStyles.paddingRight = Math.ceil((pageWidth - $this.set.dynWidth[$this.set.dynWidth.length - 1]) / 2);
+			}
+
+			applyStyles.width = $this.set.contWidth;
+
+			$this.find('.' + $this.set.slideContClass).css(applyStyles);
 			$this.data('dynWidth', $this.set.dynWidth);
 
 		},
@@ -461,11 +619,11 @@
 			$this.data('position', $this.set.overflow);
 		},
 		pagination: function() {
-			var html = '<div class="center-pagination">',
-				str = 'a',
-				num = 1,
-				pre = '',
-				post = '';
+			var html = '<div class="center-pagination">';
+			var str = 'a';
+			var num = 1;
+			var pre = '';
+			var post = '';
 
 			for (var i = 0; i < this.set.totalAmount; i++) {
 				pre = this.find('.' + this.set.slideClass).eq(i).data('pagination-pre');
@@ -492,6 +650,24 @@
 			html += '</div>';
 			
 			this.siblings('.' + this.set.pagClass).html(html);
+		},
+		paginationLine: function() {
+			var html = '<div class="pagination-inner"><a href="#" class="pagination-inner-handle"></a></div>';
+			
+			this.siblings('.' + this.set.pagClass).html(html);
+		},
+		updatePaginationLine: function(position) {
+
+			var $this = this;
+			var $container = $this.siblings('.' + $this.set.pagClass);
+			var $handle = $container.find('.pagination-inner a');
+			var handleLength = $handle.width();
+			var containerLength = $container.width() - handleLength;
+
+			$handle.animate({
+				left: position / ($this.set.totalAmount - 1) * containerLength
+			}, $this.set.speed);
+
 		},
 		beforeAnimating: function(dir, newPosition) {
 			var $this = this;
@@ -543,6 +719,11 @@
 			//This should be the future slide.
 			if(!$this.set.slide) $this.find('.' + $this.set.slideClass).eq(position).css('z-index', 2);
 			$this.siblings('.' + $this.set.pagClass).find('a').removeClass('selected').eq(position - $this.set.overflow).addClass('selected');
+
+			if($this.set.pagination === 'line' && $this.set.paginationLinePosition !== position) {
+				priv.updatePaginationLine.apply($this, [position]);
+				$this.set.paginationLinePosition = position;
+			}
 
 			if($this.set.updateHash) {
 				hash = $this.find('.focused').data('hash');
@@ -662,7 +843,11 @@
 
 				//Create additional elements.
 				if($this.set.pagination !== false && ($this.set.totalAmount > 1 || $this.set.multiSlide)) {
-					priv.pagination.apply($this);
+					if($this.set.pagination === 'line') {
+						priv.paginationLine.apply($this);
+					} else {
+						priv.pagination.apply($this);
+					}
 				}
 
 				if($this.set.overflow > 0 && ($this.set.totalAmount > 1 || $this.set.multiSlide)) {
@@ -825,7 +1010,9 @@
 		offset: 0,
 		totalPos: 0,
 		timer: null,
-		animationStopped: false
+		animationStopped: false,
+		handleMoving: false,
+		paginationLinePosition: 0
 	};
 
 	$.fn.redils = function(method) {
