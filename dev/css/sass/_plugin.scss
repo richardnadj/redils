@@ -27,8 +27,11 @@ section { margin-top: 50px; }
 	.super-slide .slides { padding: 0 10px; } }
 
 .pagination { text-align: center; position: relative; top: -25px; z-index: 5; 
-	a { width: 15px; height: 15px; border-radius: 50%; background-color: #fff; display: inline-block; margin: 0 5px; 
+	.center-pagination a { width: 15px; height: 15px; border-radius: 50%; background-color: #fff; display: inline-block; margin: 0 5px; 
 		&.selected { background-color: #333; } } }
+
+.pagination--line { height: 50px; width: 60%; position: relative; margin: 25px auto; background-color: #fff; text-align: left;
+	.pagination-inner a { width: 10%; position: absolute; background-color: #000; height: 10px; top: 20px; display: inline-block; } }
 
 .arrow { position: absolute; display: inline-block; vertical-align: center; top: 50%; margin-top: -10px;
 	&:before { content: ""; border: 10px solid transparent; position: absolute; } }

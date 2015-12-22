@@ -20,6 +20,11 @@ table.redils-controls { width: 100%; height: 100%; position: absolute; top: 0; l
 .redils-default { height: 660px;
 	.slides { float: left; } }
 
+.redils-centered { width: 100%; 
+	.slide-cont { line-height: 0; font-size: 0; }
+	.slides { display: inline-block; vertical-align: top; 
+		img { width: 585px; height: auto; } } }
+
 .redils-responsive { height: 600px;
 	.slides { float: left;
 		img { width: auto; height: 100%; } }

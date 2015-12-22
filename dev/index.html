@@ -10,46 +10,58 @@
 	</head>
 	<body>
 		<div id="grid-container" class="hidden"><div></div></div>
-		<main class="main-cont">
-			<section>
-				<h1>Redils Slider</h1>
-				<p class="ingress">A slider that covers all functionality.</p>
-			</section>
-			<section>
-				<h3>Default</h3>
-				<p>Standard slider.</p>
-				<pre>$('.redils-default .redils').redils();</pre>
-				<div class="redils-cont redils-default">
-					<div class="redils">
-						<div class="slide-cont" style="width: 5850px">
-							<div id="first-slide" class="slides">
-								<img id="first-image-in-slide" src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="660">
-							</div><div class="slides">
-								<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
-							</div><div class="slides">
-								<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
-							</div><div class="slides">
-								<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
-							</div><div class="slides">
-								<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
+		<main>
+			<div class="main-cont">
+				<section>
+					<h1>Redils Slider</h1>
+					<p class="ingress">A slider that covers all functionality.</p>
+				</section>
+				<section>
+					<h3>Default</h3>
+					<p>Standard slider.</p>
+					<pre>$('.redils-default .redils').redils();</pre>
+					<div class="redils-cont redils-default">
+						<div class="redils">
+							<div class="slide-cont" style="width: 5850px">
+								<div id="first-slide" class="slides">
+									<img id="first-image-in-slide" src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="660">
+								</div><div class="slides">
+									<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
+								</div><div class="slides">
+									<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
+								</div><div class="slides">
+									<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
+								</div><div class="slides">
+									<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="redils-controls">
-						<div class="arrow-area arrow-area-left">
-							<div class="arrow"></div>
+						<div class="redils-controls">
+							<div class="arrow-area arrow-area-left">
+								<div class="arrow"></div>
+							</div>
+							<div class="arrow-area arrow-area-right">
+								<div class="arrow"></div>
+							</div>
 						</div>
-						<div class="arrow-area arrow-area-right">
-							<div class="arrow"></div>
-						</div>
+						<div class="pagination"></div>
 					</div>
-					<div class="pagination"></div>
+				</section>
+			</div>
+			<section>
+				<div class="main-cont">
+					<h3>Centered</h3>
+					<p>Slider with slides centered in screen. Shows a little of the coming and previous slides.</p>
+					<pre>
+$('.redils-centered .redils').redils({
+	center: true,
+	auto: false,
+	overflow: 0,
+	pagintion: 'line'
+});
+					</pre>
 				</div>
-			</section><section>
-				<h3>Centered</h3>
-				<p>Standard slider.</p>
-				<pre>$('.redils-default .redils').redils();</pre>
-				<div class="redils-cont redils-default">
+				<div class="redils-cont redils-centered">
 					<div class="redils">
 						<div class="slide-cont" style="width: 5850px">
 							<div class="slides">
@@ -73,12 +85,14 @@
 							<div class="arrow"></div>
 						</div>
 					</div>
-					<div class="pagination"></div>
+					<div class="pagination pagination--line"></div>
 				</div>
-			</section><section>
-				<h3>Responsive</h3>
-				<p>Slider Stretches to fit it's container. With external controls</p>
-				<pre>
+			</section>
+			<div class="main-cont">
+				<section>
+					<h3>Responsive</h3>
+					<p>Slider Stretches to fit it's container. With external controls</p>
+					<pre>
 $('.redils-responsive .redils').redils({
 	autoResize: true
 });
@@ -96,81 +110,81 @@ $('#return-to-start').on('click', function(){
 	var pos = $(this).data('pos');
 	$('.redils-responsive .redils').redils('skipTo', {skipToSlide: pos});
 });
-				</pre>
-				<div class="redils-cont redils-responsive">
-					<div class="redils">
-						<div class="slide-cont" style="width: 7020px">
-							<div class="slides">
-								<a href="http://google.com" target="_blank">
-									<img src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="660">
-								</a>
-							</div>
-							<div class="slides">
-								<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
-							</div>
-							<div class="slides">
-								<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
-							</div>
-							<div class="slides">
-								<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
-							</div>
-							<div class="slides">
-								<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
+					</pre>
+					<div class="redils-cont redils-responsive">
+						<div class="redils">
+							<div class="slide-cont" style="width: 7020px">
+								<div class="slides">
+									<a href="http://google.com" target="_blank">
+										<img src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="660">
+									</a>
+								</div>
+								<div class="slides">
+									<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
+								</div>
+								<div class="slides">
+									<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
+								</div>
+								<div class="slides">
+									<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
+								</div>
+								<div class="slides">
+									<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="redils-controls">
-						<div class="arrow-area arrow-area-left">
-							<div class="arrow"></div>
+						<div class="redils-controls">
+							<div class="arrow-area arrow-area-left">
+								<div class="arrow"></div>
+							</div>
+							<div class="arrow-area arrow-area-right">
+								<div class="arrow"></div>
+							</div>
 						</div>
-						<div class="arrow-area arrow-area-right">
-							<div class="arrow"></div>
+						<div class="pagination"></div>
+					</div>
+					<!-- Seperated by content out of bounding box -->
+					<div class="external-controls">
+						<div id="arrow-left">
+							Arrow Left
+						</div><div id="return-to-start" data-pos="0">
+							Return Home
+						</div><div id="arrow-right">
+							Arrow Right
 						</div>
 					</div>
-					<div class="pagination"></div>
-				</div>
-				<!-- Seperated by content out of bounding box -->
-				<div class="external-controls">
-					<div id="arrow-left">
-						Arrow Left
-					</div><div id="return-to-start" data-pos="0">
-						Return Home
-					</div><div id="arrow-right">
-						Arrow Right
-					</div>
-				</div>
-			</section>
-			<section>
-				<h3>Responsive</h3>
-				<p>Same as section above but with only one slide. Should be disabled but have all values.</p>
-				<pre>
+				</section>
+				<section>
+					<h3>Responsive</h3>
+					<p>Same as section above but with only one slide. Should be disabled but have all values.</p>
+					<pre>
 $('.redils-responsive .redils').redils({
 	autoResize: true
 });
-				</pre>
-				<div class="redils-cont redils-responsive">
-					<div class="redils">
-						<div class="slide-cont" style="width: 7020px">
-							<div class="slides">
-								<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
+					</pre>
+					<div class="redils-cont redils-responsive">
+						<div class="redils">
+							<div class="slide-cont" style="width: 7020px">
+								<div class="slides">
+									<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="redils-controls">
-						<div class="arrow-area arrow-area-left">
-							<div class="arrow"></div>
+						<div class="redils-controls">
+							<div class="arrow-area arrow-area-left">
+								<div class="arrow"></div>
+							</div>
+							<div class="arrow-area arrow-area-right">
+								<div class="arrow"></div>
+							</div>
 						</div>
-						<div class="arrow-area arrow-area-right">
-							<div class="arrow"></div>
-						</div>
+						<div class="pagination"></div>
 					</div>
-					<div class="pagination"></div>
-				</div>
-			</section>
-			<section>
-				<h3>Fader</h3>
-				<p>Slider off use fade transitions instead. Updates the page's hash automatically based on data-hash or default 'slide-#' where # is the index + 1.</p>
-				<pre>
+				</section>
+				<section>
+					<h3>Fader</h3>
+					<p>Slider off use fade transitions instead. Updates the page's hash automatically based on data-hash or default 'slide-#' where # is the index + 1.</p>
+					<pre>
 $('.redils-fader .redils').redils({
 	autoResize: true,
 	slide: false,
@@ -178,218 +192,219 @@ $('.redils-fader .redils').redils({
 	speed: 800,
 	updateHash: true
 });
-				</pre>
-				<div class="redils-cont redils-fader">
-					<div class="redils">
-						<div class="slide-cont" style="width: 7020px">
-							<div class="slides">
-								<img src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="660">
-							</div>
-							<div class="slides">
-								<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
-							</div>
-							<div class="slides">
-								<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
-							</div>
-							<div class="slides" data-hash="slides-4">
-								<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
-							</div>
-							<div class="slides" data-hash="slides-5">
-								<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
+					</pre>
+					<div class="redils-cont redils-fader">
+						<div class="redils">
+							<div class="slide-cont" style="width: 7020px">
+								<div class="slides">
+									<img src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="660">
+								</div>
+								<div class="slides">
+									<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
+								</div>
+								<div class="slides">
+									<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
+								</div>
+								<div class="slides" data-hash="slides-4">
+									<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
+								</div>
+								<div class="slides" data-hash="slides-5">
+									<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
+								</div>
 							</div>
 						</div>
+						<div class="redils-controls">
+							<div class="arrow-area arrow-area-left">
+								<div class="arrow"></div>
+							</div>
+							<div class="arrow-area arrow-area-right">
+								<div class="arrow"></div>
+							</div>
+						</div>
+						<div class="pagination"></div>
 					</div>
-					<div class="redils-controls">
-						<div class="arrow-area arrow-area-left">
-							<div class="arrow"></div>
-						</div>
-						<div class="arrow-area arrow-area-right">
-							<div class="arrow"></div>
-						</div>
-					</div>
-					<div class="pagination"></div>
-				</div>
-			</section>
-			<section>
-				<h3>Multislide</h3>
-				<p>Using several fixed size slides within a slider. Slider changes amount of slides shown based on container's width.</p>
-				<pre>
+				</section>
+				<section>
+					<h3>Multislide</h3>
+					<p>Using several fixed size slides within a slider. Slider changes amount of slides shown based on container's width.</p>
+					<pre>
 $('.redils-multislide .redils').redils({
 	multiSlide: true,
 	multiSlidePadding: 10,
 	auto: false
 });
-				</pre>
-				<div class="redils-cont redils-multislide">
-					<div class="redils">
-						<div class="slide-cont" style="width: 7020px">
-							<div class="slides">
-								<img src="images/170714164301-placeholder-180x240-DDDDDD.jpg" alt="DDDDDD" width="180" height="240">
-							</div>
-							<div class="slides">
-								<img src="images/170714164304-placeholder-180x240-c4c4c4.jpg" alt="c4c4c4" width="180" height="240">
-							</div>
-							<div class="slides">
-								<img src="images/170714164307-placeholder-180x240-e5e5e5.jpg" alt="e5e5e5" width="180" height="240">
-							</div>
-							<div class="slides">
-								<img src="images/170714164309-placeholder-180x240-c6c6c6.jpg" alt="c6c6c6" width="180" height="240">
-							</div>
-							<div class="slides">
-								<img src="images/170714164314-placeholder-180x240-b6b6b6.jpg" alt="b6b6b6" width="180" height="240">
-							</div>
-							<div class="slides">
-								<img src="images/170714164316-placeholder-180x240-757575.jpg" alt="757575" width="180" height="240">
-							</div>
-							<div class="slides">
-								<img src="images/170714164319-placeholder-180x240-383838.jpg" alt="383838" width="180" height="240">
-							</div>
-							<div class="slides">
-								<img src="images/170714164321-placeholder-180x240-262626.jpg" alt="262626" width="180" height="240">
-							</div>
-							<div class="slides">
-								<img src="images/170714164324-placeholder-180x240-f1f1f1.jpg" alt="f1f1f1" width="180" height="240">
-							</div>
-							<div class="slides">
-								<img src="images/170714164326-placeholder-180x240-c3c3c3.jpg" alt="c3c3c3" width="180" height="240">
+					</pre>
+					<div class="redils-cont redils-multislide">
+						<div class="redils">
+							<div class="slide-cont" style="width: 7020px">
+								<div class="slides">
+									<img src="images/170714164301-placeholder-180x240-DDDDDD.jpg" alt="DDDDDD" width="180" height="240">
+								</div>
+								<div class="slides">
+									<img src="images/170714164304-placeholder-180x240-c4c4c4.jpg" alt="c4c4c4" width="180" height="240">
+								</div>
+								<div class="slides">
+									<img src="images/170714164307-placeholder-180x240-e5e5e5.jpg" alt="e5e5e5" width="180" height="240">
+								</div>
+								<div class="slides">
+									<img src="images/170714164309-placeholder-180x240-c6c6c6.jpg" alt="c6c6c6" width="180" height="240">
+								</div>
+								<div class="slides">
+									<img src="images/170714164314-placeholder-180x240-b6b6b6.jpg" alt="b6b6b6" width="180" height="240">
+								</div>
+								<div class="slides">
+									<img src="images/170714164316-placeholder-180x240-757575.jpg" alt="757575" width="180" height="240">
+								</div>
+								<div class="slides">
+									<img src="images/170714164319-placeholder-180x240-383838.jpg" alt="383838" width="180" height="240">
+								</div>
+								<div class="slides">
+									<img src="images/170714164321-placeholder-180x240-262626.jpg" alt="262626" width="180" height="240">
+								</div>
+								<div class="slides">
+									<img src="images/170714164324-placeholder-180x240-f1f1f1.jpg" alt="f1f1f1" width="180" height="240">
+								</div>
+								<div class="slides">
+									<img src="images/170714164326-placeholder-180x240-c3c3c3.jpg" alt="c3c3c3" width="180" height="240">
+								</div>
 							</div>
 						</div>
+						<div class="redils-controls">
+							<div class="arrow-area arrow-area-left">
+								<div class="arrow"></div>
+							</div>
+							<div class="arrow-area arrow-area-right">
+								<div class="arrow"></div>
+							</div>
+						</div>
+						<div class="pagination"></div>
 					</div>
-					<div class="redils-controls">
-						<div class="arrow-area arrow-area-left">
-							<div class="arrow"></div>
-						</div>
-						<div class="arrow-area arrow-area-right">
-							<div class="arrow"></div>
-						</div>
-					</div>
-					<div class="pagination"></div>
-				</div>
-			</section>
-			<section>
-				<h3>Multislide</h3>
-				<p>Test for not many slides setting class on arrows</p>
-				<pre>
+				</section>
+				<section>
+					<h3>Multislide</h3>
+					<p>Test for not many slides setting class on arrows</p>
+					<pre>
 $('.redils-multislide .redils').redils({
 	multiSlide: true,
 	multiSlidePadding: 10,
 	auto: false
 });
-				</pre>
-				<div class="redils-cont redils-multislide">
-					<div class="redils">
-						<div class="slide-cont" style="width: 7020px">
-							<div class="slides">
-								<img src="images/170714164301-placeholder-180x240-DDDDDD.jpg" alt="DDDDDD" width="180" height="240">
-							</div>
-							<div class="slides">
-								<img src="images/170714164304-placeholder-180x240-c4c4c4.jpg" alt="c4c4c4" width="180" height="240">
-							</div>
-							<div class="slides">
-								<img src="images/170714164307-placeholder-180x240-e5e5e5.jpg" alt="e5e5e5" width="180" height="240">
+					</pre>
+					<div class="redils-cont redils-multislide">
+						<div class="redils">
+							<div class="slide-cont" style="width: 7020px">
+								<div class="slides">
+									<img src="images/170714164301-placeholder-180x240-DDDDDD.jpg" alt="DDDDDD" width="180" height="240">
+								</div>
+								<div class="slides">
+									<img src="images/170714164304-placeholder-180x240-c4c4c4.jpg" alt="c4c4c4" width="180" height="240">
+								</div>
+								<div class="slides">
+									<img src="images/170714164307-placeholder-180x240-e5e5e5.jpg" alt="e5e5e5" width="180" height="240">
+								</div>
 							</div>
 						</div>
+						<div class="redils-controls">
+							<div class="arrow-area arrow-area-left">
+								<div class="arrow"></div>
+							</div>
+							<div class="arrow-area arrow-area-right">
+								<div class="arrow"></div>
+							</div>
+						</div>
+						<div class="pagination"></div>
 					</div>
-					<div class="redils-controls">
-						<div class="arrow-area arrow-area-left">
-							<div class="arrow"></div>
-						</div>
-						<div class="arrow-area arrow-area-right">
-							<div class="arrow"></div>
-						</div>
-					</div>
-					<div class="pagination"></div>
-				</div>
-			</section>
-			<section>
-				<h3>Multislide Contact Sheet</h3>
-				<p>Responsive, stretching images reconfigure on user defined breakpoints. Levrages multislide with defined breakpoints.</p>
-				<pre>
+				</section>
+				<section>
+					<h3>Multislide Contact Sheet</h3>
+					<p>Responsive, stretching images reconfigure on user defined breakpoints. Levrages multislide with defined breakpoints.</p>
+					<pre>
 $('.redils-contact-sheet .redils').redils({
 	multiSlide: true,
 	breakPoints: [{breakAfter: 1100, numSlides: 9}, {breakAfter: 600, numSlides: 4}, {breakAfter: 0, numSlides: 1}],
 	auto: false
 });
-				</pre>
-				<div class="redils-cont redils-contact-sheet">
-					<div class="redils">
-						<div class="slide-cont" style="width: 7020px">
-							<div class="slides">
-								<img src="images/250115213833-placeholder-570x250-DDDDDD.jpg" alt="DDDDDD" width="570" height="250">
-							</div><div class="slides">
-								<img src="images/250115213839-placeholder-570x250-757575.jpg" alt="c4c4c4" width="570" height="250">
-							</div><div class="slides">
-								<img src="images/250115213844-placeholder-570x250-6f6f6f.jpg" alt="e5e5e5" width="570" height="250">
-							</div><div class="slides">
-								<img src="images/250115213850-placeholder-570x250-d1d1d1.jpg" alt="c6c6c6" width="570" height="250">
-							</div><div class="slides">
-								<img src="images/250115213856-placeholder-570x250-cbcbcb.jpg" alt="b6b6b6" width="570" height="250">
-							</div><div class="slides">
-								<img src="images/250115213901-placeholder-570x250-131313.jpg" alt="757575" width="570" height="250">
-							</div><div class="slides">
-								<img src="images/250115213906-placeholder-570x250-575757.jpg" alt="383838" width="570" height="250">
-							</div><div class="slides">
-								<img src="images/250115213911-placeholder-570x250-232323.jpg" alt="262626" width="570" height="250">
-							</div><div class="slides">
-								<img src="images/250115213915-placeholder-570x250-6f6f6f.jpg" alt="f1f1f1" width="570" height="250">
-							</div> <div class="slides">
-								<img src="images/250115213920-placeholder-570x250-c2c2c2.jpg" alt="c3c3c3" width="570" height="250">
+					</pre>
+					<div class="redils-cont redils-contact-sheet">
+						<div class="redils">
+							<div class="slide-cont" style="width: 7020px">
+								<div class="slides">
+									<img src="images/250115213833-placeholder-570x250-DDDDDD.jpg" alt="DDDDDD" width="570" height="250">
+								</div><div class="slides">
+									<img src="images/250115213839-placeholder-570x250-757575.jpg" alt="c4c4c4" width="570" height="250">
+								</div><div class="slides">
+									<img src="images/250115213844-placeholder-570x250-6f6f6f.jpg" alt="e5e5e5" width="570" height="250">
+								</div><div class="slides">
+									<img src="images/250115213850-placeholder-570x250-d1d1d1.jpg" alt="c6c6c6" width="570" height="250">
+								</div><div class="slides">
+									<img src="images/250115213856-placeholder-570x250-cbcbcb.jpg" alt="b6b6b6" width="570" height="250">
+								</div><div class="slides">
+									<img src="images/250115213901-placeholder-570x250-131313.jpg" alt="757575" width="570" height="250">
+								</div><div class="slides">
+									<img src="images/250115213906-placeholder-570x250-575757.jpg" alt="383838" width="570" height="250">
+								</div><div class="slides">
+									<img src="images/250115213911-placeholder-570x250-232323.jpg" alt="262626" width="570" height="250">
+								</div><div class="slides">
+									<img src="images/250115213915-placeholder-570x250-6f6f6f.jpg" alt="f1f1f1" width="570" height="250">
+								</div> <div class="slides">
+									<img src="images/250115213920-placeholder-570x250-c2c2c2.jpg" alt="c3c3c3" width="570" height="250">
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="redils-controls">
-						<div class="arrow-area arrow-area-left">
-							<div class="arrow"></div>
+						<div class="redils-controls">
+							<div class="arrow-area arrow-area-left">
+								<div class="arrow"></div>
+							</div>
+							<div class="arrow-area arrow-area-right">
+								<div class="arrow"></div>
+							</div>
 						</div>
-						<div class="arrow-area arrow-area-right">
-							<div class="arrow"></div>
-						</div>
+						<div class="pagination"></div>
 					</div>
-					<div class="pagination"></div>
-				</div>
-			</section><section>
-				<h3>Responsive</h3>
-				<p>Using only CSS to manipulate height</p>
-				<pre>
+				</section><section>
+					<h3>Responsive</h3>
+					<p>Using only CSS to manipulate height</p>
+					<pre>
 $('.redils-responsive-height .redils').redils({
 	autoResize: true,
 	setHeight: false
 });
-				</pre>
-				<div class="redils-cont redils-responsive-height">
-					<div class="redils">
-						<div class="slide-cont" style="width: 7020px">
-							<div class="slides">
-								<a href="http://google.com" target="_blank">
-									<img src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="660">
-								</a>
-							</div>
-							<div class="slides">
-								<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
-								<h3>Caption associated with slide</h3>
-							</div>
-							<div class="slides">
-								<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
-							</div>
-							<div class="slides">
-								<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
-							</div>
-							<div class="slides">
-								<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
+					</pre>
+					<div class="redils-cont redils-responsive-height">
+						<div class="redils">
+							<div class="slide-cont" style="width: 7020px">
+								<div class="slides">
+									<a href="http://google.com" target="_blank">
+										<img src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="660">
+									</a>
+								</div>
+								<div class="slides">
+									<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
+									<h3>Caption associated with slide</h3>
+								</div>
+								<div class="slides">
+									<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
+								</div>
+								<div class="slides">
+									<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
+								</div>
+								<div class="slides">
+									<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
+								</div>
 							</div>
 						</div>
+						<div class="redils-controls">
+							<div class="arrow-area arrow-area-left">
+								<div class="arrow"></div>
+							</div>
+							<div class="arrow-area arrow-area-right">
+								<div class="arrow"></div>
+							</div>
+						</div>
+						<div class="pagination"></div>
 					</div>
-					<div class="redils-controls">
-						<div class="arrow-area arrow-area-left">
-							<div class="arrow"></div>
-						</div>
-						<div class="arrow-area arrow-area-right">
-							<div class="arrow"></div>
-						</div>
-					</div>
-					<div class="pagination"></div>
-				</div>
-			</section>
+				</section>
+			</div>
 		</main>
 		<footer class="main-cont">
 			<a class="signature" href="http://youngskilled.com">
@@ -416,6 +431,14 @@ $('.redils-responsive-height .redils').redils({
 
 				//Default redils
 				$('.redils-default .redils').redils();
+
+				//Centered redils
+				$('.redils-centered .redils').redils({
+					center: true,
+					auto: false,
+					overflow: 0,
+					pagination: 'line'
+				});
 
 				//Responsive redils
 				$('.redils-responsive .redils').redils({

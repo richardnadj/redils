@@ -782,15 +782,30 @@ section {
   position: relative;
   top: -25px;
   z-index: 5; }
-  .pagination a {
+  .pagination .center-pagination a {
     width: 15px;
     height: 15px;
     border-radius: 50%;
     background-color: #fff;
     display: inline-block;
     margin: 0 5px; }
-    .pagination a.selected {
+    .pagination .center-pagination a.selected {
       background-color: #333; }
+
+.pagination--line {
+  height: 50px;
+  width: 60%;
+  position: relative;
+  margin: 25px auto;
+  background-color: #fff;
+  text-align: left; }
+  .pagination--line .pagination-inner a {
+    width: 10%;
+    position: absolute;
+    background-color: #000;
+    height: 10px;
+    top: 20px;
+    display: inline-block; }
 
 .arrow {
   position: absolute;
@@ -900,6 +915,18 @@ table.redils-controls {
   height: 660px; }
   .redils-default .slides {
     float: left; }
+
+.redils-centered {
+  width: 100%; }
+  .redils-centered .slide-cont {
+    line-height: 0;
+    font-size: 0; }
+  .redils-centered .slides {
+    display: inline-block;
+    vertical-align: top; }
+    .redils-centered .slides img {
+      width: 585px;
+      height: auto; }
 
 .redils-responsive {
   height: 600px; }
