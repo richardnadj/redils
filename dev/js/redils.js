@@ -758,10 +758,11 @@
 		},
 		animating: function() {
 			//Handle scroll animation.
-			var $this = this,
-				moveTo = $this.data('position'),
-				totalPos = priv.totalPos.apply($this),
-				callback = function() { priv.afterAnimating.apply($this); };
+			var $this = this;
+			var moveTo = $this.data('position');
+			var totalPos = priv.totalPos.apply($this);
+			var callback = function() { priv.afterAnimating.apply($this); };
+			var speed = $this.set.speed !== $this.set.temporarySpeed ? $this.set.temporarySpeed : $this.set.speed;
 
 			if($this.set.ends !== false) {
 				//Decide on end animation:
@@ -783,17 +784,19 @@
 				$this.animate({
 					scrollLeft: totalPos - $this.set.offset
 				}, {
-					duration: $this.set.speed,
+					duration: speed,
 					queue: false,
 					complete: callback
 				});
 			} else {
 				$this.find('.' + $this.set.slideClass).eq($this.data('prevPosition')).fadeOut({
-					'duration': $this.set.speed,
+					'duration': speed,
 					'queue': false,
 					'complete': callback
 				});
 			}
+
+			$this.set.temporarySpeed = $this.set.speed;
 
 		},
 		afterAnimating: function() {
@@ -952,6 +955,7 @@
 
 				$this.set = $this.data();
 				var skipToSlide = options.skipToSlide || 0;
+				$this.set.temporarySpeed = options.skipToSlideSpeed || $this.set.speed;
 				$this.data('position', skipToSlide + $this.set.overflow);
 
 				priv.interaction.apply($this);
@@ -975,6 +979,7 @@
 		width: 'dyn',
 		overflow: 1,
 		speed: 200,
+		temporarySpeed: 200,
 		center: false,
 		pagination: true,
 		attach: false,

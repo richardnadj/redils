@@ -297,10 +297,13 @@ Define outside of the plugin container which slide to move to. Option moveTo tak
 
 Define outside of the plugin container which slide to skip to. 
 
-	$(selector).redils('skipTo', {skipToSlide: 3});
+	$(selector).redils('skipTo', {skipToSlide: 3, skipToSlideSpeed: 200});
 
 
 ### Changelog ###
+
+**Version 1.11.3**   
+Added a temporary speed adjustment variable mainly for skipTo animations.
 
 **Version 1.11.2**   
 Fixed bugs with touch interaction on pagination line.
