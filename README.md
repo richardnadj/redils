@@ -302,6 +302,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.11.1**   
+A more accurate representation of size for each slide. Slides previously were automatically rounded via javascript's clientWidth therefore not giving an accurate length when using many slides.
+
 **Version 1.11.0**   
 Added a new type of pagination for continuous sliding of the slideshow. Added padding to the slideshow for center to center the first and last slides.
 

@@ -555,9 +555,9 @@
 		},
 		totalWidth: function() {
 			var $this = this;
-			var pageWidth = $this.parent().width();
+			var rect = $this[0].getBoundingClientRect();
+			var pageWidth = rect.width ? rect.width : rect.right - rect.left;
 			var applyStyles = {};
-			
 
 			$this.set.contWidth = 0;
 			$this.set.dynWidth = [];
@@ -569,10 +569,12 @@
 				$this.find('.' + $this.set.slideClass).each(function(i) {
 
 					if($this.set.autoResize || $this.set.multiSlide) {
-						$this.set.dynWidth[i] = pageWidth + 1;
+						$this.set.dynWidth[i] = pageWidth;
 						$(this).width($this.set.dynWidth[i]);
 					} else {
-						$this.set.dynWidth[i] = $(this).width();
+						//To get exact width of element including floating point. Javascript clientWidth rounds giving rounding errors for larger amounts of slides.
+						rect = $(this)[0].getBoundingClientRect();
+						$this.set.dynWidth[i] = rect.width ? rect.width : rect.right - rect.left;
 					}
 
 					$this.set.contWidth += $this.set.dynWidth[i];
