@@ -793,6 +793,7 @@ section {
       background-color: #333; }
 
 .pagination--line {
+  -webkit-tap-highlight-color: transparent;
   height: 50px;
   width: 60%;
   position: relative;

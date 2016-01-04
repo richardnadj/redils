@@ -203,8 +203,8 @@
 						mouseStart = event.pageX;
 						mousePosition = event.pageX;
 					} else {
-						mouseStart = e.originalEvent.targetTouches[0].pageX;
-						mousePosition = e.originalEvent.targetTouches[0].pageX;
+						mouseStart = event.originalEvent.targetTouches[0].pageX;
+						mousePosition = event.originalEvent.targetTouches[0].pageX;
 					}
 
 					$container = $(this);
@@ -237,7 +237,7 @@
 
 			$(window).on('mouseup touchend', function() {
 				if($this.set.handleMoving) {
-					$this.siblings('.' + $this.set.pagClass).off('mousemove touchmove');
+					$this.siblings('.' + $this.set.pagClass).off('mousemove');
 					$this.set.handleMoving = false;
 
 					if(Math.abs(mouseStart - mousePosition) > 5) {
