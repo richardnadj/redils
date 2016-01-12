@@ -302,6 +302,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.11.4**   
+Set up a default position.
+
 **Version 1.11.3**   
 Added a temporary speed adjustment variable mainly for skipTo animations.
 

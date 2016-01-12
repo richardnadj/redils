@@ -838,7 +838,7 @@
 					if(isNaN(pos)) pos = 0;
 					$this.data('position', pos);
 				} else if($this.data('position') === undefined) {
-					$this.data('position', 0);
+					$this.data('position', $this.set.position);
 				}
 
 				$this.set.totalAmount = $this.find('.' + $this.set.slideClass).length;
@@ -977,6 +977,7 @@
 
 	var defaultOpts	= {
 		width: 'dyn',
+		position: 0,
 		overflow: 1,
 		speed: 200,
 		temporarySpeed: 200,
