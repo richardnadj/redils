@@ -302,6 +302,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.11.5**   
+Fixed temporary speed to use set speed. Removed animations if speed of animations set to 0.
+
 **Version 1.11.4**   
 Set up a default position.
 

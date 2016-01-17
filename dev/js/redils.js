@@ -780,20 +780,29 @@
 				priv.center.apply($this, [moveTo]);
 			}
 			
-			if($this.set.slide) {
-				$this.animate({
-					scrollLeft: totalPos - $this.set.offset
-				}, {
-					duration: speed,
-					queue: false,
-					complete: callback
-				});
+			if(speed === 0) {
+				if($this.set.slide) {
+					$this.scrollLeft(totalPos - $this.set.offset);
+				} else {
+					$this.find('.' + $this.set.slideClass).eq($this.data('prevPosition')).hide();
+				}
+				priv.afterAnimating.apply($this);
 			} else {
-				$this.find('.' + $this.set.slideClass).eq($this.data('prevPosition')).fadeOut({
-					'duration': speed,
-					'queue': false,
-					'complete': callback
-				});
+				if($this.set.slide) {
+					$this.animate({
+						scrollLeft: totalPos - $this.set.offset
+					}, {
+						duration: speed,
+						queue: false,
+						complete: callback
+					});
+				} else {
+					$this.find('.' + $this.set.slideClass).eq($this.data('prevPosition')).fadeOut({
+						'duration': speed,
+						'queue': false,
+						'complete': callback
+					});
+				}
 			}
 
 			$this.set.temporarySpeed = $this.set.speed;
@@ -831,6 +840,8 @@
 					//Rewrap slides in a superSlide and work with that from here on.
 					priv.multiSlide.apply($this);
 				}
+
+				$this.set.temporarySpeed = $this.set.speed;
 
 				if($this.set.updateHash) {
 					pos = $this.find('[data-hash="' + window.location.hash.replace('#','') + '"]').index();
