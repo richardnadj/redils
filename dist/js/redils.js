@@ -16,6 +16,8 @@
 			var halfway = false;
 			var forced = force || false;
 			var startTimer = new Date().getTime() + 2500;
+			//Losing data in following loop for some reason... Saving as local variable to be re-applied
+			var position = $this.data('position');
 
 			(function imgLoaded() {
 				numLoaded = 0;
@@ -33,6 +35,7 @@
 				//update halfway to make it smoother.
 				if(!halfway && numLoaded > totalImages / 5) {
 					if($this.set.ratio === false) $this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();
+					$this.data('position', position);
 					priv.update.apply($this, [forced]);
 					halfway = true;
 				}
@@ -41,6 +44,7 @@
 					$this.trigger('redils.imagesLoaded').addClass('redils--imagesLoaded');
 					//ensure all images are loaded before determining the length use natural dimensions when possible
 					if($this.set.ratio === false) $this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();
+					$this.data('position', position);
 					priv.update.apply($this, [forced]);
 				} else {
 					requestAnimFrame(imgLoaded);

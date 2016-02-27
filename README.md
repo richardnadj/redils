@@ -302,6 +302,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.11.6**   
+Fixed a weird bug that made the position get lost. Now remembers position correctly.
+
 **Version 1.11.5**   
 Fixed temporary speed to use set speed. Removed animations if speed of animations set to 0.
 
