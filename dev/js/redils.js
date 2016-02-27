@@ -81,6 +81,7 @@
 			var handlePositionPercentage;
 			var paddingLeft;
 			var paddingRight;
+			var position = $this.data('position');
 
 			var moveSlider = function(e) {
 				if(e.type === 'mousemove') {
@@ -137,6 +138,7 @@
 						
 						//We started at a lower amount than where we have finished. 
 						//We slid our finger from left to right and therefore gone backwards
+						if($this.data('position') === 0) $this.data('position', position);
 						if (touches.endX > touches.startX) {
 							priv.interaction.apply($this);
 							priv.beforeAnimating.apply($this, [-1]);
@@ -154,6 +156,7 @@
 				var dir = ($(this).hasClass($this.set.rightArrowClass)) ? 1 : -1;
 				if($this.set.debug) { console.log('Arrows clicked direction: ', dir); }
 
+				if($this.data('position') === 0) $this.data('position', position);
 				priv.interaction.apply($this);
 				priv.beforeAnimating.apply($this, [dir]);
 			});
@@ -313,6 +316,7 @@
 
 				$(window).on('keydown', function(e) {
 					if($this.set.debug) console.log('Allow keyboard on key pressed is: ', e.keyCode);
+					if($this.data('position') === 0) $this.data('position', position);
 					switch (e.keyCode) {
 						case 39:
 							//key right

@@ -302,6 +302,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.11.7**   
+Another fix due to data saved variable. Same method applied to the events to stop a double click.
+
 **Version 1.11.6**   
 Fixed a weird bug that made the position get lost. Now remembers position correctly.
 
