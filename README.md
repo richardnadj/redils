@@ -89,7 +89,7 @@ Enables dynamic widths of the slider. Redils works out how wide each slide is.
 
 Show slides around the main slider area. Clones slides to the end and the beginning of the slide container. Also important for using the slider in a carousel way. Infinity loop of slides.
 
-	$(selector).redils({width: 'dyn'});
+	$(selector).redils({overflow: '1'});
 
 
 #### speed ####
@@ -99,7 +99,7 @@ Show slides around the main slider area. Clones slides to the end and the beginn
 
 How fast the animation between slides is.
 
-	$(selector).redils({width: 'dyn'});
+	$(selector).redils({speed: '200'});
 
 
 #### center ####
@@ -115,12 +115,13 @@ If the container is bigger than the slide it will center the slide. If not using
 #### pagination ####
 
 *Default* `true`   
-*Expects* `boolean, 'num', 'str', 'line'`
+*Expects* `boolean, 'num', 'str', 'line', 'thumb'`
 
 Adds dynamically created elements to pagination container. Pagination *will only be true* if a sibling to the called container has a container with `.pagination`.   
 `'num'` `'str'` prints out consecutive numbers, letters respectively. `data-pagination="String"` can be set on each slide to define indivdual unique pagination names on each slide.
 Pagination will create following html structure `div.center-pagination>a*5>span.default-pagination` (default-pagination and 5 are subject to options).   
-If using `'line'` then a slider will be created as a timeline of the slideshow.
+If using `'line'` then a slider will be created as a timeline of the slideshow.  
+Thumb uses the images from the slider to create the pagination thumbnails.
 
 	$(selector).redils({pagination: true});
 
@@ -301,6 +302,9 @@ Define outside of the plugin container which slide to skip to.
 
 
 ### Changelog ###
+
+**Version 1.12.0**   
+Added thumb as an option to pagination. Uses slide image as an automatically generated thumbnail.
 
 **Version 1.11.7**   
 Another fix due to data saved variable. Same method applied to the events to stop a double click.

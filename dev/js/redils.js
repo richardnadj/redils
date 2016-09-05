@@ -649,6 +649,8 @@
 					str = String.fromCharCode(str.charCodeAt(0) + 1);
 				} else if(this.set.pagination === 'num') {
 					html += num++;
+				} else if(this.set.pagination === 'thumb') {
+					html += '<img src="' + this.find('.' + this.set.slideClass).eq(i).find('img').attr('src') + '">';
 				}
 
 				html += '</span>';
