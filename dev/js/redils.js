@@ -273,18 +273,16 @@
 					$slides = $slides.find('.' + $this.set.prevSlideClass);
 				}
 
-				$slides.each(function(i) {
-					if($this.set.multiSlide && $this.set.breakPoints === false) {
-						subSlideWidths[i] = $(this).find('img').width() + $this.set.multiSlidePadding * 2;
-					} else {
+				if($this.set.multiSlide) {
+					$slides.each(function(i) {
 						subSlideWidths[i] = $(this).width() + $this.set.multiSlidePadding * 2;
-					}
-				});
+					});
 
-				$this.set.subSlideWidths = subSlideWidths;
-				if($this.set.debug) console.log('Individual multislide slide widths: ', $this.set.subSlideWidths);
-				if($this.set.multiSlide) priv.multiSlide.apply($this);
+					$this.set.subSlideWidths = subSlideWidths;
 
+					if($this.set.debug) console.log('Individual multislide slide widths: ', $this.set.subSlideWidths);
+					priv.multiSlide.apply($this);
+				}
 			});
 
 			$(window).on('resize', function() {
@@ -444,11 +442,10 @@
 
 			//Make .superSlides
 			$slides.each(function(i) {
-				var $img = $(this).find('img');
 
 				//For automatically calculated fixed images.
 				if($this.set.breakPoints === false) {
-					slideWidth = ($this.set.subSlideWidths.length === 0) ? $img.width() + $this.set.multiSlidePadding * 2 : $this.set.subSlideWidths[i];
+					slideWidth = ($this.set.subSlideWidths.length === 0) ? $(this).width() + $this.set.multiSlidePadding * 2 : $this.set.subSlideWidths[i];
 					totalWidth += slideWidth;
 					currentWidth += slideWidth;
 

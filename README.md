@@ -303,6 +303,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.12.1**   
+Multislide width calculation changed to rely on width of slide and not image. Image is not always 100% of the slide.
+
 **Version 1.12.0**   
 Added thumb as an option to pagination. Uses slide image as an automatically generated thumbnail.
 
