@@ -1,9 +1,9 @@
 {
-  "name": "ys-redils",
+  "name": "redils",
   "version": "1.12.1",
   "main": "dist/redils.js",
   "authors": [
-    "Richard Herries <richard@youngskilled.com>"
+    "richard@coalescecreate.com - Coalesce Create"
   ],
   "description": "Redils a slider for almost all situations",
   "license": "MIT",
