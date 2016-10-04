@@ -88,6 +88,45 @@ $('.redils-centered .redils').redils({
 					<div class="pagination pagination--line"></div>
 				</div>
 			</section>
+			<section>
+				<div class="main-cont">
+					<h3>Centered with Overflow</h3>
+					<p>Slider with slides centered in screen. Shows a little of the coming and previous slides.</p>
+					<pre>
+$('.redils-centered-overflow .redils').redils({
+	center: true,
+	auto: false,
+	overflow: 2
+});
+					</pre>
+				</div>
+				<div class="redils-cont redils-centered-overflow">
+					<div class="redils">
+						<div class="slide-cont" style="width: 5850px">
+							<div class="slides">
+								<img src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="400">
+							</div><div class="slides">
+								<img src="images/240614085630-placeholder-1170x660-b5b5b5.jpg" alt="b5b5b5" width="1170" height="660">
+							</div><div class="slides">
+								<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
+							</div><div class="slides">
+								<img src="images/240614085645-placeholder-1170x660-5c5c5c.jpg" alt="5c5c5c" width="1170" height="660">
+							</div><div class="slides">
+								<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
+							</div>
+						</div>
+					</div>
+					<div class="redils-controls">
+						<div class="arrow-area arrow-area-left">
+							<div class="arrow"></div>
+						</div>
+						<div class="arrow-area arrow-area-right">
+							<div class="arrow"></div>
+						</div>
+					</div>
+					<div class="pagination"></div>
+				</div>
+			</section>
 			<div class="main-cont">
 				<section>
 					<h3>Responsive</h3>
@@ -438,6 +477,12 @@ $('.redils-responsive-height .redils').redils({
 					auto: false,
 					overflow: 0,
 					pagination: 'line'
+				});
+
+				$('.redils-centered-overflow .redils').redils({
+					center: true,
+					auto: false,
+					overflow: 2
 				});
 
 				//Responsive redils

@@ -303,6 +303,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.12.2**   
+Fixed calculation of center for sliders that show previous and next slides. Added an extra example of this behaviour.
+
 **Version 1.12.1**   
 Multislide width calculation changed to rely on width of slide and not image. Image is not always 100% of the slide.
 
@@ -470,4 +473,4 @@ Basic slider finished.
 ### Contact ###
 
 This is a small plugin by Young Skilled.
-Contact [richard](mailto:richard@youngskilled) for more details about this plugin.
+Contact [richard](mailto:richard@coalescecreate.com) for more details about this plugin.

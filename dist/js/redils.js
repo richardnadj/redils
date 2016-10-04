@@ -386,13 +386,11 @@
 			var $this = this;
 			var position = pos || $this.data('position');
 			var startPadding = parseInt($this.find('.' + $this.set.slideContClass).css('paddingLeft'));
+			var offset = 0;
+			var slideWidth = ($this.set.width === 'dyn') ? $this.set.dynWidth[position] : $this.set.width;
 
-			if($this.set.width === 'dyn') {
-				$this.set.offset = startPadding - ($this.width() - parseInt($this.set.dynWidth[position], 10)) / 2;
-			} else {
-				$this.set.offset = startPadding - ($this.width() - parseInt($this.set.width, 10)) / 2;
-			}
-
+			offset = ($this.width() - parseInt(slideWidth, 10)) / 2;
+			$this.set.offset = $this.set.overflow === 0 ? startPadding - offset : offset;
 		},
 		fullWidth: function() {
 			var winWidth = $(window).width();
@@ -784,6 +782,7 @@
 			}
 
 			if($this.set.width === 'dyn' && $this.set.center) {
+				//Sets new offset as image may be different size than previous image.
 				priv.center.apply($this, [moveTo]);
 			}
 			
@@ -796,6 +795,7 @@
 				priv.afterAnimating.apply($this);
 			} else {
 				if($this.set.slide) {
+					//if($this.set.center) console.log('var totalPos, $this.set.offset', totalPos, $this.set.offset, $this.set.dynWidth);
 					$this.animate({
 						scrollLeft: totalPos - $this.set.offset
 					}, {

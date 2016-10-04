@@ -929,6 +929,19 @@ table.redils-controls {
       width: 585px;
       height: auto; }
 
+.redils-centered-overflow {
+  width: 100%; }
+  .redils-centered-overflow .slide-cont {
+    line-height: 0;
+    font-size: 0; }
+  .redils-centered-overflow .slides {
+    display: inline-block;
+    vertical-align: top;
+    width: 70vw; }
+    .redils-centered-overflow .slides img {
+      width: 100%;
+      height: auto; }
+
 .redils-responsive {
   height: 600px; }
   .redils-responsive .slides {
