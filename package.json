@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/youngskilled/js-redils.git"
+    "url": "git@github.com:coalescecreate/redils.git"
   },
   "dependencies": {
     "jquery": ">=1.8"
