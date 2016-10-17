@@ -1,6 +1,6 @@
 {
   "name": "redils",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "description": "Redils a slider for almost all situations",
   "main": ["dist/js/redils.min.js", "dist/css/redils.min.css"],
   "homepage": "http://coalescecreate.com",

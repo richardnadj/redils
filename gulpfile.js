@@ -86,6 +86,7 @@ gulp.task('publish-redils-css', function() {
 		.pipe(rename({basename: vars.pluginName, extname: '.css'}))
 		.pipe(gulp.dest(vars.distDir+'css'))
 		.pipe(minifycss())
+		.pipe(header(banner, {pkg: pkg}))
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest(vars.distDir+'css'));
 });

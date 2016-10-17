@@ -312,6 +312,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.13.1**   
+Fixed small path error to redils.min.css in main bower.json. Added header to css as well.
+
 **Version 1.13.0**   
 Moved repo to new location and updated bower.json and package.json to more correct values. Added a new experimental slider type `stacked`. Outputting redils.css for easier integration with projects.
 
