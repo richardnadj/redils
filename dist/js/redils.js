@@ -361,8 +361,10 @@
 				$this.scrollLeft($this.set.totalPos - $this.set.offset);
 
 			} else {
-				//Fader update
-				priv.compress.apply($this);
+				if(!$this.set.stacked) {
+					//Fader update
+					priv.compress.apply($this);
+				}
 
 				//If Dyn get new array of widths.
 				priv.totalWidth.apply($this);
@@ -708,23 +710,44 @@
 			$this.data('position', position);
 			$this.trigger('redils.beforeAnimating', [$this]);
 			//This should be the previous slide.
-			if(!$this.set.slide) $this.find('.' + $this.set.slideClass).css({'z-index': '', 'display': 'block'}).eq(prevPosition).css('z-index', 3);
+			if(!$this.set.slide && !$this.set.stacked) $this.find('.' + $this.set.slideClass).css({'z-index': '', 'display': 'block'}).eq(prevPosition).css('z-index', 3);
 
 			if($this.set.debug) { console.log('Current settings object before animation ', $this.set); }
 
 			priv.animating.apply($this);
-			priv.currentSlide.apply($this);
+			priv.currentSlide.apply($this, [dir]);
 
 		},
-		currentSlide: function() {
+		currentSlide: function(dir) {
+			dir = dir || 0;
 			var $this = this;
 			var position = $this.data('position');
 			var barTimer = null;
 			var hash = '';
 
-			$this.find('.' + $this.set.slideClass).removeClass('focused').eq(position).addClass('focused');
+			if($this.set.stacked) {
+				console.log('var position, dir', position, dir);
+				if(dir > 0) {
+					// hidden < left < center < right < hidden
+					$this.find('.' + $this.set.slideClass).removeClass('hidden left center right back')
+						.eq((position - 2) % $this.set.totalAmount).addClass('hidden back').end()
+						.eq((position - 1) % $this.set.totalAmount).addClass('left back').end()
+						.eq((position + 0) % $this.set.totalAmount).addClass('center back').end()
+						.eq((position + 1) % $this.set.totalAmount).addClass('right back').end();
+				} else {
+					$this.find('.' + $this.set.slideClass).removeClass('hidden left center right back')
+						.eq((position - 1) % $this.set.totalAmount).addClass('left').end()
+						.eq((position + 0) % $this.set.totalAmount).addClass('center').end()
+						.eq((position + 1) % $this.set.totalAmount).addClass('right').end()
+						.eq((position + 2) % $this.set.totalAmount).addClass('hidden').end();
+				}
+
+			}
+
+			$this.find('.' + $this.set.slideClass).removeClass($this.set.currentSlideClass).eq(position).addClass($this.set.currentSlideClass);
+
 			//This should be the future slide.
-			if(!$this.set.slide) $this.find('.' + $this.set.slideClass).eq(position).css('z-index', 2);
+			if(!$this.set.slide && !$this.set.stacked) $this.find('.' + $this.set.slideClass).eq(position).css('z-index', 2);
 			$this.siblings('.' + $this.set.pagClass).find('a').removeClass('selected').eq(position - $this.set.overflow).addClass('selected');
 
 			if($this.set.pagination === 'line' && $this.set.paginationLinePosition !== position) {
@@ -733,8 +756,8 @@
 			}
 
 			if($this.set.updateHash) {
-				hash = $this.find('.focused').data('hash');
-				if(hash === undefined) hash = 'slide-' + ($this.find('.focused').index() + 1 - $this.set.overflow);
+				hash = $this.find('.' + $this.set.currentSlideClass).data('hash');
+				if(hash === undefined) hash = 'slide-' + ($this.find('.' + $this.set.currentSlideClass).index() + 1 - $this.set.overflow);
 				window.location.hash = hash;
 			}
 
@@ -804,11 +827,13 @@
 						complete: callback
 					});
 				} else {
-					$this.find('.' + $this.set.slideClass).eq($this.data('prevPosition')).fadeOut({
-						'duration': speed,
-						'queue': false,
-						'complete': callback
-					});
+					if(!this.set.stacked) {
+						$this.find('.' + $this.set.slideClass).eq($this.data('prevPosition')).fadeOut({
+							'duration': speed,
+							'queue': false,
+							'complete': callback
+						});
+					}
 				}
 			}
 
@@ -861,7 +886,7 @@
 
 				$this.set.totalAmount = $this.find('.' + $this.set.slideClass).length;
 				
-				if(!$this.set.slide) { $this.set.overflow = 0; }
+				if(!$this.set.slide && !$this.set.stacked) { $this.set.overflow = 0; }
 
 
 				//Create additional elements.
@@ -925,7 +950,7 @@
 				var $this = $(this);
 
 				$this.set = $.extend({}, $this.data(), options);
-				if(!$this.set.slide) { $this.set.overflow = 0; }
+				if(!$this.set.slide && !$this.set.stacked) { $this.set.overflow = 0; }
 				priv.testIfLoaded.apply($this, [true]);
 
 				$this.data($this.set);
@@ -1013,6 +1038,7 @@
 		allowKeyboard: false,
 		updateHash: false,
 		breakPoints: false,
+		stacked: false,
 		slideClass: 'slides',
 		multiSlideClass: 'super-slide',
 		pagClass: 'pagination',
@@ -1022,6 +1048,9 @@
 		timerBarContClass: 'redils-timer',
 		timerBarFillClass: 'redils-fill',
 		singleMultiSlideClass: 'single-multislide-disable',
+		previousSlideClass: 'previous',
+		currentSlideClass: 'current',
+		nextSlideClass: 'next',
 		slide: true,
 		debug: false
 	};

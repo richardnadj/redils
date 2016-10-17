@@ -1,4 +1,4 @@
-# Redils - A HTML slider #
+# Redils - An HTML slider #
 
 A jQuery plugin that changes any HTML content into a slider or fader. Content should be contained within .slide containers. The slider has pagination (numbers, letters, text), timer, timer bar, arrows, carousel animation, rewind animation and overflow slides so that the next and prev slides can be viewed.
 
@@ -228,6 +228,16 @@ Should only be used if the plugin is already being used or if you want to switch
 	$(selector).redils({slide: false});
 
 
+#### stacked ####
+
+*Default* `false`   
+*Expects* `boolean`
+
+Used in conjunction with the above property `slide`. This stacks the slides on either side of the viewport with a specific distance of the next and previous slides showing. The slide animation is via CSS animations and `calc()` therefore it is slightly experimental and not well supported.
+
+	$(selector).redils({stacked: false});
+
+
 #### allowKeyboard ####
 
 *Default* `false`   
@@ -301,6 +311,9 @@ Define outside of the plugin container which slide to skip to.
 
 
 ### Changelog ###
+
+**Version 1.13.0**   
+Moved repo to new location and updated bower.json and package.json to more correct values. Added a new experimental slider type `stacked`. Outputting redils.css for easier integration with projects.
 
 **Version 1.12.2**   
 Fixed calculation of center for sliders that show previous and next slides. Added an extra example of this behaviour.

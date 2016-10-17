@@ -1,7 +1,7 @@
 {
   "name": "redils",
-  "version": "1.12.2",
-  "main": "dist/redils.js",
+  "version": "1.13.0",
+  "main": ["dist/js/redils.min.js", "dist/js/redils.min.css"],
   "authors": [
     "richard@coalescecreate.com - Coalesce Create"
   ],

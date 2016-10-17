@@ -5,10 +5,8 @@ var gulp = require('gulp'),
 	jshint = require('gulp-jshint'),
 	uglify = require('gulp-uglify'),
 	concat = require('gulp-concat'),
-	changed = require('gulp-changed'),
 	notify = require('gulp-notify'),
 	clean = require('gulp-clean'),
-	git = require('gulp-git'),
 	jscs = require('gulp-jscs'),
 	header = require('gulp-header'),
 	rename = require('gulp-rename'),
@@ -20,7 +18,7 @@ var vars = {
 	bowerJquery: 'bower_components/jquery/dist/jquery.js',
 	bowerNormalize: 'bower_components/normalize-scss',
 	pluginName: 'redils'
-}
+};
 
 
 //////////////////////////////////////////
@@ -51,40 +49,60 @@ gulp.task('clean-live', function() {
     	.pipe(clean());
 });
 
-gulp.task('update-index', ['clean-live'], function() {
+gulp.task('update-index', function() {
 	return gulp.src([vars.devDir+'index.html'])
 		.pipe(gulp.dest(vars.distDir));
-})
+});
 
-gulp.task('update-scss', ['clean-live'], function() {
-	return gulp.src([vars.devDir+'css/sass/_'+vars.pluginName+'.scss'])
+gulp.task('update-scss', function() {
+	return gulp.src([vars.devDir+'css/sass/'+vars.pluginName+'.scss'])
+		.pipe(rename({prefix: '_'}))
 		.pipe(gulp.dest(vars.distDir+'css'));
-})
+});
 
-gulp.task('update-js', ['clean-live'], function() {
+gulp.task('update-js', function() {
 	return gulp.src([vars.devDir+'js/'+vars.pluginName+'.js'])
 		.pipe(gulp.dest(vars.distDir+'js'));
-})
+});
 
-gulp.task('publish-css', ['clean-live'], function() {
+gulp.task('publish-css', function() {
 	return gulp.src(vars.devDir+'css/main.css')
 		.pipe(minifycss({keepBreaks: true}))
 		.pipe(gulp.dest(vars.distDir+'css'));
-})
+});
 
-gulp.task('publish-js', ['clean-live'], function() {
+gulp.task('publish-redils-css', function() {
+	return gulp.src('dev/css/sass/redils.scss')
+		.pipe(
+			sass({
+				outputStyle: 'expanded',
+				errLogToConsole: false,
+				onError: function(err) {
+					return notify().write(err);
+				}
+			})
+		)
+		.pipe(autoprefixer())
+		.pipe(rename({basename: vars.pluginName, extname: '.css'}))
+		.pipe(gulp.dest(vars.distDir+'css'))
+		.pipe(minifycss())
+		.pipe(rename({suffix: '.min'}))
+		.pipe(gulp.dest(vars.distDir+'css'));
+});
+
+gulp.task('publish-js', function() {
 	return gulp.src(vars.devDir+'js/'+vars.pluginName+'.js')
 		.pipe(uglify())
 		.pipe(header(banner, {pkg: pkg}))
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest(vars.distDir+'js'));
-})
+});
 
 
 // Publish
-gulp.task('publish', function() {
-	gulp.start('update-index', 'update-js', 'update-scss', 'publish-css', 'publish-js');
-})
+gulp.task('publish', ['clean-live'], function() {
+	gulp.start('update-index', 'update-js', 'update-scss', 'publish-redils-css', 'publish-css', 'publish-js');
+});
 
 //////////////////////////////////////////
 // WATCHING
