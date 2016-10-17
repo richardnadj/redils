@@ -21,7 +21,6 @@ Following structure is required for selector to work. (Using Emmet tab complete 
 
 	div
 	div.redils>div.slide-cont[style="width: 7020px"]>div.slides*5>img
-	table.redils-controls>tbody>tr>td.arrow-area.arrow-area-left>div.arrow^td.center-cell+td.arrow-area.arrow-area-right>div.arrow
 	div.redils-controls>div.arrow-area.arrow-area-left>span.chevron-left^div.arrow-area.arrow-area-right>span.chevron-right
 	div.pagination
 

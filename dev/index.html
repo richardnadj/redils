@@ -127,6 +127,45 @@ $('.redils-centered-overflow .redils').redils({
 					<div class="pagination"></div>
 				</div>
 			</section>
+			<section>
+				<div class="main-cont">
+					<h3>Stacked</h3>
+					<p>Slides are stacked to the left and right. Animation is done by translate3d with the help of calc. Experimental...</p>
+					<pre>
+$('.redils-stacked .redils').redils({
+	slide: false,
+	stacked: true,
+	auto: false
+});
+					</pre>
+				</div>
+				<div class="redils-cont redils-stacked">
+					<div class="redils">
+						<div class="slide-cont" style="width: 5850px">
+							<div class="slides">
+								<img src="images/240614085618-placeholder-1170x660-dddddd.jpg" alt="dddddd" width="1170" height="400">
+							</div><div class="slides">
+								<img src="images/141016174434-placeholder-800x660-b5b5b5.jpg" alt="b5b5b5" width="800" height="660">
+							</div><div class="slides">
+								<img src="images/240614085638-placeholder-1170x660-838383.jpg" alt="838383" width="1170" height="660">
+							</div><div class="slides">
+								<img src="images/141016174540-placeholder-500x660-5c5c5c.jpg" alt="5c5c5c" width="500" height="660">
+							</div><div class="slides">
+								<img src="images/090914165252-placeholder-1170x660-d43b2d.png" alt="ededed" width="1170" height="660">
+							</div>
+						</div>
+					</div>
+					<div class="redils-controls">
+						<div class="arrow-area arrow-area-left">
+							<div class="arrow"></div>
+						</div>
+						<div class="arrow-area arrow-area-right">
+							<div class="arrow"></div>
+						</div>
+					</div>
+					<div class="pagination"></div>
+				</div>
+			</section>
 			<div class="main-cont">
 				<section>
 					<h3>Responsive</h3>
@@ -483,6 +522,13 @@ $('.redils-responsive-height .redils').redils({
 					center: true,
 					auto: false,
 					overflow: 2
+				});
+
+				$('.redils-stacked .redils').redils({
+					slide: false,
+					stacked: true,
+					overflow: 2,
+					auto: false
 				});
 
 				//Responsive redils

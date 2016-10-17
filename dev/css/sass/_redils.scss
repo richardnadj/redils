@@ -50,3 +50,66 @@ table.redils-controls { width: 100%; height: 100%; position: absolute; top: 0; l
 .redils-contact-sheet {
 	.slides { display: inline-block; vertical-align: top; }
 	.super-slide { float: left; text-align: center; } }
+
+// animate forwards  hidden > left > center > right > hidden
+@keyframes hidden_left {
+	0% { transform: translate3d(calc(-200% + 60px), 0, 0); }
+	100% { transform: translate3d(calc(-100% + 60px), 0, 0); }
+}
+
+@keyframes left_center {
+	0% { transform: translate3d(calc(-100% + 60px), 0, 0); }
+	100% { transform: translate3d(calc((100vw - 100%) / 2), 0, 0); }
+}
+
+@keyframes center_right {
+	0% { transform: translate3d(calc((100vw - 100%) / 2), 0, 0); }
+	100% { transform: translate3d(calc(100vw - 60px), 0, 0); }
+}
+
+@keyframes right_hidden { //from out of frame.
+	0% { transform: translate3d(calc(100vw - 60px), 0, 0); }
+	100% { transform: translate3d(calc(100vw - 60px + 100%), 0, 0); }
+}
+
+// animate backwards hidden < left < center < right < hidden
+@keyframes left_hidden { //from out of frame.
+	0% { transform: translate3d(calc(-100% + 60px), 0, 0); }
+	100% { transform: translate3d(calc(-200% + 60px), 0, 0); }
+}
+
+@keyframes center_left {
+	0% { transform: translate3d(calc((100vw - 100%) / 2), 0, 0); }
+	100% { transform: translate3d(calc(-100% + 60px), 0, 0); }
+}
+
+@keyframes right_center {
+	0% { transform: translate3d(calc(100vw - 60px), 0, 0); }
+	100% { transform: translate3d(calc((100vw - 100%) / 2), 0, 0); }
+}
+
+@keyframes hidden_right {
+	0% { transform: translate3d(calc(100vw - 60px + 100%), 0, 0); }
+	100% { transform: translate3d(calc(100vw - 60px), 0, 0); }
+}
+
+.redils-stacked { width: 100vw; height: 660px;
+	.redils { position: relative; }
+	.slide-cont { position: relative; left: -7.5px; }
+	.slides { transform: translate3d(200vw, 0, 0); position: absolute; top: 0; left: 0; text-align: center;
+		img { display: block; }
+		&.hidden { animation: right_hidden 0.5s ease-in-out forwards; // right < hidden > left
+			&.back { animation: left_hidden 0.5s ease-in-out forwards; }
+		}
+		&.left { animation: hidden_left 0.5s ease-in-out forwards; // hidden < left > center
+			&.back { animation: center_left 0.5s ease-in-out forwards; }
+		}
+		&.center { animation: left_center 0.5s ease-in-out forwards; // left < center > right
+			&.back { animation: right_center 0.5s ease-in-out forwards; }
+		}
+		&.right { animation: center_right 0.5s ease-in-out forwards; // center < right > hidden
+			&.back { animation: hidden_right 0.5s ease-in-out forwards; }
+		}
+
+	}
+}

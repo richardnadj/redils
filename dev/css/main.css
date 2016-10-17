@@ -985,4 +985,190 @@ table.redils-controls {
   float: left;
   text-align: center; }
 
+@-webkit-keyframes hidden_left {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc(-200% + 60px), 0, 0);
+    transform: translate3d(calc(-200% + 60px), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc(-100% + 60px), 0, 0);
+    transform: translate3d(calc(-100% + 60px), 0, 0); } }
+
+@keyframes hidden_left {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc(-200% + 60px), 0, 0);
+    transform: translate3d(calc(-200% + 60px), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc(-100% + 60px), 0, 0);
+    transform: translate3d(calc(-100% + 60px), 0, 0); } }
+
+@-webkit-keyframes left_center {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc(-100% + 60px), 0, 0);
+    transform: translate3d(calc(-100% + 60px), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc((100vw - 100%) / 2), 0, 0);
+    transform: translate3d(calc((100vw - 100%) / 2), 0, 0); } }
+
+@keyframes left_center {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc(-100% + 60px), 0, 0);
+    transform: translate3d(calc(-100% + 60px), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc((100vw - 100%) / 2), 0, 0);
+    transform: translate3d(calc((100vw - 100%) / 2), 0, 0); } }
+
+@-webkit-keyframes center_right {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc((100vw - 100%) / 2), 0, 0);
+    transform: translate3d(calc((100vw - 100%) / 2), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc(100vw - 60px), 0, 0);
+    transform: translate3d(calc(100vw - 60px), 0, 0); } }
+
+@keyframes center_right {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc((100vw - 100%) / 2), 0, 0);
+    transform: translate3d(calc((100vw - 100%) / 2), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc(100vw - 60px), 0, 0);
+    transform: translate3d(calc(100vw - 60px), 0, 0); } }
+
+@-webkit-keyframes right_hidden {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc(100vw - 60px), 0, 0);
+    transform: translate3d(calc(100vw - 60px), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc(100vw - 60px + 100%), 0, 0);
+    transform: translate3d(calc(100vw - 60px + 100%), 0, 0); } }
+
+@keyframes right_hidden {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc(100vw - 60px), 0, 0);
+    transform: translate3d(calc(100vw - 60px), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc(100vw - 60px + 100%), 0, 0);
+    transform: translate3d(calc(100vw - 60px + 100%), 0, 0); } }
+
+@-webkit-keyframes left_hidden {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc(-100% + 60px), 0, 0);
+    transform: translate3d(calc(-100% + 60px), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc(-200% + 60px), 0, 0);
+    transform: translate3d(calc(-200% + 60px), 0, 0); } }
+
+@keyframes left_hidden {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc(-100% + 60px), 0, 0);
+    transform: translate3d(calc(-100% + 60px), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc(-200% + 60px), 0, 0);
+    transform: translate3d(calc(-200% + 60px), 0, 0); } }
+
+@-webkit-keyframes center_left {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc((100vw - 100%) / 2), 0, 0);
+    transform: translate3d(calc((100vw - 100%) / 2), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc(-100% + 60px), 0, 0);
+    transform: translate3d(calc(-100% + 60px), 0, 0); } }
+
+@keyframes center_left {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc((100vw - 100%) / 2), 0, 0);
+    transform: translate3d(calc((100vw - 100%) / 2), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc(-100% + 60px), 0, 0);
+    transform: translate3d(calc(-100% + 60px), 0, 0); } }
+
+@-webkit-keyframes right_center {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc(100vw - 60px), 0, 0);
+    transform: translate3d(calc(100vw - 60px), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc((100vw - 100%) / 2), 0, 0);
+    transform: translate3d(calc((100vw - 100%) / 2), 0, 0); } }
+
+@keyframes right_center {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc(100vw - 60px), 0, 0);
+    transform: translate3d(calc(100vw - 60px), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc((100vw - 100%) / 2), 0, 0);
+    transform: translate3d(calc((100vw - 100%) / 2), 0, 0); } }
+
+@-webkit-keyframes hidden_right {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc(100vw - 60px + 100%), 0, 0);
+    transform: translate3d(calc(100vw - 60px + 100%), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc(100vw - 60px), 0, 0);
+    transform: translate3d(calc(100vw - 60px), 0, 0); } }
+
+@keyframes hidden_right {
+  0% {
+    -webkit-transform: translate3d(-webkit-calc(100vw - 60px + 100%), 0, 0);
+    transform: translate3d(calc(100vw - 60px + 100%), 0, 0); }
+
+  100% {
+    -webkit-transform: translate3d(-webkit-calc(100vw - 60px), 0, 0);
+    transform: translate3d(calc(100vw - 60px), 0, 0); } }
+
+.redils-stacked {
+  width: 100vw;
+  height: 660px; }
+  .redils-stacked .redils {
+    position: relative; }
+  .redils-stacked .slide-cont {
+    position: relative;
+    left: -7.5px; }
+  .redils-stacked .slides {
+    -webkit-transform: translate3d(200vw, 0, 0);
+    transform: translate3d(200vw, 0, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center; }
+    .redils-stacked .slides img {
+      display: block; }
+    .redils-stacked .slides.hidden {
+      -webkit-animation: right_hidden 0.5s ease-in-out forwards;
+      animation: right_hidden 0.5s ease-in-out forwards; }
+      .redils-stacked .slides.hidden.back {
+        -webkit-animation: left_hidden 0.5s ease-in-out forwards;
+        animation: left_hidden 0.5s ease-in-out forwards; }
+    .redils-stacked .slides.left {
+      -webkit-animation: hidden_left 0.5s ease-in-out forwards;
+      animation: hidden_left 0.5s ease-in-out forwards; }
+      .redils-stacked .slides.left.back {
+        -webkit-animation: center_left 0.5s ease-in-out forwards;
+        animation: center_left 0.5s ease-in-out forwards; }
+    .redils-stacked .slides.center {
+      -webkit-animation: left_center 0.5s ease-in-out forwards;
+      animation: left_center 0.5s ease-in-out forwards; }
+      .redils-stacked .slides.center.back {
+        -webkit-animation: right_center 0.5s ease-in-out forwards;
+        animation: right_center 0.5s ease-in-out forwards; }
+    .redils-stacked .slides.right {
+      -webkit-animation: center_right 0.5s ease-in-out forwards;
+      animation: center_right 0.5s ease-in-out forwards; }
+      .redils-stacked .slides.right.back {
+        -webkit-animation: hidden_right 0.5s ease-in-out forwards;
+        animation: hidden_right 0.5s ease-in-out forwards; }
+
 /*# sourceMappingURL=main.css.map */
