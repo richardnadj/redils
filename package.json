@@ -1,6 +1,6 @@
 {
   "name": "redils",
-  "version": "1.13.2",
+  "version": "1.14.0",
   "description": "Redils a slider for almost all situations",
   "main": "dist/js/redils.min.js", 
   "style": "dist/css/redils.min.css",

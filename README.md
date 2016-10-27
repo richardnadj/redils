@@ -31,42 +31,42 @@ Following structure is required for selector to work. (Using Emmet tab complete 
 
 Triggers when interacting with the slider. Swipe, click, arrow etc. Is not triggered in automatic slide mode.
 
-	$(selector).on('redils.interaction', function(){ });
+	$(selector).on('redils.interaction', function(){ }).redils();
 
 
 #### redils.imagesLoaded ####
 
 Triggers when images in the slider are completely loaded. This triggers before rendered. Not many use cases for this.
 
-	$(selector).on('redils.imagesLoaded', function(){ });
+	$(selector).on('redils.imagesLoaded', function(){ }).redils();
 
 
 #### redils.rendered ####
 
 When a **multi slider** is fully rendered for the first time and after every recalculation.
 
-	$(selector).on('redils.rendered', function(){ });
+	$(selector).on('redils.rendered', function(){ }).redils();
 
 
 #### redils.updated ####
 
 When a the slider is rendered and at every update.
 
-	$(selector).on('redils.updated', function(){ });
+	$(selector).on('redils.updated', function(){ }).redils();
 
 
 #### redils.beforeAnimating ####
 
 This is triggered before the slider starts animating.
 
-	$(selector).on('redils.beforeAnimating', function(){ });
+	$(selector).on('redils.beforeAnimating', function(){ }).redils();
 
 
 #### redils.afterAnimating ####
 
 This is triggered after the slider starts animating.
 
-	$(selector).on('redils.afterAnimating', function(){ });
+	$(selector).on('redils.afterAnimating', function(){ }).redils();
 
 
 ### Properties ###
@@ -258,6 +258,35 @@ Updates the location hash `window.location.hash`. Each slide should have a data 
 	$(selector).redils({updateHash: false});
 
 
+#### drag ####
+
+*Default* `false`   
+*Expects* `boolean`
+
+Used to change between slides by dragging the slider left or right with the mouse. Doesn't affect touch events which always use drag.
+
+	$(selector).redils({drag: false});
+
+
+#### easing ####
+
+*Default* `swing`   
+*Expects* `string`
+
+This determines the type of easing used on animations during slide transitions. Swing is the inbuilt jQuery function. To add a new function you need to extend the Jquery.easing object with a function. These functions are not packaged in redils or executed their either.   
+[Some standard functions for jquery easing](http://easings.net/) also [some examples of easing functions and their graphs](http://easings.net/)   
+To extend the jQuery easing object see following:
+
+	$.extend( $.easing, {
+		easeOutCubic: function (x, t, b, c, d) {
+			return c*((t=t/d-1)*t*t + 1) + b;
+		}
+	});
+	
+
+	$(selector).redils({easing: 'swing'});
+
+
 #### debug ####
 
 *Default* `false`   
@@ -311,6 +340,9 @@ Define outside of the plugin container which slide to skip to.
 
 
 ### Changelog ###
+
+**Version 1.14.0**   
+Added new function for dragging slides with mouse. Rebuilt touch interactions to move slide. Added the ability to overwrite easing. Added user-select: none to slides to avoid highlighting of slides.
 
 **Version 1.13.2**   
 Added support for modules and corrected package.json to the correct defaults.

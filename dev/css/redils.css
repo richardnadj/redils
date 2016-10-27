@@ -3,24 +3,42 @@
   max-width: 100%;
   position: relative; }
 
+#redils-click-blocker {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent; }
+
 .redils {
   overflow: hidden;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent; }
   .redils .slide-cont {
     height: 100%; }
   .redils .slides {
     height: 100%; }
 
-.redils-controls .arrow-area {
-  position: absolute;
-  height: 100%;
-  width: 20%;
-  top: 0;
-  z-index: 10;
-  cursor: pointer; }
-.redils-controls .arrow-area-right {
-  right: 0; }
+.redils-controls {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent; }
+  .redils-controls .arrow-area {
+    position: absolute;
+    height: 100%;
+    width: 20%;
+    top: 0;
+    z-index: 10;
+    cursor: pointer; }
+  .redils-controls .arrow-area-right {
+    right: 0; }
 
 .redils-fader {
   height: 600px; }

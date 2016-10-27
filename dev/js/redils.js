@@ -69,11 +69,22 @@
 				$this.set.timerBar = false;
 			}
 		},
-		enableEvents: function() {
+		paginationNavigationEvents: function() {
 			var $this = this;
-			var touches = {};
 
-			//Pagination Line variables.
+			//Click on pagination
+			$this.siblings('.' + $this.set.pagClass).on('click', '.center-pagination a', function(e) {
+				e.preventDefault();
+
+				var index = $(this).index();
+				if($this.set.debug) { console.log('Pagination links clicked index: ', index); }
+				
+				priv.interaction.apply($this);
+				priv.beforeAnimating.apply($this, [0, (index + $this.set.overflow)]);
+			});
+		},
+		paginationDragEvents: function() {
+			var $this = this;
 			var mouseStart;
 			var mousePosition;
 			var $container = $this.siblings('.' + $this.set.pagClass);
@@ -87,9 +98,8 @@
 			var handlePositionPercentage;
 			var paddingLeft;
 			var paddingRight;
-			var position = $this.data('position');
 
-			var moveSlider = function(e) {
+			var dragSliderPagination = function(e) {
 				if(e.type === 'mousemove') {
 					mousePosition = e.pageX;
 				} else {
@@ -112,146 +122,76 @@
 				}
 			};
 
-			$this.on({
-				touchstart: function(e) {
-					//Get initial values
-					touches.slide = false;
-					touches.startX = e.originalEvent.targetTouches[0].pageX;
-					touches.startY = e.originalEvent.targetTouches[0].pageY;
-				},
-				touchmove: function(e) {
-					var totalX;
-					var totalY;
-
-					//Determine if scrolling handle accordingly
-					touches.endX = e.originalEvent.targetTouches[0].pageX;
-					touches.endY = e.originalEvent.targetTouches[0].pageY;
-
-					//See how far we've moved in either positive or negative direction...
-					totalX = Math.abs(Math.abs(touches.startX) - Math.abs(touches.endX));
-					totalY = Math.abs(Math.abs(touches.startY) - Math.abs(touches.endY));
-					
-					//Check that we are not scrolling more than sliding.
-					if(totalX > totalY) {
-						//We're moving sideways disable scroll.
-						e.preventDefault();
-					}
-
-					//Check that we haven't already made the slider slide.
-					//Check if we've moved our finger more than 50 px sideways left or right.
-					if(!touches.slide && totalX > 50) {
-						touches.slide = true;
-						
-						//We started at a lower amount than where we have finished. 
-						//We slid our finger from left to right and therefore gone backwards
-						if($this.data('position') === 0) $this.data('position', position);
-						if (touches.endX > touches.startX) {
-							priv.interaction.apply($this);
-							priv.beforeAnimating.apply($this, [-1]);
-						} else {
-							priv.interaction.apply($this);
-							priv.beforeAnimating.apply($this, [1]);
-						}
-
-					}
-					
-				}
-			});
-			
-			$this.siblings('.redils-controls').on('click', '.' + $this.set.arrowContClass, function() {
-				var dir = ($(this).hasClass($this.set.rightArrowClass)) ? 1 : -1;
-				if($this.set.debug) { console.log('Arrows clicked direction: ', dir); }
-
-				if($this.data('position') === 0) $this.data('position', position);
-				priv.interaction.apply($this);
-				priv.beforeAnimating.apply($this, [dir]);
-			});
-
-			$this.siblings('.' + $this.set.pagClass).on('click', '.center-pagination a', function(e) {
-				e.preventDefault();
-
-				var index = $(this).index();
-				if($this.set.debug) { console.log('Pagination links clicked index: ', index); }
-				
-				priv.interaction.apply($this);
-				priv.beforeAnimating.apply($this, [0, (index + $this.set.overflow)]);
-			});
-
 			//Pagination slider control.
 			$this.siblings('.' + $this.set.pagClass).on('click', function(e) {
-				if($this.set.pagination === 'line') {
-					e.preventDefault();
-					e.stopPropagation();
+				e.preventDefault();
+				e.stopPropagation();
 
-					if(Math.abs(mouseStart - mousePosition) < 5) {
-						//Performed a static click
-						handlePosition = e.pageX - containerStart;
-						handlePositionPercentage = handlePosition / containerLength;
+				if(Math.abs(mouseStart - mousePosition) < 5) {
+					//Performed a static click
+					handlePosition = e.pageX - containerStart;
+					handlePositionPercentage = handlePosition / containerLength;
 
-						if(handlePosition > containerLength) {
-							handlePositionPercentage = 1;
-						} else if(handlePosition < 0) {
-							handlePositionPercentage = 0;
-						}
-
-						position = Math.round(($this.set.totalAmount - 1) * handlePositionPercentage);
-
-						$handle.animate({
-							left: position / ($this.set.totalAmount - 1) * containerLength
-						}, $this.set.speed);
-
-						$this.set.paginationLinePosition = position;
-
-						priv.interaction.apply($this);
-						priv.beforeAnimating.apply($this, [0, (position + $this.set.overflow)]);
-
+					if(handlePosition > containerLength) {
+						handlePositionPercentage = 1;
+					} else if(handlePosition < 0) {
+						handlePositionPercentage = 0;
 					}
+
+					position = Math.round(($this.set.totalAmount - 1) * handlePositionPercentage);
+
+					$handle.animate({
+						left: position / ($this.set.totalAmount - 1) * containerLength
+					}, $this.set.speed);
+
+					$this.set.paginationLinePosition = position;
+
+					priv.interaction.apply($this);
+					priv.beforeAnimating.apply($this, [0, (position + $this.set.overflow)]);
+
 				}
 			}).on('mousedown touchstart', function(event) {
-				if($this.set.pagination === 'line') {
+				//If mouseevents
+				if(event.type === 'mousedown') {
+					event.preventDefault();
+					mouseStart = event.pageX;
+					mousePosition = event.pageX;
+				} else {
+					mouseStart = event.originalEvent.targetTouches[0].pageX;
+					mousePosition = event.originalEvent.targetTouches[0].pageX;
+				}
 
-					//If mouseevents
-					if(event.type === 'mousedown') {
-						event.preventDefault();
-						mouseStart = event.pageX;
-						mousePosition = event.pageX;
-					} else {
-						mouseStart = event.originalEvent.targetTouches[0].pageX;
-						mousePosition = event.originalEvent.targetTouches[0].pageX;
-					}
+				$container = $(this);
+				$handle = $(this).find('.pagination-inner a');
+				handleLength = $handle.width();
+				containerLength = $container.width() - handleLength;
+				handleStart = $handle.offset().left;
+				containerStart = $container.offset().left;
+				paddingLeft = parseInt($this.find('.' + $this.set.slideContClass).css('paddingLeft'));
+				paddingRight = parseInt($this.find('.' + $this.set.slideContClass).css('paddingRight'));
+				contWidth = $this.set.contWidth + paddingLeft - $this.parent().width() + paddingRight;
 
-					$container = $(this);
-					$handle = $(this).find('.pagination-inner a');
-					handleLength = $handle.width();
-					containerLength = $container.width() - handleLength;
-					handleStart = $handle.offset().left;
-					containerStart = $container.offset().left;
-					paddingLeft = parseInt($this.find('.' + $this.set.slideContClass).css('paddingLeft'));
-					paddingRight = parseInt($this.find('.' + $this.set.slideContClass).css('paddingRight'));
-					contWidth = $this.set.contWidth + paddingLeft - $this.parent().width() + paddingRight;
+				$this.set.handlePaginationDrag = true;
 
-					$this.set.handleMoving = true;
-
-					if(event.type === 'mousedown') {
-						$(this).on('mousemove', function(e) {
-							window.requestAnimFrame(function() {
-								moveSlider(e);
-							});
+				if(event.type === 'mousedown') {
+					$(this).on('mousemove', function(e) {
+						window.requestAnimFrame(function() {
+							dragSliderPagination(e);
 						});
-					}
-
+					});
 				}
 
 			}).on('touchmove', function(e) {
 				window.requestAnimFrame(function() {
-					moveSlider(e);
+					dragSliderPagination(e);
 				});
 			});
 
+
 			$(window).on('mouseup touchend', function() {
-				if($this.set.handleMoving) {
+				if($this.set.handlePaginationDrag) {
 					$this.siblings('.' + $this.set.pagClass).off('mousemove');
-					$this.set.handleMoving = false;
+					$this.set.handlePaginationDrag = false;
 
 					if(Math.abs(mouseStart - mousePosition) > 5) {
 						var position = 0;
@@ -271,6 +211,142 @@
 				}
 			});
 
+		},
+		slideDragEvents: function() {
+			var $this = this;
+			var paddingLeft = 0;
+			var mouseStart;
+			var mousePosition;
+			var startScroll;
+			var sliderWidth;
+			var slideWidth;
+			var mouseMovement;
+			var mouseMovementPercentage;
+			var sliderPosition;
+
+			var dragSliderSlide = function(e) {
+				if(e.type === 'mousemove') {
+					mousePosition = e.pageX;
+				} else {
+					mousePosition = e.originalEvent.targetTouches[0].pageX;
+					touchPositionY = e.originalEvent.targetTouches[0].screenY;
+				}
+
+				mouseMovement = mousePosition - mouseStart;
+				mouseMovementPercentage = mouseMovement / (sliderWidth / 2);
+				
+				if(!$this.set.handleSlideDrag && Math.abs(mouseMovement) > 5) {
+					$this.set.handleSlideDrag = true;
+					if(e.type === 'mousemove') {
+						//Insert div to stop all click events from children.
+						$this.find('#redils-click-blocker').css('height', $this.height()).show();
+					} else {
+						e.preventDefault();
+					}
+				}
+
+				if(mouseMovementPercentage > 1) {
+					mouseMovementPercentage = 1;
+				} else if(mouseMovementPercentage < -1) {
+					mouseMovementPercentage = -1;
+				}
+				mouseMovementPercentage = mouseMovementPercentage * -1;
+				if($this.set.slide) {
+					if($this.set.pagination === 'line') {
+						paddingLeft = parseInt($this.find('.' + $this.set.slideContClass).css('paddingLeft'));
+					}
+					
+					$this.scrollLeft(paddingLeft + startScroll + slideWidth * mouseMovementPercentage);
+				}
+			};
+
+			$this.set.handleSlideDrag = false;
+
+			if($this.set.drag) {
+				$this.find('.' + $this.set.slideContClass).css('position', 'relative').prepend('<div id="redils-click-blocker" style="position: absolute; z-index: 10000; top: 0; left: 0; width: 100%; height: 100%; display: none;"></div>');
+			}
+
+			//Drag slide
+			$this.on('mousedown touchstart', function(event) {
+				//Always run if touch, optional drag slide with mouse.
+				if(event.type === 'touchstart' || ($this.set.drag && event.type === 'mousedown')) {
+
+					if(event.type === 'mousedown') {
+						mouseStart = event.pageX;
+						mousePosition = event.pageX;
+					} else {
+						mouseStart = event.originalEvent.targetTouches[0].pageX;
+						mousePosition = event.originalEvent.targetTouches[0].pageX;
+					}
+
+					startScroll = $this.scrollLeft();
+					sliderWidth = $this.width();
+					sliderPosition = $this.data('position');
+					slideWidth = $this.set.dynWidth[sliderPosition];
+
+					if(event.type === 'mousedown') {
+						$this.on('mousemove', function(e) {
+							window.requestAnimFrame(function() {
+								dragSliderSlide(e);
+							});
+						});
+					}
+
+				}
+
+			}).on('dragstart', function(e) {
+				if($this.set.drag) {
+					e.preventDefault();
+					e.stopPropagation();
+				}
+			}).on('touchmove', function(e) {
+				window.requestAnimFrame(function() {
+					dragSliderSlide(e);
+				});
+			});
+
+			$(window).on('mouseup touchend', function(e) {
+				$this.off('mousemove');
+				
+				if($this.set.handleSlideDrag) {
+					var toSlide = (mouseMovementPercentage > 0 ? 1 : -1);
+					$this.set.handleSlideDrag = false;
+
+					//If distance no longer than 30% of slide width left or right return to current slide.
+					if(Math.abs(mouseMovementPercentage) > 0.3) {
+						priv.interaction.apply($this);
+						priv.beforeAnimating.apply($this, [toSlide]);
+					} else {
+						//Set to same slide as we were on. Didn't move far enough.
+						priv.beforeAnimating.apply($this, [0, sliderPosition]);
+					}
+				}
+				mouseStart = mousePosition;
+			});
+
+		},
+		arrowNavigationEvents: function() {
+			var $this = this;
+			var position = $this.data('position');
+
+			//Click on arrows
+			$this.siblings('.redils-controls').on('click', '.' + $this.set.arrowContClass, function() {
+				var dir = ($(this).hasClass($this.set.rightArrowClass)) ? 1 : -1;
+				if($this.set.debug) { console.log('Arrows clicked direction: ', dir); }
+
+				if($this.data('position') === 0) $this.data('position', position);
+				priv.interaction.apply($this);
+				priv.beforeAnimating.apply($this, [dir]);
+			});
+		},
+		internalEvents: function() {
+			var $this = this;
+			if($this.set.pagination === 'line') {
+				var $handle = $(this).find('.pagination-inner a');
+				var $container = $this.siblings('.' + $this.set.pagClass);
+			}
+
+			//Images loaded recompiling multislider
 			$this.on('redils.imagesLoaded', function() {
 				var $slides = $(this).find('.' + $this.set.slideClass).not('.redils-duplicated');
 				var subSlideWidths = [];
@@ -291,6 +367,7 @@
 				}
 			});
 
+			//Resizing events
 			$(window).on('resize', function() {
 				if($this.set.fullWidth !== false) {
 					priv.fullWidth.apply($this);
@@ -315,25 +392,43 @@
 
 				if($this.set.autoResize || $this.set.multiSlide) priv.update.apply($this);
 			});
+			
+		},
+		keyboardEvents: function() {
+			var $this = this;
+			var position = $this.data('position');
+
+			$(window).on('keydown', function(e) {
+				if($this.set.debug) console.log('Allow keyboard on key pressed is: ', e.keyCode);
+				if($this.data('position') === 0) $this.data('position', position);
+				switch (e.keyCode) {
+					case 39:
+						//key right
+						priv.interaction.apply($this);
+						priv.beforeAnimating.apply($this, [1]);
+						break;
+					case 37:
+						priv.interaction.apply($this);
+						priv.beforeAnimating.apply($this, [-1]);
+						break;
+				}
+			});
+		},
+		enableEvents: function() {
+			var $this = this;
+			var touches = {};
+
+			priv.internalEvents.apply($this);
+			priv.slideDragEvents.apply($this);
+			priv.arrowNavigationEvents.apply($this);
+			
+			priv.paginationNavigationEvents.apply($this);
+			if($this.set.pagination === 'line') {
+				priv.paginationDragEvents.apply($this);
+			}
 
 			if($this.set.allowKeyboard) {
-
-				$(window).on('keydown', function(e) {
-					if($this.set.debug) console.log('Allow keyboard on key pressed is: ', e.keyCode);
-					if($this.data('position') === 0) $this.data('position', position);
-					switch (e.keyCode) {
-						case 39:
-							//key right
-							priv.interaction.apply($this);
-							priv.beforeAnimating.apply($this, [1]);
-							break;
-						case 37:
-							priv.interaction.apply($this);
-							priv.beforeAnimating.apply($this, [-1]);
-							break;
-					}
-				});
-
+				priv.keyboardEvents.apply($this);
 			}
 
 		},
@@ -797,6 +892,7 @@
 			var totalPos = priv.totalPos.apply($this);
 			var callback = function() { priv.afterAnimating.apply($this); };
 			var speed = $this.set.speed !== $this.set.temporarySpeed ? $this.set.temporarySpeed : $this.set.speed;
+			var easing = $this.set.easing || 'swing';
 
 			if($this.set.ends !== false) {
 				//Decide on end animation:
@@ -830,14 +926,16 @@
 					}, {
 						duration: speed,
 						queue: false,
-						complete: callback
+						complete: callback,
+						easing: easing
 					});
 				} else {
 					if(!this.set.stacked) {
 						$this.find('.' + $this.set.slideClass).eq($this.data('prevPosition')).fadeOut({
-							'duration': speed,
-							'queue': false,
-							'complete': callback
+							duration: speed,
+							queue: false,
+							complete: callback,
+							easing: easing
 						});
 					}
 				}
@@ -850,6 +948,10 @@
 			var $this = this;
 
 			$this.trigger('redils.afterAnimating', [$this]);
+
+			if($this.set.drag) {
+				$this.find('#redils-click-blocker').hide();
+			}
 
 			//Trigger an event on after slide to connect to.
 			if($this.set.overflow && $this.set.ends !== false) {
@@ -1045,6 +1147,8 @@
 		updateHash: false,
 		breakPoints: false,
 		stacked: false,
+		drag: false,
+		easing: false,
 		slideClass: 'slides',
 		multiSlideClass: 'super-slide',
 		pagClass: 'pagination',
