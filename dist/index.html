@@ -57,7 +57,7 @@ $('.redils-centered .redils').redils({
 	center: true,
 	auto: false,
 	overflow: 0,
-	pagintion: 'line'
+	pagination: 'line'
 });
 					</pre>
 				</div>
@@ -445,7 +445,9 @@ $('.redils-contact-sheet .redils').redils({
 					<pre>
 $('.redils-responsive-height .redils').redils({
 	autoResize: true,
-	setHeight: false
+	setHeight: false,
+	auto: false,
+	drag: true
 });
 					</pre>
 					<div class="redils-cont redils-responsive-height">
@@ -487,6 +489,17 @@ $('.redils-responsive-height .redils').redils({
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/redils.js"></script>
 		<script>
+
+			$.extend( $.easing, {
+				easeInOutQuad: function (x, t, b, c, d) {
+					if ((t/=d/2) < 1) return c/2*t*t + b;
+					return -c/2 * ((--t)*(t-2) - 1) + b;
+				},
+				easeOutCubic: function (x, t, b, c, d) {
+					return c*((t=t/d-1)*t*t + 1) + b;
+				}
+			});
+
 			$(document).ready(function() {
 				var gridShowing = false;
 
@@ -529,7 +542,11 @@ $('.redils-responsive-height .redils').redils({
 				//Responsive with no height
 				$('.redils-responsive-height .redils').redils({
 					autoResize: true,
-					setHeight: false
+					setHeight: false,
+					auto: false,
+					drag: true,
+					speed: 800,
+					easing: 'easeOutCubic'
 				});
 
 				//External controls for responsive redils

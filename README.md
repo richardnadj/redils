@@ -341,6 +341,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.14.1**   
+Pushed published version.
+
 **Version 1.14.0**   
 Added new function for dragging slides with mouse. Rebuilt touch interactions to move slide. Added the ability to overwrite easing. Added user-select: none to slides to avoid highlighting of slides.
 
