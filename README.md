@@ -233,7 +233,7 @@ Should only be used if the plugin is already being used or if you want to switch
 *Default* `false`   
 *Expects* `boolean`
 
-Used in conjunction with the above property `slide`. This stacks the slides on either side of the viewport with a specific distance of the next and previous slides showing. The slide animation is via CSS animations and `calc()` therefore it is slightly experimental and not well supported.
+Used in conjunction with the above property `slide`. This stacks the slides on either side of the viewport with a specific distance of the next and previous slides showing. The slide animation is via multiple CSS transforms & animations.
 
 	$(selector).redils({stacked: false});
 

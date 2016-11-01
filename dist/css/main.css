@@ -112,38 +112,38 @@ section{margin-top:50px}
 .single-multislide-disable .arrow-area,.single-multislide-disable .pagination{display:none}
 .redils-contact-sheet .slides{display:inline-block;vertical-align:top}
 .redils-contact-sheet .super-slide{float:left;text-align:center}
-@-webkit-keyframes hidden_left{0%{-webkit-transform:translate3d(-webkit-calc(-200% + 60px),0,0);transform:translate3d(calc(-200% + 60px),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc(-100% + 60px),0,0);transform:translate3d(calc(-100% + 60px),0,0)}}
-@keyframes hidden_left{0%{-webkit-transform:translate3d(-webkit-calc(-200% + 60px),0,0);transform:translate3d(calc(-200% + 60px),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc(-100% + 60px),0,0);transform:translate3d(calc(-100% + 60px),0,0)}}
-@-webkit-keyframes left_center{0%{-webkit-transform:translate3d(-webkit-calc(-100% + 60px),0,0);transform:translate3d(calc(-100% + 60px),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc((100vw - 100%) / 2),0,0);transform:translate3d(calc((100vw - 100%) / 2),0,0)}}
-@keyframes left_center{0%{-webkit-transform:translate3d(-webkit-calc(-100% + 60px),0,0);transform:translate3d(calc(-100% + 60px),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc((100vw - 100%) / 2),0,0);transform:translate3d(calc((100vw - 100%) / 2),0,0)}}
-@-webkit-keyframes center_right{0%{-webkit-transform:translate3d(-webkit-calc((100vw - 100%) / 2),0,0);transform:translate3d(calc((100vw - 100%) / 2),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px),0,0);transform:translate3d(calc(100vw - 60px),0,0)}}
-@keyframes center_right{0%{-webkit-transform:translate3d(-webkit-calc((100vw - 100%) / 2),0,0);transform:translate3d(calc((100vw - 100%) / 2),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px),0,0);transform:translate3d(calc(100vw - 60px),0,0)}}
-@-webkit-keyframes right_hidden{0%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px),0,0);transform:translate3d(calc(100vw - 60px),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px + 100%),0,0);transform:translate3d(calc(100vw - 60px + 100%),0,0)}}
-@keyframes right_hidden{0%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px),0,0);transform:translate3d(calc(100vw - 60px),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px + 100%),0,0);transform:translate3d(calc(100vw - 60px + 100%),0,0)}}
-@-webkit-keyframes left_hidden{0%{-webkit-transform:translate3d(-webkit-calc(-100% + 60px),0,0);transform:translate3d(calc(-100% + 60px),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc(-200% + 60px),0,0);transform:translate3d(calc(-200% + 60px),0,0)}}
-@keyframes left_hidden{0%{-webkit-transform:translate3d(-webkit-calc(-100% + 60px),0,0);transform:translate3d(calc(-100% + 60px),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc(-200% + 60px),0,0);transform:translate3d(calc(-200% + 60px),0,0)}}
-@-webkit-keyframes center_left{0%{-webkit-transform:translate3d(-webkit-calc((100vw - 100%) / 2),0,0);transform:translate3d(calc((100vw - 100%) / 2),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc(-100% + 60px),0,0);transform:translate3d(calc(-100% + 60px),0,0)}}
-@keyframes center_left{0%{-webkit-transform:translate3d(-webkit-calc((100vw - 100%) / 2),0,0);transform:translate3d(calc((100vw - 100%) / 2),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc(-100% + 60px),0,0);transform:translate3d(calc(-100% + 60px),0,0)}}
-@-webkit-keyframes right_center{0%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px),0,0);transform:translate3d(calc(100vw - 60px),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc((100vw - 100%) / 2),0,0);transform:translate3d(calc((100vw - 100%) / 2),0,0)}}
-@keyframes right_center{0%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px),0,0);transform:translate3d(calc(100vw - 60px),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc((100vw - 100%) / 2),0,0);transform:translate3d(calc((100vw - 100%) / 2),0,0)}}
-@-webkit-keyframes hidden_right{0%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px + 100%),0,0);transform:translate3d(calc(100vw - 60px + 100%),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px),0,0);transform:translate3d(calc(100vw - 60px),0,0)}}
-@keyframes hidden_right{0%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px + 100%),0,0);transform:translate3d(calc(100vw - 60px + 100%),0,0)}
-100%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px),0,0);transform:translate3d(calc(100vw - 60px),0,0)}}
+@-webkit-keyframes hidden_left{0%{-webkit-transform:translate3d(-200%,0,0) translate3d(60px,0,0);transform:translate3d(-200%,0,0) translate3d(60px,0,0)}
+100%{-webkit-transform:translate3d(-100%,0,0) translate3d(60px,0,0);transform:translate3d(-100%,0,0) translate3d(60px,0,0)}}
+@keyframes hidden_left{0%{-webkit-transform:translate3d(-200%,0,0) translate3d(60px,0,0);transform:translate3d(-200%,0,0) translate3d(60px,0,0)}
+100%{-webkit-transform:translate3d(-100%,0,0) translate3d(60px,0,0);transform:translate3d(-100%,0,0) translate3d(60px,0,0)}}
+@-webkit-keyframes left_center{0%{-webkit-transform:translate3d(-100%,0,0) translate3d(60px,0,0);transform:translate3d(-100%,0,0) translate3d(60px,0,0)}
+100%{-webkit-transform:translate3d(50vw,0,0) translate3d(-50%,0,0);transform:translate3d(50vw,0,0) translate3d(-50%,0,0)}}
+@keyframes left_center{0%{-webkit-transform:translate3d(-100%,0,0) translate3d(60px,0,0);transform:translate3d(-100%,0,0) translate3d(60px,0,0)}
+100%{-webkit-transform:translate3d(50vw,0,0) translate3d(-50%,0,0);transform:translate3d(50vw,0,0) translate3d(-50%,0,0)}}
+@-webkit-keyframes center_right{0%{-webkit-transform:translate3d(50vw,0,0) translate3d(-50%,0,0);transform:translate3d(50vw,0,0) translate3d(-50%,0,0)}
+100%{-webkit-transform:translate3d(100vw,0,0) translate3d(-60px,0,0);transform:translate3d(100vw,0,0) translate3d(-60px,0,0)}}
+@keyframes center_right{0%{-webkit-transform:translate3d(50vw,0,0) translate3d(-50%,0,0);transform:translate3d(50vw,0,0) translate3d(-50%,0,0)}
+100%{-webkit-transform:translate3d(100vw,0,0) translate3d(-60px,0,0);transform:translate3d(100vw,0,0) translate3d(-60px,0,0)}}
+@-webkit-keyframes right_hidden{0%{-webkit-transform:translate3d(100vw,0,0) translate3d(-60px,0,0);transform:translate3d(100vw,0,0) translate3d(-60px,0,0)}
+100%{-webkit-transform:translate3d(100vw,0,0) translate3d(-60px,0,0) translate3d(100%,0,0);transform:translate3d(100vw,0,0) translate3d(-60px,0,0) translate3d(100%,0,0)}}
+@keyframes right_hidden{0%{-webkit-transform:translate3d(100vw,0,0) translate3d(-60px,0,0);transform:translate3d(100vw,0,0) translate3d(-60px,0,0)}
+100%{-webkit-transform:translate3d(100vw,0,0) translate3d(-60px,0,0) translate3d(100%,0,0);transform:translate3d(100vw,0,0) translate3d(-60px,0,0) translate3d(100%,0,0)}}
+@-webkit-keyframes left_hidden{0%{-webkit-transform:translate3d(-100%,0,0) translate3d(60px,0,0);transform:translate3d(-100%,0,0) translate3d(60px,0,0)}
+100%{-webkit-transform:translate3d(-200%,0,0) translate3d(60px,0,0);transform:translate3d(-200%,0,0) translate3d(60px,0,0)}}
+@keyframes left_hidden{0%{-webkit-transform:translate3d(-100%,0,0) translate3d(60px,0,0);transform:translate3d(-100%,0,0) translate3d(60px,0,0)}
+100%{-webkit-transform:translate3d(-200%,0,0) translate3d(60px,0,0);transform:translate3d(-200%,0,0) translate3d(60px,0,0)}}
+@-webkit-keyframes center_left{0%{-webkit-transform:translate3d(50vw,0,0) translate3d(-50%,0,0);transform:translate3d(50vw,0,0) translate3d(-50%,0,0)}
+100%{-webkit-transform:translate3d(-100%,0,0) translate3d(60px,0,0);transform:translate3d(-100%,0,0) translate3d(60px,0,0)}}
+@keyframes center_left{0%{-webkit-transform:translate3d(50vw,0,0) translate3d(-50%,0,0);transform:translate3d(50vw,0,0) translate3d(-50%,0,0)}
+100%{-webkit-transform:translate3d(-100%,0,0) translate3d(60px,0,0);transform:translate3d(-100%,0,0) translate3d(60px,0,0)}}
+@-webkit-keyframes right_center{0%{-webkit-transform:translate3d(100vw,0,0) translate3d(-60px,0,0);transform:translate3d(100vw,0,0) translate3d(-60px,0,0)}
+100%{-webkit-transform:translate3d(50vw,0,0) translate3d(-50%,0,0);transform:translate3d(50vw,0,0) translate3d(-50%,0,0)}}
+@keyframes right_center{0%{-webkit-transform:translate3d(100vw,0,0) translate3d(-60px,0,0);transform:translate3d(100vw,0,0) translate3d(-60px,0,0)}
+100%{-webkit-transform:translate3d(50vw,0,0) translate3d(-50%,0,0);transform:translate3d(50vw,0,0) translate3d(-50%,0,0)}}
+@-webkit-keyframes hidden_right{0%{-webkit-transform:translate3d(100vw,0,0) translate3d(-60px,0,0) translate3d(100%,0,0);transform:translate3d(100vw,0,0) translate3d(-60px,0,0) translate3d(100%,0,0)}
+100%{-webkit-transform:translate3d(100vw,0,0) translate3d(-60px,0,0);transform:translate3d(100vw,0,0) translate3d(-60px,0,0)}}
+@keyframes hidden_right{0%{-webkit-transform:translate3d(100vw,0,0) translate3d(-60px,0,0) translate3d(100%,0,0);transform:translate3d(100vw,0,0) translate3d(-60px,0,0) translate3d(100%,0,0)}
+100%{-webkit-transform:translate3d(100vw,0,0) translate3d(-60px,0,0);transform:translate3d(100vw,0,0) translate3d(-60px,0,0)}}
 .redils-stacked{width:100vw;height:660px}
 .redils-stacked .redils{position:relative}
 .redils-stacked .slides{-webkit-transform:translate3d(200vw,0,0);transform:translate3d(200vw,0,0);position:absolute;top:0;left:0;text-align:center}
