@@ -270,9 +270,6 @@
   height: 660px; }
   .redils-stacked .redils {
     position: relative; }
-  .redils-stacked .slide-cont {
-    position: relative;
-    left: -7.5px; }
   .redils-stacked .slides {
     -webkit-transform: translate3d(200vw, 0, 0);
     transform: translate3d(200vw, 0, 0);

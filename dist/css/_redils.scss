@@ -92,7 +92,6 @@
 
 .redils-stacked { width: 100vw; height: 660px;
 	.redils { position: relative; }
-	.slide-cont { position: relative; left: -7.5px; }
 	.slides { transform: translate3d(200vw, 0, 0); position: absolute; top: 0; left: 0; text-align: center;
 		img { display: block; }
 		&.hidden { animation: right_hidden 0.5s ease-in-out forwards; // right < hidden > left
@@ -107,6 +106,5 @@
 		&.right { animation: center_right 0.5s ease-in-out forwards; // center < right > hidden
 			&.back { animation: hidden_right 0.5s ease-in-out forwards; }
 		}
-
 	}
 }

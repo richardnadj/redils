@@ -390,7 +390,7 @@
 					$handle.css('left', $this.data('position') / ($this.set.totalAmount - 1) * containerLength);
 				}
 
-				if($this.set.autoResize || $this.set.multiSlide) priv.update.apply($this);
+				if($this.set.autoResize || $this.set.multiSlide || $this.set.stacked) priv.update.apply($this);
 			});
 			
 		},
@@ -465,6 +465,8 @@
 				if(!$this.set.stacked) {
 					//Fader update
 					priv.compress.apply($this);
+				} else {
+					priv.stacked.apply($this);
 				}
 
 				//If Dyn get new array of widths.
@@ -484,6 +486,26 @@
 			});
 
 			$this.find('.' + $this.set.slideContClass).css('width', '');
+		},
+		stacked: function() {
+			var $this = this;
+			var scrollBarWidth;
+
+			if($('#redils-hiddenscroll-test').length === 0) {
+				$('body').append('<div id="redils-hiddenscroll-test" style="width: 100vw; height: 0;"></div>');
+			}
+
+			scrollBarWidth = $(window).width() - $('#redils-hiddenscroll-test').width();
+
+			if(this.set.hasScrollBars !== (scrollBarWidth === 0)) {
+				this.set.hasScrollBars = (scrollBarWidth === 0);
+
+				if(scrollBarWidth === 0) {
+					$this.find('.' + $this.set.slideContClass).css({position: '', left: ''});
+				} else {
+					$this.find('.' + $this.set.slideContClass).css({position: 'relative', left: (scrollBarWidth / 2)});
+				}
+			}
 		},
 		center: function(pos) {
 			var $this = this;
@@ -787,11 +809,6 @@
 			var position = $this.data('position');
 			var prevPosition = position;
 
-			//$this.set.oldPosition = $this.set.position;
-			//$this.set.position = $this.data('position');
-			//console.log('var $this.set.position, $this.set.oldPosition', $this.set.position, $this.set.oldPosition);
-
-
 			//Adding the overflow offset will enable us to use absolute positions.
 			if(position + dir > $this.set.totalAmount - 1 - $this.set.overflow) {
 				if($this.set.debug) { console.log('Before Sliding -> reached end | pos: ', position,' dir: ', dir,' total: ', $this.set.totalAmount,' overflow: ', $this.set.overflow, ' case left: ', position + dir, ' case right: ', $this.set.totalAmount - 1 - $this.set.overflow); }
@@ -827,7 +844,6 @@
 			var hash = '';
 
 			if($this.set.stacked) {
-				console.log('var position, dir', position, dir);
 				if(dir > 0) {
 					// hidden < left < center < right < hidden
 					$this.find('.' + $this.set.slideClass).removeClass('hidden left center right back')
@@ -1177,7 +1193,8 @@
 		timer: null,
 		animationStopped: false,
 		handleMoving: false,
-		paginationLinePosition: 0
+		paginationLinePosition: 0,
+		hasScrollBars: null
 	};
 
 	$.fn.redils = function(method) {

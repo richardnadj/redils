@@ -146,7 +146,6 @@ section{margin-top:50px}
 100%{-webkit-transform:translate3d(-webkit-calc(100vw - 60px),0,0);transform:translate3d(calc(100vw - 60px),0,0)}}
 .redils-stacked{width:100vw;height:660px}
 .redils-stacked .redils{position:relative}
-.redils-stacked .slide-cont{position:relative;left:-7.5px}
 .redils-stacked .slides{-webkit-transform:translate3d(200vw,0,0);transform:translate3d(200vw,0,0);position:absolute;top:0;left:0;text-align:center}
 .redils-stacked .slides img{display:block}
 .redils-stacked .slides.hidden{-webkit-animation:right_hidden .5s ease-in-out forwards;animation:right_hidden .5s ease-in-out forwards}

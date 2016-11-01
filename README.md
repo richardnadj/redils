@@ -341,6 +341,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.14.2**   
+Removed console log for stacked. Made adjustments to the centering of the slider due to vw being the width of the page and not the document (vw includes scrollbars if visible).
+
 **Version 1.14.1**   
 Pushed published version.
 
