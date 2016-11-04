@@ -52,7 +52,7 @@ a{color:#333;text-decoration:none}
 img{display:block;max-width:100%;height:auto}
 iframe{width:100%}
 label{cursor:pointer}
-.main-cont{width:1170px;margin:0 auto;max-width:92%}
+.main-cont{width:1170px;margin:0 auto;max-width:92%;padding-bottom:300px}
 section{margin-top:50px}
 .ingress{width:65.81197%}
 .signature{width:48.71795%;margin:250px auto 0;text-align:center;display:block;border-top:1px solid #ccc}

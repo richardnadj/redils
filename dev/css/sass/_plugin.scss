@@ -16,7 +16,7 @@ img { display: block; max-width: 100%; height: auto; }
 iframe { width: 100%; }
 label { cursor: pointer; }
 
-.main-cont { width: $pageWidth; margin: 0 auto; max-width: $maxPageWidth; }
+.main-cont { width: $pageWidth; margin: 0 auto; max-width: $maxPageWidth; padding-bottom: 300px; }
 section { margin-top: 50px; }
 .ingress { width: w(8, 0); }
 .signature { width: w(6, 0); margin: 250px auto 0; text-align: center; display: block; border-top: 1px solid #ccc;

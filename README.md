@@ -341,6 +341,12 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.14.4**   
+Major improvements in handling of overloading when changing slides and much improved touch capabilities inc. preventing scrolling when sliding.
+
+**Version 1.14.3**   
+Possible IE fix regarding using calc() in transform functions.
+
 **Version 1.14.2**   
 Removed console log for stacked. Made adjustments to the centering of the slider due to vw being the width of the page and not the document (vw includes scrollbars if visible).
 

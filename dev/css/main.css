@@ -746,7 +746,8 @@ label {
 .main-cont {
   width: 1170px;
   margin: 0 auto;
-  max-width: 92%; }
+  max-width: 92%;
+  padding-bottom: 300px; }
 
 section {
   margin-top: 50px; }

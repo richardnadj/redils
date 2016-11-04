@@ -215,6 +215,8 @@
 		slideDragEvents: function() {
 			var $this = this;
 			var paddingLeft = 0;
+			var isSliding = false;
+			var dragStartTime;
 			var mouseStart;
 			var mousePosition;
 			var startScroll;
@@ -223,17 +225,24 @@
 			var mouseMovement;
 			var mouseMovementPercentage;
 			var sliderPosition;
+			var touchStartY;
+			var touchPositionY;
 
 			var dragSliderSlide = function(e) {
 				if(e.type === 'mousemove') {
 					mousePosition = e.pageX;
 				} else {
-					mousePosition = e.originalEvent.targetTouches[0].pageX;
-					touchPositionY = e.originalEvent.targetTouches[0].screenY;
+					mousePosition = e.originalEvent.targetTouches[0].clientX;
+					touchPositionY = e.originalEvent.targetTouches[0].clientY;
 				}
 
 				mouseMovement = mousePosition - mouseStart;
 				mouseMovementPercentage = mouseMovement / (sliderWidth / 2);
+
+				if(isSliding || Math.abs(mouseMovement) > Math.abs(touchStartY - touchPositionY)) {
+					//Prevent scrolling while sliding.
+					isSliding = true;
+				}
 				
 				if(!$this.set.handleSlideDrag && Math.abs(mouseMovement) > 5) {
 					$this.set.handleSlideDrag = true;
@@ -256,7 +265,9 @@
 						paddingLeft = parseInt($this.find('.' + $this.set.slideContClass).css('paddingLeft'));
 					}
 					
-					$this.scrollLeft(paddingLeft + startScroll + slideWidth * mouseMovementPercentage);
+					if($this.set.isAnimating === false) {
+						$this.scrollLeft(paddingLeft + startScroll + slideWidth * mouseMovementPercentage);
+					}
 				}
 			};
 
@@ -275,9 +286,13 @@
 						mouseStart = event.pageX;
 						mousePosition = event.pageX;
 					} else {
-						mouseStart = event.originalEvent.targetTouches[0].pageX;
-						mousePosition = event.originalEvent.targetTouches[0].pageX;
+						mouseStart = event.originalEvent.targetTouches[0].clientX;
+						touchStartY = event.originalEvent.targetTouches[0].clientY;
+						mousePosition = event.originalEvent.targetTouches[0].clientX;
+						touchPositionY = event.originalEvent.targetTouches[0].clientY;
 					}
+
+					dragStartTime = new Date().getTime();
 
 					startScroll = $this.scrollLeft();
 					sliderWidth = $this.width();
@@ -305,12 +320,23 @@
 				});
 			});
 
+			$(document).on('touchmove', function(e) {
+				if(isSliding) e.preventDefault();
+			});
+
 			$(window).on('mouseup touchend', function(e) {
 				$this.off('mousemove');
-				
+				isSliding = false;
+
 				if($this.set.handleSlideDrag) {
 					var toSlide = (mouseMovementPercentage > 0 ? 1 : -1);
+					var dragTotalTime = new Date().getTime() - dragStartTime;
+					var velocitySpeed = Math.round(dragTotalTime / Math.abs(mouseMovementPercentage));
+					var animationSpeed = velocitySpeed > $this.set.speed ? $this.set.speed : velocitySpeed;
+					
+					$this.set.temporarySpeed = (1 - Math.abs(mouseMovementPercentage)) * animationSpeed;
 					$this.set.handleSlideDrag = false;
+
 
 					//If distance no longer than 30% of slide width left or right return to current slide.
 					if(Math.abs(mouseMovementPercentage) > 0.3) {
@@ -832,7 +858,8 @@
 
 			if($this.set.debug) { console.log('Current settings object before animation ', $this.set); }
 
-			priv.animating.apply($this);
+			$this.set.isAnimating = true;
+			priv.animating.apply($this, [dir]);
 			priv.currentSlide.apply($this, [dir]);
 
 		},
@@ -858,7 +885,6 @@
 						.eq((position + 1) % $this.set.totalAmount).addClass('right').end()
 						.eq((position + 2) % $this.set.totalAmount).addClass('hidden').end();
 				}
-
 			}
 
 			$this.find('.' + $this.set.slideClass).removeClass($this.set.currentSlideClass).eq(position).addClass($this.set.currentSlideClass);
@@ -901,26 +927,16 @@
 
 			}
 		},
-		animating: function() {
+		animating: function(dir) {
 			//Handle scroll animation.
 			var $this = this;
 			var moveTo = $this.data('position');
 			var totalPos = priv.totalPos.apply($this);
+			var currentPos = $this.scrollLeft();
 			var callback = function() { priv.afterAnimating.apply($this); };
 			var speed = $this.set.speed !== $this.set.temporarySpeed ? $this.set.temporarySpeed : $this.set.speed;
 			var easing = $this.set.easing || 'swing';
-
-			if($this.set.ends !== false) {
-				//Decide on end animation:
-				
-				//Rewind - default
-				//Stop - optional
-				//Infinite - if extended
-				if($this.set.overflow) {
-					moveTo = $this.set.ends;
-					totalPos = priv.totalPos.apply($this, [moveTo]);
-				}
-			}
+			var endScrollLeft;
 
 			if($this.set.width === 'dyn' && $this.set.center) {
 				//Sets new offset as image may be different size than previous image.
@@ -936,15 +952,49 @@
 				priv.afterAnimating.apply($this);
 			} else {
 				if($this.set.slide) {
-					//if($this.set.center) console.log('var totalPos, $this.set.offset', totalPos, $this.set.offset, $this.set.dynWidth);
-					$this.animate({
-						scrollLeft: totalPos - $this.set.offset
-					}, {
-						duration: speed,
-						queue: false,
-						complete: callback,
-						easing: easing
-					});
+
+					if($this.set.overflow && ((dir > 0 && currentPos > totalPos - $this.set.offset) || (dir < 0 && currentPos < totalPos - $this.set.offset))) {
+						//We need to scroll to an end and scroll from there to the position.
+						destinationPos = (dir > 0) ? ($this.set.totalAmount - $this.set.overflow) : ($this.set.overflow - 1);
+						startPos = (dir > 0) ? $this.set.overflow : ($this.set.totalAmount - $this.set.overflow - 1);
+						endScrollLeft = priv.totalPos.apply($this, [destinationPos]) - $this.set.offset;
+
+						$this.stop().animate({
+							scrollLeft: endScrollLeft
+						}, {
+							duration: speed,
+							queue: 'redilsSlide',
+							easing: easing,
+							complete: function() {
+								$this.scrollLeft(priv.totalPos.apply($this, [startPos]) - $this.set.offset);
+								totalPos = priv.totalPos.apply($this);
+								
+								if(totalPos !== $this.scrollLeft()) {
+
+									$this.animate({
+										scrollLeft: totalPos - $this.set.offset
+									}, {
+										duration: (speed / 1.6),
+										queue: 'redilsSlide',
+										easing: easing,
+										complete: callback
+									}).dequeue('redilsSlide');
+								}
+							}
+						}).dequeue('redilsSlide');
+
+					} else {
+						//Normal animation
+
+						$this.animate({
+							scrollLeft: totalPos - $this.set.offset
+						}, {
+							duration: speed,
+							queue: 'redilsSlide',
+							complete: callback,
+							easing: easing
+						}).dequeue('redilsSlide');
+					}
 				} else {
 					if(!this.set.stacked) {
 						$this.find('.' + $this.set.slideClass).eq($this.data('prevPosition')).fadeOut({
@@ -963,15 +1013,16 @@
 		afterAnimating: function() {
 			var $this = this;
 
+			//Trigger an event on after slide to connect to.
 			$this.trigger('redils.afterAnimating', [$this]);
+
+			$this.set.isAnimating = false;
 
 			if($this.set.drag) {
 				$this.find('#redils-click-blocker').hide();
 			}
 
-			//Trigger an event on after slide to connect to.
 			if($this.set.overflow && $this.set.ends !== false) {
-				$this.scrollLeft(priv.totalPos.apply($this) - $this.set.offset);
 				$this.find('.' + $this.set.slideClass).show();
 				$this.set.ends = false;
 			}
@@ -1194,7 +1245,8 @@
 		animationStopped: false,
 		handleMoving: false,
 		paginationLinePosition: 0,
-		hasScrollBars: null
+		hasScrollBars: null,
+		isAnimating: false
 	};
 
 	$.fn.redils = function(method) {
