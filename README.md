@@ -341,6 +341,9 @@ Define outside of the plugin container which slide to skip to.
 
 ### Changelog ###
 
+**Version 1.14.5**   
+Ensuring callback on afterAnimating.
+
 **Version 1.14.4**   
 Major improvements in handling of overloading when changing slides and much improved touch capabilities inc. preventing scrolling when sliding.
 

@@ -560,11 +560,13 @@ $('.redils-responsive .redils').redils({
 				});
 
 				//Responsive redils
-				$('.redils-responsive .redils').redils({
+				$('.redils-responsive .redils').on('redils.beforeAnimating', function(){
+					console.log('Before animating triggered');
+				}).on('redils.afterAnimating', function(){
+					console.log('After animating triggered');
+				}).redils({
 					autoResize: true,
 					allowKeyboard: true
-				}).on('redils.beforeAnimating', function(){
-					console.log('Before animating triggered');
 				});
 
 				$('.redils-responsive-height .redils').on('redils.updated', function(e, settings) {

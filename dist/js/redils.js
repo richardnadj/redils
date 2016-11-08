@@ -979,6 +979,8 @@
 										easing: easing,
 										complete: callback
 									}).dequeue('redilsSlide');
+								} else {
+									callback();
 								}
 							}
 						}).dequeue('redilsSlide');
