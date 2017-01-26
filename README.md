@@ -339,7 +339,18 @@ Define outside of the plugin container which slide to skip to.
 	$(selector).redils('skipTo', {skipToSlide: 3, skipToSlideSpeed: 200});
 
 
+#### destroy ####
+
+Removes all data assigned to sliders, dismantles all extra html created by the plugin. Removes all plugin specific classes. Removes all inline styles (Warning! Even inline styles defined before initiate). Removes all events.  
+`maintainWidth` is set to `false` by default, if set to `true` it will keep the calculated width on the slide container.
+
+	$(selector).redils('destroy', {maintainWidth: false});
+
+
 ### Changelog ###
+
+**Version 1.15.0**   
+Added a destroy method. Cleaned up all events to be namespaced with .redils for easier removal.
 
 **Version 1.14.5**   
 Ensuring callback on afterAnimating.

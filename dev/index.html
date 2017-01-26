@@ -515,6 +515,13 @@ $('.redils-responsive .redils').redils({
 						</div>
 						<div class="pagination"></div>
 					</div>
+				</section><section>
+					<h3>Destroy</h3>
+					<p>Destory all instances of redils plugin.</p>
+					<pre>
+$('.redils').redils('destroy');
+					</pre>
+					<a id="destroy-all" class="u-button" href="#">Destroy All</a><a id="recreate-all" class="u-button" href="#">Recreate All</a>
 				</section>
 			</div>
 		</main>
@@ -535,91 +542,106 @@ $('.redils-responsive .redils').redils({
 			$(document).ready(function() {
 				var gridShowing = false;
 
-				//Default redils
-				$('.redils-default .redils').redils();
+				var intiateSliders = function() {
 
-				//Centered redils
-				$('.redils-centered .redils').redils({
-					center: true,
-					auto: false,
-					overflow: 0,
-					pagination: 'line'
+					//Default redils
+					$('.redils-default .redils').redils();
+
+					//Centered redils
+					$('.redils-centered .redils').redils({
+						center: true,
+						auto: false,
+						overflow: 0,
+						pagination: 'line'
+					});
+
+					$('.redils-centered-overflow .redils').redils({
+						center: true,
+						auto: false,
+						overflow: 2
+					});
+
+					$('.redils-stacked .redils').redils({
+						slide: false,
+						stacked: true,
+						overflow: 2,
+						auto: false
+					});
+
+					//Responsive redils
+					$('.redils-responsive .redils').off('redils.beforeAnimating').on('redils.beforeAnimating', function(){
+						console.log('Before animating triggered');
+					}).off('redils.afterAnimating').on('redils.afterAnimating', function(){
+						console.log('After animating triggered');
+					}).redils({
+						autoResize: true,
+						allowKeyboard: true
+					});
+
+					$('.redils-responsive-height .redils').off('redils.updated').on('redils.updated', function(e, settings) {
+						console.log('This is an event for update of the slider, settings are available as well.', settings);
+					});
+
+					//Responsive with no height
+					$('.redils-responsive-height .redils').redils({
+						autoResize: true,
+						setHeight: false,
+						auto: false,
+						drag: true,
+						speed: 800,
+						easing: 'easeOutCubic'
+					});
+
+					//External controls for responsive redils
+					$('#arrow-left').off('click').on('click', function(){
+						$('.redils-responsive .redils').redils('moveTo', {moveTo: -1});
+					});
+
+					$('#arrow-right').off('click').on('click', function(){
+						$('.redils-responsive .redils').redils('moveTo', {moveTo: 1});
+					});
+
+					$('#return-to-start').off('click').on('click', function(){
+						var pos = $(this).data('pos');
+						$('.redils-responsive .redils').redils('skipTo', {skipToSlide: pos, skipToSlideSpeed: 500});
+					});
+
+					//Fading redils
+					$('.redils-fader .redils').redils({
+						autoResize: true,
+						slide: false,
+						auto: false,
+						speed: 800,
+						updateHash: true
+					});
+
+					//Multislide redils
+					$('.redils-multislide .redils').redils({
+						multiSlide: true,
+						multiSlidePadding: 10,
+						auto: false
+					}).off('redils.rendered').on('redils.rendered', function(){
+						console.log('This is an event for when multiSlide has finished rendering.');
+					});
+
+					//Contact Sheet redils
+					$('.redils-contact-sheet .redils').redils({
+						multiSlide: true,
+						breakPoints: [{breakAfter: 1100, numSlides: 9}, {breakAfter: 600, numSlides: 4}, {breakAfter: 0, numSlides: 1}],
+						auto: false
+					});
+				}
+
+				intiateSliders();
+
+				$('#destroy-all').on('click', function(e) {
+					e.preventDefault();
+					$('.redils').redils('destroy', { maintainWidth: true });
 				});
 
-				$('.redils-centered-overflow .redils').redils({
-					center: true,
-					auto: false,
-					overflow: 2
-				});
-
-				$('.redils-stacked .redils').redils({
-					slide: false,
-					stacked: true,
-					overflow: 2,
-					auto: false
-				});
-
-				//Responsive redils
-				$('.redils-responsive .redils').on('redils.beforeAnimating', function(){
-					console.log('Before animating triggered');
-				}).on('redils.afterAnimating', function(){
-					console.log('After animating triggered');
-				}).redils({
-					autoResize: true,
-					allowKeyboard: true
-				});
-
-				$('.redils-responsive-height .redils').on('redils.updated', function(e, settings) {
-					console.log('This is an event for update of the slider, settings are available as well.', settings);
-				});
-
-				//Responsive with no height
-				$('.redils-responsive-height .redils').redils({
-					autoResize: true,
-					setHeight: false,
-					auto: false,
-					drag: true,
-					speed: 800,
-					easing: 'easeOutCubic'
-				});
-
-				//External controls for responsive redils
-				$('#arrow-left').on('click', function(){
-					$('.redils-responsive .redils').redils('moveTo', {moveTo: -1});
-				});
-
-				$('#arrow-right').on('click', function(){
-					$('.redils-responsive .redils').redils('moveTo', {moveTo: 1});
-				});
-
-				$('#return-to-start').on('click', function(){
-					var pos = $(this).data('pos');
-					$('.redils-responsive .redils').redils('skipTo', {skipToSlide: pos, skipToSlideSpeed: 500});
-				});
-
-				//Fading redils
-				$('.redils-fader .redils').redils({
-					autoResize: true,
-					slide: false,
-					auto: false,
-					speed: 800,
-					updateHash: true
-				});
-
-				//Multislide redils
-				$('.redils-multislide .redils').redils({
-					multiSlide: true,
-					multiSlidePadding: 10,
-					auto: false
-				}).on('redils.rendered', function(){
-					console.log('This is an event for when multiSlide has finished rendering.');
-				});
-
-				//Contact Sheet redils
-				$('.redils-contact-sheet .redils').redils({
-					multiSlide: true,
-					breakPoints: [{breakAfter: 1100, numSlides: 9}, {breakAfter: 600, numSlides: 4}, {breakAfter: 0, numSlides: 1}],
-					auto: false
+				$('#recreate-all').on('click', function(e) {
+					e.preventDefault();
+					intiateSliders();
 				});
 
 				//Hide/display grid

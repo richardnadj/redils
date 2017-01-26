@@ -73,7 +73,7 @@
 			var $this = this;
 
 			//Click on pagination
-			$this.siblings('.' + $this.set.pagClass).on('click', '.center-pagination a', function(e) {
+			$this.siblings('.' + $this.set.pagClass).on('click.redils', '.center-pagination a', function(e) {
 				e.preventDefault();
 
 				var index = $(this).index();
@@ -123,7 +123,7 @@
 			};
 
 			//Pagination slider control.
-			$this.siblings('.' + $this.set.pagClass).on('click', function(e) {
+			$this.siblings('.' + $this.set.pagClass).on('click.redils', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
 
@@ -150,7 +150,7 @@
 					priv.beforeAnimating.apply($this, [0, (position + $this.set.overflow)]);
 
 				}
-			}).on('mousedown touchstart', function(event) {
+			}).on('mousedown.redils touchstart.redils', function(event) {
 				//If mouseevents
 				if(event.type === 'mousedown') {
 					event.preventDefault();
@@ -174,23 +174,23 @@
 				$this.set.handlePaginationDrag = true;
 
 				if(event.type === 'mousedown') {
-					$(this).on('mousemove', function(e) {
+					$(this).on('mousemove.redils', function(e) {
 						window.requestAnimFrame(function() {
 							dragSliderPagination(e);
 						});
 					});
 				}
 
-			}).on('touchmove', function(e) {
+			}).on('touchmove.redils', function(e) {
 				window.requestAnimFrame(function() {
 					dragSliderPagination(e);
 				});
 			});
 
 
-			$(window).on('mouseup touchend', function() {
+			$(window).on('mouseup.redils touchend.redils', function() {
 				if($this.set.handlePaginationDrag) {
-					$this.siblings('.' + $this.set.pagClass).off('mousemove');
+					$this.siblings('.' + $this.set.pagClass).off('mousemove.redils');
 					$this.set.handlePaginationDrag = false;
 
 					if(Math.abs(mouseStart - mousePosition) > 5) {
@@ -278,7 +278,7 @@
 			}
 
 			//Drag slide
-			$this.on('mousedown touchstart', function(event) {
+			$this.on('mousedown.redils touchstart.redils', function(event) {
 				//Always run if touch, optional drag slide with mouse.
 				if(event.type === 'touchstart' || ($this.set.drag && event.type === 'mousedown')) {
 
@@ -300,7 +300,7 @@
 					slideWidth = $this.set.dynWidth[sliderPosition];
 
 					if(event.type === 'mousedown') {
-						$this.on('mousemove', function(e) {
+						$this.on('mousemove.redils', function(e) {
 							window.requestAnimFrame(function() {
 								dragSliderSlide(e);
 							});
@@ -309,23 +309,23 @@
 
 				}
 
-			}).on('dragstart', function(e) {
+			}).on('dragstart.redils', function(e) {
 				if($this.set.drag) {
 					e.preventDefault();
 					e.stopPropagation();
 				}
-			}).on('touchmove', function(e) {
+			}).on('touchmove.redils', function(e) {
 				window.requestAnimFrame(function() {
 					dragSliderSlide(e);
 				});
 			});
 
-			$(document).on('touchmove', function(e) {
+			$(document).on('touchmove.redils', function(e) {
 				if(isSliding) e.preventDefault();
 			});
 
-			$(window).on('mouseup touchend', function(e) {
-				$this.off('mousemove');
+			$(window).on('mouseup.redils touchend.redils', function(e) {
+				$this.off('mousemove.redils');
 				isSliding = false;
 
 				if($this.set.handleSlideDrag) {
@@ -356,7 +356,7 @@
 			var position = $this.data('position');
 
 			//Click on arrows
-			$this.siblings('.redils-controls').on('click', '.' + $this.set.arrowContClass, function() {
+			$this.siblings('.redils-controls').on('click.redils', '.' + $this.set.arrowContClass, function() {
 				var dir = ($(this).hasClass($this.set.rightArrowClass)) ? 1 : -1;
 				if($this.set.debug) { console.log('Arrows clicked direction: ', dir); }
 
@@ -394,7 +394,7 @@
 			});
 
 			//Resizing events
-			$(window).on('resize', function() {
+			$(window).on('resize.redils', function() {
 				if($this.set.fullWidth !== false) {
 					priv.fullWidth.apply($this);
 					priv.totalWidth.apply($this);
@@ -424,7 +424,7 @@
 			var $this = this;
 			var position = $this.data('position');
 
-			$(window).on('keydown', function(e) {
+			$(window).on('keydown.redils', function(e) {
 				if($this.set.debug) console.log('Allow keyboard on key pressed is: ', e.keyCode);
 				if($this.data('position') === 0) $this.data('position', position);
 				switch (e.keyCode) {
@@ -456,6 +456,17 @@
 			if($this.set.allowKeyboard) {
 				priv.keyboardEvents.apply($this);
 			}
+
+		},
+		disableEvents: function() {
+			var $this = this;
+
+			$this.siblings('.' + $this.set.pagClass).off('.redils').off('.redils', '.center-pagination a');
+			$(window).off('.redils');
+			$this.off('.redils');
+			$(document).off('.redils');
+			$this.siblings('.redils-controls').off('.redils', '.' + $this.set.arrowContClass);
+			$this.off('redils.imagesLoaded');
 
 		},
 		update: function(force) {
@@ -569,20 +580,20 @@
 			return pxPosition;
 		},
 		multiSlide: function() {
-			var $this = this,
-				pageWidth = $this.parent().width(),
-				$slides = null,
-				superSlides = [''],
-				slideHTML = '',
-				totalWidth = 0,
-				slideWidth = 0,
-				currentWidth = 0,
-				totalWidthBefore = 0,
-				j = 0,
-				slidesPerSuper = 0,
-				slidesPerSuperMax = 0,
-				breakPoint = null,
-				currentBreakPoint = 0;
+			var $this = this;
+			var pageWidth = $this.parent().width();
+			var $slides = null;
+			var superSlides = [''];
+			var slideHTML = '';
+			var totalWidth = 0;
+			var slideWidth = 0;
+			var currentWidth = 0;
+			var totalWidthBefore = 0;
+			var j = 0;
+			var slidesPerSuper = 0;
+			var slidesPerSuperMax = 0;
+			var breakPoint = null;
+			var currentBreakPoint = 0;
 
 
 			//Save original slides.
@@ -906,10 +917,10 @@
 
 			if($this.set.timerBar && $this.set.auto !== false) {
 
-				var width = 0,
-					speed = 1000 / 60,
-					$el = $this.siblings('.' + $this.set.timerBarContClass).find('.' + $this.set.timerBarFillClass),
-					dist = Math.round(100 / $this.set.auto * speed * 10) / 10;
+				var width = 0;
+				var speed = 1000 / 60;
+				var $el = $this.siblings('.' + $this.set.timerBarContClass).find('.' + $this.set.timerBarFillClass);
+				var dist = Math.round(100 / $this.set.auto * speed * 10) / 10;
 
 				clearInterval($this.set.timer);
 
@@ -1029,6 +1040,42 @@
 				$this.set.ends = false;
 			}
 
+		},
+		dismantle: function(options) {
+			$this = this;
+
+			//Clear attributes
+			$this.removeAttr('style').removeClass('redils-activated disabled redils--imagesLoaded');
+			$this.parent().removeAttr('style');
+			$this.siblings('.redils-controls').find('.' + $this.set.arrowContClass).removeAttr('style');
+			$this.siblings('.' + this.set.pagClass).empty();
+			$this.find('.' + $this.set.slideClass).removeAttr('style').removeClass('hidden left center right back ' + $this.set.currentSlideClass);
+			$this.find('.' + $this.set.slideContClass).removeAttr('style');
+
+			//Special logic for multislider
+			if($this.set.multiSlide) {
+				$this.find('.' + $this.set.slideContClass).empty().append($this.set.subSlides);
+				$this.parent().removeClass($this.set.singleMultiSlideClass);
+				$this.set.slideClass = $this.set.prevSlideClass;
+			}
+
+			//Remove elements
+			$this.find('#redils-click-blocker').remove();
+			$this.find('.redils-duplicated').remove();
+			$('body').find('#redils-hiddenscroll-test').remove();
+
+			//Maintain total width property
+			if(options.maintainWidth) {
+				$this.set.overflow = 0;
+				$this.set.center = false;
+				$this.set.width = 'dyn';
+				$this.set.autoResize = false;
+				$this.set.multiSlide = false;
+				priv.totalWidth.apply($this);
+			}
+
+			//Reset scrolls
+			$this.scrollLeft(0);
 		}
 	};
 
@@ -1188,9 +1235,22 @@
 
 			return this.each(function() {
 				var $this = $(this);
+				options = options || {};  
 
-				$this.set = $.extend({}, $this.data(), options, privateOpts);
+				$this.set = $this.data();
 
+				//Remove events
+				priv.disableEvents.apply($this);
+
+				//Remove timers
+				clearInterval($this.data('timer'));
+
+				//Remove elements
+				priv.dismantle.apply($this, [options]);
+
+				//Remove data
+				$this.removeData();
+				delete $this.set;
 			});
 		}
 	};

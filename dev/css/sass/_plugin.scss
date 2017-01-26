@@ -22,6 +22,10 @@ section { margin-top: 50px; }
 .signature { width: w(6, 0); margin: 250px auto 0; text-align: center; display: block; border-top: 1px solid #ccc;
 	svg { padding-top: 30px; } }
 
+.u-button { height: 50px; border: 1px solid #000; line-height: 50px; text-transform: uppercase; display: inline-block; vertical-align: top; padding: 0 20px;
+	& + & { margin-left: 20px; }
+}
+
 .redils-multislide { padding: 0 50px; box-sizing: border-box; 
 	.redils-controls { position: absolute; width: 100%; left: 0; top: 0; height: 240px; }
 	.super-slide .slides { padding: 0 10px; } }

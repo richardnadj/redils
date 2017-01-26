@@ -764,6 +764,17 @@ section {
   .signature svg {
     padding-top: 30px; }
 
+.u-button {
+  height: 50px;
+  border: 1px solid #000;
+  line-height: 50px;
+  text-transform: uppercase;
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 20px; }
+  .u-button + .u-button {
+    margin-left: 20px; }
+
 .redils-multislide {
   padding: 0 50px;
   -webkit-box-sizing: border-box;
