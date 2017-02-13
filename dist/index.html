@@ -545,7 +545,9 @@ $('.redils').redils('destroy');
 				var intiateSliders = function() {
 
 					//Default redils
-					$('.redils-default .redils').redils();
+					$('.redils-default .redils').off('redils.initiated').on('redils.initiated', function(){
+						console.log('Initiated triggered');
+					}).redils();
 
 					//Centered redils
 					$('.redils-centered .redils').redils({

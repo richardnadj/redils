@@ -510,6 +510,10 @@
 				priv.totalWidth.apply($this);
 			}
 
+			if(!$this.set.isRendered) {
+				$this.trigger('redils.initiated', [$this.set]);
+				$this.set.isRendered = true;
+			}
 			$this.trigger('redils.updated', [$this.set]);
 
 		},
@@ -1295,6 +1299,7 @@
 	};
 
 	var privateOpts = {
+		isRendered: false,
 		contWidth: 0,
 		subSlides: null,
 		dynWidth: [],

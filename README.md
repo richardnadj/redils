@@ -27,6 +27,13 @@ Following structure is required for selector to work. (Using Emmet tab complete 
 
 ### Events ###
 
+#### redils.initiated ####
+
+Triggers when slider is first rendered.
+
+	$(selector).on('redils.initiated', function(){ }).redils();
+
+
 #### redils.interaction ####
 
 Triggers when interacting with the slider. Swipe, click, arrow etc. Is not triggered in automatic slide mode.
@@ -348,6 +355,9 @@ Removes all data assigned to sliders, dismantles all extra html created by the p
 
 
 ### Changelog ###
+
+**Version 1.16.0**   
+Triggers an event for the first time updated after the slider has been fully rendered.
 
 **Version 1.15.0**   
 Added a destroy method. Cleaned up all events to be namespaced with .redils for easier removal.
