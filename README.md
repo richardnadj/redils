@@ -356,6 +356,9 @@ Removes all data assigned to sliders, dismantles all extra html created by the p
 
 ### Changelog ###
 
+**Version 1.16.1**   
+Fixed badly behaving html data objects. Asyncronously update sliders to ensure correct start position.
+
 **Version 1.16.0**   
 Triggers an event for the first time updated after the slider has been fully rendered.
 

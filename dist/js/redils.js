@@ -52,6 +52,9 @@
 					if($this.set.ratio === false) $this.set.ratio = ($imgs[0].naturalWidth !== undefined) ? $imgs[0].naturalWidth / $imgs[0].naturalHeight : $imgs.eq(0).width() / $imgs.eq(0).height();
 					$this.data('position', position);
 					priv.update.apply($this, [forced]);
+					window.setTimeout(function() {
+						priv.update.apply($this, [forced]);
+					}, 1);
 				} else {
 					requestAnimFrame(imgLoaded);
 				}
@@ -64,7 +67,7 @@
 			$this.trigger('redils.interaction', [$this]);
 			if($this.set.auto) {
 				$this.set.animationStopped = true;
-				$this.data({'animationStopped':true});
+				$this.data('animationStopped', true);
 				clearInterval($this.set.timer);
 				$this.set.timerBar = false;
 			}
@@ -495,9 +498,7 @@
 				//Reset scrollLeft
 				$this.set.totalPos = priv.totalPos.apply($this);
 
-
 				$this.scrollLeft($this.set.totalPos - $this.set.offset);
-
 			} else {
 				if(!$this.set.stacked) {
 					//Fader update
@@ -704,7 +705,7 @@
 			$this.set.totalAmount = j + 1;
 			
 			//Start slider at the start
-			$this.data('position', 0);
+			$this.data('position', 1);
 
 			//Create pagination
 			if($this.set.pagination !== false) {
@@ -787,6 +788,7 @@
 				}
 			}
 
+			// console.log('DEBUG: $this.data()', $this.data('position'), $this.set.overflow);
 			$this.data('position', $this.set.overflow);
 		},
 		pagination: function() {
@@ -1168,8 +1170,7 @@
 
 				}
 
-				$this.data($this.set);
-
+				$this.data($.extend({}, $this.set, $this.data()));
 			});
 		},
 		update: function(options) {
