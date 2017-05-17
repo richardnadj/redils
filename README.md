@@ -281,7 +281,7 @@ Used to change between slides by dragging the slider left or right with the mous
 *Expects* `string`
 
 This determines the type of easing used on animations during slide transitions. Swing is the inbuilt jQuery function. To add a new function you need to extend the Jquery.easing object with a function. These functions are not packaged in redils or executed their either.   
-[Some standard functions for jquery easing](http://easings.net/) also [some examples of easing functions and their graphs](http://easings.net/)   
+[Some standard functions for jquery easing](https://github.com/ai/easings.net/blob/master/vendor/jquery.easing.js) also [some examples of easing functions and their graphs](http://easings.net/)   
 To extend the jQuery easing object see following:
 
 	$.extend( $.easing, {
