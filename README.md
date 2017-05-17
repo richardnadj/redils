@@ -291,7 +291,7 @@ To extend the jQuery easing object see following:
 	});
 	
 
-	$(selector).redils({easing: 'swing'});
+	$(selector).redils({easing: 'easeOutCubic'});
 
 
 #### debug ####
