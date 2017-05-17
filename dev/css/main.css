@@ -869,6 +869,10 @@ section {
     .redils-contact-sheet .super-slide .slides:nth-child(3n-2) {
       margin-left: 0; } }
 
+@media only screen and (max-width: 600px) {
+  .redils-controls {
+    display: none; } }
+
 .redils-cont {
   width: 1170px;
   max-width: 100%;

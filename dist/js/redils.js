@@ -240,7 +240,7 @@
 				}
 
 				mouseMovement = mousePosition - mouseStart;
-				mouseMovementPercentage = mouseMovement / (sliderWidth / 2);
+				mouseMovementPercentage = mouseMovement / sliderWidth;
 
 				if(isSliding || Math.abs(mouseMovement) > Math.abs(touchStartY - touchPositionY)) {
 					//Prevent scrolling while sliding.

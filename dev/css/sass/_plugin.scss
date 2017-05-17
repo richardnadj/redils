@@ -62,3 +62,7 @@ section { margin-top: 50px; }
 	.redils-contact-sheet .super-slide .slides { width: w(4); 
 		&:nth-child(2n-1) { margin-left: $gut; }
 		&:nth-child(3n-2) { margin-left: 0; } } }
+
+@media only screen and (max-width : 600px) { 
+	.redils-controls { display: none; }
+}

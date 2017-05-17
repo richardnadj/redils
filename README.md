@@ -356,6 +356,9 @@ Removes all data assigned to sliders, dismantles all extra html created by the p
 
 ### Changelog ###
 
+**Version 1.16.2**   
+Touch drag was being doubled resulting in slide moving faster than finger. This is now set to be same as finger.
+
 **Version 1.16.1**   
 Fixed badly behaving html data objects. Asyncronously update sliders to ensure correct start position.
 
