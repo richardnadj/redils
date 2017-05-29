@@ -121,13 +121,14 @@ If the container is bigger than the slide it will center the slide. If not using
 #### pagination ####
 
 *Default* `true`   
-*Expects* `boolean, 'num', 'str', 'line', 'thumb'`
+*Expects* `boolean, 'num', 'str', 'line', 'thumb', 'counter'`
 
-Adds dynamically created elements to pagination container. Pagination *will only be true* if a sibling to the called container has a container with `.pagination`.   
-`'num'` `'str'` prints out consecutive numbers, letters respectively. `data-pagination="String"` can be set on each slide to define indivdual unique pagination names on each slide.
-Pagination will create following html structure `div.center-pagination>a*5>span.default-pagination` (default-pagination and 5 are subject to options).   
+Adds dynamically created elements to pagination container. Pagination *will only be true* if a sibling to the called container has a container with `.pagination`.  
+`'num'` `'str'` prints out consecutive numbers, letters respectively. `data-pagination="String"` can be set on each slide to define indivdual unique pagination names on each slide.  
+Pagination will create following html structure `div.center-pagination>a*5>span.default-pagination` (default-pagination and 5 are subject to options).  
 If using `'line'` then a slider will be created as a timeline of the slideshow.  
-Thumb uses the images from the slider to create the pagination thumbnails.
+Thumb uses the images from the slider to create the pagination thumbnails.  
+Counter adds current slide to `.pagination-current` and total slides to `.pagination-total`. Adds no extra HTML.
 
 	$(selector).redils({pagination: true});
 
@@ -356,6 +357,9 @@ Removes all data assigned to sliders, dismantles all extra html created by the p
 
 
 ### Changelog ###
+
+**Version 1.17.0**   
+Added a new pagination type - counter.
 
 **Version 1.16.2**   
 Touch drag was being doubled resulting in slide moving faster than finger. This is now set to be same as finger.

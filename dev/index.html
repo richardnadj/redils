@@ -96,6 +96,7 @@ $('.redils-centered .redils').redils({
 $('.redils-centered-overflow .redils').redils({
 	center: true,
 	auto: false,
+	pagination: 'counter',
 	overflow: 2
 });
 					</pre>
@@ -124,7 +125,7 @@ $('.redils-centered-overflow .redils').redils({
 							<div class="arrow"></div>
 						</div>
 					</div>
-					<div class="pagination"></div>
+					<div class="pagination"><span class="pagination-current"></span> of <span class="pagination-total"></span></div>
 				</div>
 			</section>
 			<section>
@@ -560,6 +561,7 @@ $('.redils').redils('destroy');
 					$('.redils-centered-overflow .redils').redils({
 						center: true,
 						auto: false,
+						pagination: 'counter',
 						overflow: 2
 					});
 

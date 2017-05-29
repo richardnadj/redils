@@ -792,6 +792,10 @@
 			$this.data('position', $this.set.overflow);
 		},
 		pagination: function() {
+			if (this.set.pagination === 'counter') {
+				this.siblings('.' + this.set.pagClass).find('.pagination-total').text(this.set.totalAmount);
+				return;
+			}
 			var html = '<div class="center-pagination">';
 			var str = 'a';
 			var num = 1;
@@ -909,6 +913,7 @@
 			//This should be the future slide.
 			if(!$this.set.slide && !$this.set.stacked) $this.find('.' + $this.set.slideClass).eq(position).css('z-index', 2);
 			$this.siblings('.' + $this.set.pagClass).find('a').removeClass('selected').eq(position - $this.set.overflow).addClass('selected');
+			$this.siblings('.' + $this.set.pagClass).find('.pagination-current').text(position - $this.set.overflow + 1);
 
 			if($this.set.pagination === 'line' && $this.set.paginationLinePosition !== position) {
 				priv.updatePaginationLine.apply($this, [position]);
