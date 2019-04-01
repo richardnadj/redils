@@ -474,7 +474,7 @@
 		},
 		update: function(force) {
 			var $this = this,
-				pageWidth =  $this.parent().width(),
+				pageWidth = $this.set.breakPoints === false ? $this.parent().width() : window.innerWidth,
 				forced = force || false;
 
 			if($this.set.autoResize && $this.set.setHeight) {
@@ -642,7 +642,7 @@
 					for (var k = 0; k < $this.set.breakPoints.length; k++) {
 						breakPoint = parseInt($this.set.breakPoints[k].breakAfter, 10);
 
-						if(pageWidth > breakPoint) {
+						if(window.innerWidth > breakPoint) {
 							currentBreakPoint = $this.set.breakPoints[k].numSlides;
 							$this.set.multiBreakLess = breakPoint;
 							if(k + 1 < $this.set.breakPoints.length) {

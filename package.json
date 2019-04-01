@@ -1,8 +1,8 @@
 {
   "name": "redils",
-  "version": "1.17.0",
+  "version": "1.17.1",
   "description": "Redils a slider for almost all situations",
-  "main": "dist/js/redils.min.js", 
+  "main": "dist/js/redils.min.js",
   "style": "dist/css/redils.min.css",
   "homepage": "http://coalescecreate.com",
   "author": "richard@coalescecreate.com - Coalesce Create",
