@@ -358,6 +358,9 @@ Removes all data assigned to sliders, dismantles all extra html created by the p
 
 ### Changelog ###
 
+**Version 1.17.2**   
+Adjusted the slide threshold to be lower to make sliding more responsive.
+
 **Version 1.17.1**   
 If breakpoints are set break on windowWidth not container width.
 

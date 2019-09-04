@@ -342,7 +342,7 @@
 
 
 					//If distance no longer than 30% of slide width left or right return to current slide.
-					if(Math.abs(mouseMovementPercentage) > 0.3) {
+					if(Math.abs(mouseMovementPercentage) > 0.1) {
 						priv.interaction.apply($this);
 						priv.beforeAnimating.apply($this, [toSlide]);
 					} else {
